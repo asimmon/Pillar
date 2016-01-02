@@ -3,7 +3,7 @@
   <metadata>
     <id>Askaiser.Mobile.Pillar</id>
     <version>0.0.1</version>
-    <title></title>
+    <title>Pillar</title>
     <authors>Anthony Simmon</authors>
     <owners>Anthony Simmon</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
@@ -12,6 +12,7 @@
     <description>A lightweight PCL framework that helps you develop MVVM Xamarin.Forms 1.x / 2.x applications easily.</description>
     <copyright>Copyright Anthony Simmon 2015-2016</copyright>
     <tags>xamarin forms mvvm pcl android ios windowsphone</tags>
+    <iconUrl>https://anthonysimmon.com/wp-content/uploads/pillar_118x128.png</iconUrl>
     <dependencies>
       <dependency id="Autofac" version="3.5.2" />
       <dependency id="MvvmLightLibs" version="5.2.0.0" />
