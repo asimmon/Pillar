@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Askaiser.Mobile.Pillar</id>
+    <version>0.0.1</version>
+    <title></title>
+    <authors>Anthony Simmon</authors>
+    <owners>Anthony Simmon</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/asimmon/Xamarin-Forms-Starter</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A lightweight PCL framework that helps you develop MVVM Xamarin.Forms 1.x / 2.x applications easily.</description>
+    <copyright>Copyright Anthony Simmon 2015-2016</copyright>
+    <tags>xamarin forms mvvm pcl android ios windowsphone</tags>
+    <dependencies>
+      <dependency id="Autofac" version="3.5.2" />
+      <dependency id="MvvmLightLibs" version="5.2.0.0" />
+      <dependency id="Xamarin.Forms" version="1.3.3.6323" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\src\Askaiser.Mobile.Pillar\bin\Release\Askaiser.Mobile.Pillar.dll" target="lib"/>
+    <file src="..\src\Askaiser.Mobile.Pillar\bin\Release\Askaiser.Mobile.Pillar.pdb" target="lib"/>
+  </files>
+</package>
