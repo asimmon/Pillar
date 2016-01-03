@@ -15,7 +15,7 @@ Pillar is a MVVM framework for [Xamarin.Forms](https://xamarin.com/forms) 1.x an
 
 ## Get started
 
-Install the nuget package and its dependencies:
+[Install the nuget package](https://www.nuget.org/packages/Askaiser.Mobile.Pillar/) and its dependencies:
 
     Install-Package Askaiser.Mobile.Pillar -Pre
 
