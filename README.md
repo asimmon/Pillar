@@ -98,3 +98,5 @@ You may notice that some of these methods can take an action as parameter. This 
 The rest of the documentation will be available soon in the wiki section. If you want to use the EventToCommand behavior, there is an example on [my blog at anthonysimmon.com](https://anthonysimmon.com/eventtocommand-in-xamarin-forms-apps/).
 
 Thank you for your interest in this library.
+
+I would like to thanks Jonathan Yates (http://adventuresinxamarinforms.com/) for his tutorials. It has been a great source of inspiration and he is doing a very good job.
