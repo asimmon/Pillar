@@ -66,7 +66,7 @@ public class MyAppBootstrapper : PillarBootstrapper
 The view models that will be associated to pages need to extend the `PillarViewModelBase`, or you will get a compilation error. It is a child class of the ViewModelBase from MvvmLight library. This class provides useful observable properties for mobile applications:
 
 * `Title` (string): You can bound it to the associated page Title
-* `NoHistory` (boolean): If true, the associated page will be removed from the navigation stack
+* `NoHistory` (boolean): If true, it will remove the previous page from the navigation stack
 * `IsBusy` (boolean): Can be used to show or hide a loading spinner using the included BooleanConverter with the Visibility property
 
 ## Navigation
