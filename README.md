@@ -95,4 +95,6 @@ await _navigator.PopToRootAsync();
 
 You may notice that some of these methods can take an action as parameter. This is the preferred way to pass data from one view model to another. All of these methods - except `PopToRootAsync` - return the resolved instance of the destination view model type.
 
-The rest of the documentation will be available soon in the wiki section. Thank you for your interest in this library.
+The rest of the documentation will be available soon in the wiki section. If you want to use the EventToCommand behavior, there is an example on [my blog at anthonysimmon.com](https://anthonysimmon.com/eventtocommand-in-xamarin-forms-apps/).
+
+Thank you for your interest in this library.
