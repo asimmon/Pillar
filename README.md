@@ -19,7 +19,7 @@ Pillar is a MVVM framework for [Xamarin.Forms](https://xamarin.com/forms) 1.x an
 
     Install-Package Askaiser.Mobile.Pillar -Pre
 
-Extend the class `PillarBootstrapper` to configure your view models and views. Then, in your Application class, instantiate it and call the `Run` method.
+Extend the `PillarBootstrapper` class to configure your view models and views. Then, in your Application class, instantiate it and call the `Run` method.
 
 Here is an example:
 
@@ -83,7 +83,7 @@ var home = new HomeViewModel();
 await _navigator.PushAsync(home);
 await _navigator.PushModalAsync(home);
 
-// Navigate to a view model and apply changes ont it
+// Navigate to a view model and apply changes on it
 await _navigator.PushAsync<HomeViewModel>(vm => { vm.Title = "Home page"; });
 await _navigator.PushModalAsync<HomeViewModel>(vm => { vm.Title = "Home page"; });
 
