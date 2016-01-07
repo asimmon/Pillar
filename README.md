@@ -1,6 +1,7 @@
 # Pillar
 
 [![Build Status](https://travis-ci.org/asimmon/Pillar.svg?branch=master)](https://travis-ci.org/asimmon/Pillar)
+[![NuGet Stats](https://img.shields.io/nuget/dt/Askaiser.Mobile.Pillar.svg)](https://www.nuget.org/packages/Askaiser.Mobile.Pillar)
 
 Pillar is a MVVM framework for [Xamarin.Forms](https://xamarin.com/forms) 1.x and 2.x. With this framework, you won't have to deal with page navigation or messed up code-behind anymore. Now, it's all about **view models**, and **navigation between view models**. It rely on [Autofac](http://autofac.org/) for dependency injection and [MvvmLight](https://mvvmlight.codeplex.com/) for basic MVVM features and helper classes.
 
