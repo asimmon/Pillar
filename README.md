@@ -1,6 +1,7 @@
 # Pillar
 
 [![Build Status](https://travis-ci.org/asimmon/Pillar.svg?branch=master)](https://travis-ci.org/asimmon/Pillar)
+[![NuGet Stats](https://img.shields.io/nuget/dt/Askaiser.Mobile.Pillar.svg)](https://www.nuget.org/packages/Askaiser.Mobile.Pillar)
 
 Pillar is a MVVM framework for [Xamarin.Forms](https://xamarin.com/forms) 1.x and 2.x. With this framework, you won't have to deal with page navigation or messed up code-behind anymore. Now, it's all about **view models**, and **navigation between view models**. It rely on [Autofac](http://autofac.org/) for dependency injection and [MvvmLight](https://mvvmlight.codeplex.com/) for basic MVVM features and helper classes.
 
@@ -17,7 +18,7 @@ Pillar is a MVVM framework for [Xamarin.Forms](https://xamarin.com/forms) 1.x an
 
 [Install the nuget package](https://www.nuget.org/packages/Askaiser.Mobile.Pillar/) and its dependencies:
 
-    Install-Package Askaiser.Mobile.Pillar -Pre
+    Install-Package Askaiser.Mobile.Pillar
 
 Extend the `PillarBootstrapper` class to configure your view models and views. Then, in your Application class, instantiate it and call the `Run` method.
 
@@ -71,7 +72,7 @@ The view models that will be associated to pages need to extend the `PillarViewM
 
 ## Navigation
 
-In Pillar, view models and pages are fully decoupled. To navigate between view models, you need to inject the `INavigator` Pillar service into your view models (do not confuse `INavigator` with `INavigation` from Xamarin.Forms). This service provides the following methods:
+With Pillar, view models and pages are fully decoupled. To navigate between view models, you need to inject the `INavigator` Pillar service into your view models (do not confuse `INavigator` with `INavigation` from Xamarin.Forms). This service provides the following methods:
 
 ```C#
 // Navigate to a view model (the lifecycle is managed by Autofac)
@@ -97,6 +98,6 @@ You may notice that some of these methods can take an action as parameter. This 
 
 The rest of the documentation will be available soon in the wiki section. If you want to use the EventToCommand behavior, there is an example on [my blog at anthonysimmon.com](https://anthonysimmon.com/eventtocommand-in-xamarin-forms-apps/).
 
-Thank you for your interest in this library.
+Thank you for your interest in this framework.
 
 I would like to thanks Jonathan Yates (http://adventuresinxamarinforms.com/) for his tutorials. It has been a great source of inspiration and he is doing a very good job.
