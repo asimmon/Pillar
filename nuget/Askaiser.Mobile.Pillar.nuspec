@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Askaiser.Mobile.Pillar</id>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <title>Pillar</title>
     <authors>Anthony Simmon</authors>
     <owners>Anthony Simmon</owners>
@@ -22,5 +22,6 @@
   <files>
     <file src="..\src\Askaiser.Mobile.Pillar\bin\Release\Askaiser.Mobile.Pillar.dll" target="lib"/>
     <file src="..\src\Askaiser.Mobile.Pillar\bin\Release\Askaiser.Mobile.Pillar.pdb" target="lib"/>
+    <file src="..\src\Askaiser.Mobile.Pillar\bin\Release\Askaiser.Mobile.Pillar.xml" target="lib"/>
   </files>
 </package>
