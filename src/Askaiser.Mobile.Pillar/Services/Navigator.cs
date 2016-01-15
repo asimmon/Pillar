@@ -41,6 +41,9 @@ namespace Askaiser.Mobile.Pillar.Services
         {
             get
             {
+                if (Navigation == null || Navigation.NavigationStack == null)
+                    return null;
+
                 var firstPage = Navigation.NavigationStack.FirstOrDefault();
                 if (firstPage == null)
                     return null;
@@ -82,7 +85,8 @@ namespace Askaiser.Mobile.Pillar.Services
             TViewModel viewModel;
             var view = _viewFactory.Resolve(out viewModel, setStateAction);
 
-            if (CurrentViewModel != null && CurrentViewModel.NoHistory)
+            var currentViewModel = CurrentViewModel;
+            if (currentViewModel != null && currentViewModel.NoHistory)
             {
                 Navigation.InsertPageBefore(view, Navigation.NavigationStack.FirstOrDefault());
                 await Navigation.PopAsync().ConfigureAwait(false);
@@ -98,7 +102,8 @@ namespace Askaiser.Mobile.Pillar.Services
         {
             var view = _viewFactory.Resolve(viewModel);
 
-            if (CurrentViewModel != null && CurrentViewModel.NoHistory)
+            var currentViewModel = CurrentViewModel;
+            if (currentViewModel != null && currentViewModel.NoHistory)
             {
                 Navigation.InsertPageBefore(view, Navigation.NavigationStack.FirstOrDefault());
                 await Navigation.PopAsync().ConfigureAwait(false);
