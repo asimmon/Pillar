@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:v="clr-namespace:Askaiser.Mobile.Pillar.Views;assembly=Askaiser.Mobile.Pillar"
+             xmlns:m="clr-namespace:PillarDemo.Models;assembly=PillarDemo"
+             x:Class="PillarDemo.Views.TemplateSelectorView"
+             Title="{Binding Title}">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <v:TemplateSelector x:Key="TemplateSelector">
+        <v:TemplateSelector.Templates>
+
+          <v:DataTemplateWrapper x:TypeArguments="m:Dog" IsDefault="True">
+            <v:DataTemplateWrapper.WrappedTemplate>
+              <DataTemplate>
+                <StackLayout Padding="10" BackgroundColor="Maroon">
+                  <Label Text="Template for the Dog class" />
+                </StackLayout>
+              </DataTemplate>
+            </v:DataTemplateWrapper.WrappedTemplate>
+          </v:DataTemplateWrapper>
+
+          <v:DataTemplateWrapper x:TypeArguments="m:Cat">
+            <v:DataTemplateWrapper.WrappedTemplate>
+              <DataTemplate>
+                <StackLayout Padding="10" BackgroundColor="Purple">
+                  <Label Text="Template for the Cat class" />
+                </StackLayout>
+              </DataTemplate>
+            </v:DataTemplateWrapper.WrappedTemplate>
+          </v:DataTemplateWrapper>
+
+          <v:DataTemplateWrapper x:TypeArguments="m:Giraffe">
+            <v:DataTemplateWrapper.WrappedTemplate>
+              <DataTemplate>
+                <StackLayout Padding="10" BackgroundColor="Green">
+                  <Label Text="Template for the Giraffe class" />
+                </StackLayout>
+              </DataTemplate>
+            </v:DataTemplateWrapper.WrappedTemplate>
+          </v:DataTemplateWrapper>
+
+        </v:TemplateSelector.Templates>
+      </v:TemplateSelector>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <StackLayout Padding="10" Spacing="10">
+
+    <Label Text="This ItemsView uses a TemplateSelector and render a specific DataTemplate depending on the type of each element of its ItemsSource."
+           HeightRequest="50" VerticalTextAlignment="Center" />
+    
+    <v:ItemsView ItemsSource="{Binding Animals}" TemplateSelector="{StaticResource TemplateSelector}" />
+
+  </StackLayout>
+</ContentPage>

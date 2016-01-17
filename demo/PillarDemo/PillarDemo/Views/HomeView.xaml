@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PillarDemo.Views.HomeView"
+             Title="{Binding Title}">
+
+  <ScrollView>
+    <StackLayout Padding="10" Spacing="10">
+      <Label Text="{Binding CurrentUser, StringFormat='Logged as {0}'}" />
+      <Label Text="Try to change the user in the messenger exemple..." />
+
+      <Button Text="EventToCommand example" Command="{Binding GoToEventToCommandCommand}" />
+      <Button Text="TemplateSelector example" Command="{Binding GoToTemplateSelectorCommand}" />
+      <Button Text="Messenger example" Command="{Binding GoToMessengerCommand}" />
+      <Button Text="Dialog example" Command="{Binding GoToDialogCommand}" />
+    </StackLayout>
+  </ScrollView>
+</ContentPage>

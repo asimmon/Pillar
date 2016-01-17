@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PillarDemo.Views.DialogView"
+             Title="{Binding Title}">
+  <StackLayout Spacing="10" Padding="10">
+    <Button Text="Show an alert dialog" Command="{Binding ShowAlertCommand}" />
+    <Button Text="Show a confirm dialog" Command="{Binding ShowConfirmCommand}" />
+    <Button Text="Show an action sheet" Command="{Binding ShowActionSheetCommand}" />
+
+    <Label Text="{Binding LatestAction}" />
+  </StackLayout>
+</ContentPage>

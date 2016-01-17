@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PillarDemo.Views.LoginView"
+             Title="{Binding Title}">
+
+  <ScrollView>
+    <StackLayout Spacing="10" Padding="10">
+      
+      <Label Text="Enter dummy data and press the login button to see all examples. You won't be able to go back to this page with navigation because the NoHistory flag is set to true on this view model." />
+      <Label Text="The 'help' button is bound to a different view model through a hybrid ViewModelLocator pattern." />
+
+      <Entry Placeholder="Email" Keyboard="Email" Text="{Binding Email, Mode=TwoWay}" />
+      <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password, Mode=TwoWay}" />
+
+      <StackLayout Orientation="Horizontal">
+        <Switch IsToggled="{Binding RememberMe, Mode=TwoWay}" />
+        <Label Text="Remember me" VerticalTextAlignment="Center" />
+      </StackLayout>
+
+      <Button Text="Log in" Command="{Binding LoginCommand}" />
+
+      <ActivityIndicator IsEnabled="{Binding IsBusy}" IsRunning="{Binding IsBusy}"
+                         HorizontalOptions="CenterAndExpand" />
+    </StackLayout>
+  </ScrollView>
+
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Command="{Binding Locator.Help.ShowLoginHelpCommand}">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" Android="ic_help_white_24dp.png" />
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+  </ContentPage.ToolbarItems>
+</ContentPage>

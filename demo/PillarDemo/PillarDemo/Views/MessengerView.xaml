@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PillarDemo.Views.MessengerView"
+             Title="{Binding Title}">
+  <StackLayout Padding="10" Spacing="10">
+    <Label Text="Press the button to send a notification to the HomeViewModel that will change one of its observable properties." />
+    <Label Text="The HomeViewModel instances is actually waiting for any messages." />
+    <Label Text="As the PillarViewModelBase class implements IDisposable, you can unregister to any notification by overriding the Dispose method." />
+
+    <Button Text="Change current user" Command="{Binding ChangeCurrentUserCommand}" />
+  </StackLayout>
+</ContentPage>

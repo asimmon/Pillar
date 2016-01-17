@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Askaiser.Mobile.Pillar.Converters;assembly=Askaiser.Mobile.Pillar"
+             xmlns:b="clr-namespace:Askaiser.Mobile.Pillar.Behaviors;assembly=Askaiser.Mobile.Pillar"
+             x:Class="PillarDemo.Views.EventToCommandView"
+             Title="{Binding Title}">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <c:ItemTappedEventArgsConverter x:Key="ItemTappedConverter" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <StackLayout Padding="10" Spacing="10">
+    
+    <Label Text="If you click on a person name below, the ItemTapped event will be catched by the EventToCommandBehavior." />
+    <Label Text="It will call a Command with the selected Person class instance as parameter." />
+
+    <Label Text="{Binding SelectedPerson, StringFormat='Selected person: {0}'}" HorizontalTextAlignment="Center" HeightRequest="50" />
+
+    <ListView ItemsSource="{Binding People}">
+      <ListView.Behaviors>
+        <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SayHelloCommand}"
+                                  EventArgsConverter="{StaticResource ItemTappedConverter}" />
+      </ListView.Behaviors>
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <TextCell Text="{Binding Name}" />
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+
+  </StackLayout>
+
+</ContentPage>
