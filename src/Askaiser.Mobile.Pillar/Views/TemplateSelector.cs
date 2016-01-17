@@ -8,6 +8,11 @@ using Xamarin.Forms;
 
 namespace Askaiser.Mobile.Pillar.Views
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="Xamarin.Forms.BindableObject" />
+    [ContentProperty("Templates")]
     public class TemplateSelector : BindableObject
     {
         public static BindableProperty TemplatesProperty = BindableProperty.Create<TemplateSelector, DataTemplateCollection>(x => x.Templates, default(DataTemplateCollection), BindingMode.OneWay, null, TemplatesChanged);

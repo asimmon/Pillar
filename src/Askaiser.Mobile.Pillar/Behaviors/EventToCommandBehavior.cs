@@ -122,7 +122,7 @@ namespace Askaiser.Mobile.Pillar.Behaviors
         public void OnFired(object sender, EventArgs eventArgs)
         {
             if (Command == null)
-                throw new InvalidOperationException("No command available, is Command properly properly set up?");
+                return;
 
             var parameter = CommandParameter;
 

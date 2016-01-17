@@ -9,6 +9,7 @@ namespace Askaiser.Mobile.Pillar.Views
     /// so I had to wrap the DataTemplate instead of inheriting it.
     /// </summary>
     /// <typeparam name="T">The object type that this DataTemplateWrapper matches</typeparam>
+    [ContentProperty("WrappedTemplate")]
     public class DataTemplateWrapper<T> : BindableObject, IDataTemplateWrapper
     {
         public static readonly BindableProperty WrappedTemplateProperty = BindableProperty.Create<DataTemplateWrapper<T>, DataTemplate>(x => x.WrappedTemplate, null);
@@ -19,6 +20,7 @@ namespace Askaiser.Mobile.Pillar.Views
             get { return (bool)GetValue(IsDefaultProperty); }
             set { SetValue(IsDefaultProperty, value); }
         }
+
         public DataTemplate WrappedTemplate
         {
             get { return (DataTemplate)GetValue(WrappedTemplateProperty); }
