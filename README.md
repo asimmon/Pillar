@@ -96,7 +96,7 @@ await _navigator.PopToRootAsync();
 
 You may notice that some of these methods can take an action as parameter. This is the preferred way to pass data from one view model to another. All of these methods - except `PopToRootAsync` - return the resolved instance of the destination view model type.
 
-The rest of the documentation will be available soon in the wiki section. If you want to use the EventToCommand behavior, there is an example on [my blog at anthonysimmon.com](https://anthonysimmon.com/eventtocommand-in-xamarin-forms-apps/).
+The rest of the documentation will be available soon in the wiki section. Checkout the demo app to see examples of each features of Pillar. I wrote a post on [my blog at anthonysimmon.com](https://anthonysimmon.com/eventtocommand-in-xamarin-forms-apps/), about how to use the EventToCommandBehavior class.
 
 Thank you for your interest in this framework.
 
