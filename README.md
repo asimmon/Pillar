@@ -62,6 +62,14 @@ public class MyAppBootstrapper : PillarBootstrapper
         _app.MainPage = new NavigationPage(page);
     }
 }
+
+public class App : Application
+{
+    public App()
+    {
+        new MyAppBootstrapper(this).Run();
+    }
+}
 ```
 
 The view models that will be associated to pages need to extend the `PillarViewModelBase`, or you will get a compilation error. It is a child class of the ViewModelBase from MvvmLight library. This class provides useful observable properties for mobile applications:
@@ -95,6 +103,29 @@ await _navigator.PopToRootAsync();
 ```
 
 You may notice that some of these methods can take an action as parameter. This is the preferred way to pass data from one view model to another. All of these methods - except `PopToRootAsync` - return the resolved instance of the destination view model type.
+
+How to use it:
+
+```C#
+public class FirstViewModel : PillarViewModelBase
+{
+    private readonly INavigator _navigator;
+
+    public FirstViewModel(INavigator navigator)
+    {
+        _navigator = navigator;
+
+        // Go to the second view after 5 seconds
+        GoToSecondViewModel();
+    }
+
+    public async void GoToSecondViewModel()
+    {
+        await Task.Delay(TimeSpan.FromSeconds(5));
+        await _navigator.PushAsync<SecondViewModel>();
+    }
+}
+```
 
 ## EventToCommandBehavior
 
