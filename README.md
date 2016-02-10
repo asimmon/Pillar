@@ -7,11 +7,11 @@ Pillar is a MVVM framework for [Xamarin.Forms](https://xamarin.com/forms) 1.x an
 
 ## Features
 
-* ViewModel navigation, you won't need to manipulate pages in your view models
+* [ViewModel navigation](#navigation), you won't need to manipulate pages in your view models
 * Design your apps with unit testing in mind with dependency injection
 * Flexible, you can use differents patterns: ViewModel first, Messaging, ViewModelLocator (without static classes, wiki page coming soon)
-* EventToCommand behavior and useful converters included
-* Useful views: ItemsView repeater, with optional DataTemplate selector by item type
+* [EventToCommand](#eventtocommandbehavior) behavior and useful converters included
+* Useful views: [ItemsView repeater](#itemsview-with-templateselector-by-type), with optional DataTemplate selector by item type
 * Not intrusive, you can reuse your view models in other projects (WPF for example) with very few modifications 
 
 ## Get started
@@ -66,9 +66,9 @@ public class MyAppBootstrapper : PillarBootstrapper
 
 The view models that will be associated to pages need to extend the `PillarViewModelBase`, or you will get a compilation error. It is a child class of the ViewModelBase from MvvmLight library. This class provides useful observable properties for mobile applications:
 
-* `Title` (string): You can bound it to the associated page Title
-* `NoHistory` (boolean): If true, it will remove the previous page from the navigation stack
-* `IsBusy` (boolean): Can be used to show or hide a loading spinner using the included BooleanConverter with the Visibility property
+* **Title** (*string*): You can bound it to the associated page Title
+* **NoHistory** (*boolean*): If true, it will remove the previous page from the navigation stack
+* **IsBusy** (*boolean*): Can be used to show or hide a loading spinner using the included BooleanConverter with the Visibility property
 
 ## Navigation
 
@@ -128,11 +128,11 @@ In this example, we use a converter to extract the tapped item's BindingContext 
 
 The EventToCommandBehavior class has the following properties:
 
-- **EventName** (*string*): Name of the event to bind.
-- **Command** (*ICommand*): Command that will be fired when the event will be raised
-- **CommandParameter** (*object*): Optional parameter to pass to the command
-- **EventArgsConverter** (*IValueConverter*): Optional converter that will convert an EventArgs to something that will be passed as command parameter. Overrides any user defined command parameter with the CommandParameter property.
-- **EventArgsConverterParameter** (*object*): Optional parameter that will be passed to the EventArgsConverter.
+* **EventName** (*string*): Name of the event to bind.
+* **Command** (*ICommand*): Command that will be fired when the event will be raised
+* **CommandParameter** (*object*): Optional parameter to pass to the command
+* **EventArgsConverter** (*IValueConverter*): Optional converter that will convert an EventArgs to something that will be passed as command parameter. Overrides any user defined command parameter with the CommandParameter property.
+* **EventArgsConverterParameter** (*object*): Optional parameter that will be passed to the EventArgsConverter.
 
 ## ItemsView with TemplateSelector by type
 
