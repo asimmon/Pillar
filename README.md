@@ -96,7 +96,46 @@ await _navigator.PopToRootAsync();
 
 You may notice that some of these methods can take an action as parameter. This is the preferred way to pass data from one view model to another. All of these methods - except `PopToRootAsync` - return the resolved instance of the destination view model type.
 
-The rest of the documentation will be available soon in the wiki section. Checkout the demo app to see examples of each features of Pillar. I wrote a post on [my blog at anthonysimmon.com](https://anthonysimmon.com/eventtocommand-in-xamarin-forms-apps/), about how to use the EventToCommandBehavior class.
+## EventToCommandBehavior
+
+Pillars provides a behavior that allows you to bind any view event to a command. This is an example that bind the ItemTapped event of a ListView to a command:
+
+```C#
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:b="clr-namespace:HelloEventToCommand.Behaviors;assembly=HelloEventToCommand" xmlns:c="clr-namespace:HelloEventToCommand.Converters;assembly=HelloEventToCommand" x:Class="HelloEventToCommand.Views.HomeView">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <c:ItemTappedEventArgsConverter x:Key="ItemTappedConverter" />
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <ListView ItemsSource="{Binding People}">
+    <ListView.Behaviors>
+      <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SayHelloCommand}" EventArgsConverter="{StaticResource ItemTappedConverter}" />
+    </ListView.Behaviors>
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <TextCell Text="{Binding Name}"/>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView>
+
+</ContentPage>
+```
+
+In this example, we use a converter to extract the tapped item's BindingContext and pass it to our command. You can see the full example [here, on my blog](http://anthonysimmon.com/eventtocommand-in-xamarin-forms-apps/).
+
+### Properties
+
+The EventToCommandBehavior class has the following properties:
+
+- **EventName** (*string*): Name of the event to bind.
+- **Command** (*ICommand*): Command that will be fired when the event will be raised
+- **CommandParameter** (*object*): Optional parameter to pass to the command
+- **EventArgsConverter** (*IValueConverter*): Optional converter that will convert an EventArgs to something that will be passed as command parameter. Overrides any user defined command parameter with the CommandParameter property.
+- **EventArgsConverterParameter** (*object*): Optional parameter that will be passed to the EventArgsConverter.
+
+The rest of the documentation will be available soon in the wiki section. Checkout the demo app to see examples of each features of Pillar.
 
 Thank you for your interest in this framework.
 
