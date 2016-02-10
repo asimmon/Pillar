@@ -100,7 +100,7 @@ You may notice that some of these methods can take an action as parameter. This 
 
 Pillars provides a behavior that allows you to bind any view event to a command. This is an example that bind the ItemTapped event of a ListView to a command:
 
-```C#
+```XML
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:b="clr-namespace:HelloEventToCommand.Behaviors;assembly=HelloEventToCommand" xmlns:c="clr-namespace:HelloEventToCommand.Converters;assembly=HelloEventToCommand" x:Class="HelloEventToCommand.Views.HomeView">
   <ContentPage.Resources>
@@ -119,7 +119,6 @@ Pillars provides a behavior that allows you to bind any view event to a command.
       </DataTemplate>
     </ListView.ItemTemplate>
   </ListView>
-
 </ContentPage>
 ```
 
@@ -134,6 +133,64 @@ The EventToCommandBehavior class has the following properties:
 - **CommandParameter** (*object*): Optional parameter to pass to the command
 - **EventArgsConverter** (*IValueConverter*): Optional converter that will convert an EventArgs to something that will be passed as command parameter. Overrides any user defined command parameter with the CommandParameter property.
 - **EventArgsConverterParameter** (*object*): Optional parameter that will be passed to the EventArgsConverter.
+
+## ItemsView with TemplateSelector by type
+
+The ItemsView is a  way for displaying a list of items. When used with the TemplateSelector, you can define a template for each different type of items contained in the items source. Quick example:
+
+```XML
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:v="clr-namespace:Askaiser.Mobile.Pillar.Views;assembly=Askaiser.Mobile.Pillar"
+             xmlns:vm="clr-namespace:HelloXam.ViewModels;assembly=HelloXam"
+             x:Class="HelloXam.Views.FirstView" Title="First">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <v:TemplateSelector x:Key="TemplateSelector">
+        <v:DataTemplateWrapper x:TypeArguments="vm:Foo" IsDefault="True">
+          <DataTemplate>
+            <Label Text="Template for type Foo"   />
+          </DataTemplate>
+        </v:DataTemplateWrapper>
+        <v:DataTemplateWrapper x:TypeArguments="vm:Bar">
+          <DataTemplate>
+            <Label Text="Template for type Bar" />
+          </DataTemplate>
+        </v:DataTemplateWrapper>
+        <v:DataTemplateWrapper x:TypeArguments="vm:Qux">
+          <DataTemplate>
+            <Label Text="Template for type Qux" />
+          </DataTemplate>
+        </v:DataTemplateWrapper>
+      </v:TemplateSelector>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <StackLayout>
+    <v:ItemsView ItemsSource="{Binding Things}" TemplateSelector="{StaticResource TemplateSelector}" Orientation="Vertical" />
+  </StackLayout>
+</ContentPage>
+```
+
+The items source is:
+
+```C#
+Things = new ObservableCollection<Thing>
+{
+    new Bar(),
+    new Foo(),
+    new Qux(),
+    new Qux(),
+    new Foo()
+};
+```
+
+The result:
+
+![](http://anthonysimmon.com/wp-content/uploads/pillar/pillar-itemsview-result.png)
+
+The ItemsView class provides an Orientation property, just like the StackLayout class.
+If a template is not defined for a specific type, the TemplateSelector will look for the first template with the IsDefault property set to true.
 
 The rest of the documentation will be available soon in the wiki section. Checkout the demo app to see examples of each features of Pillar.
 
