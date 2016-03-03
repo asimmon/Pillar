@@ -108,6 +108,8 @@
     <Compile Include="Services\DialogServiceFixture.cs" />
     <Compile Include="Services\NavigatorFixture.cs" />
     <Compile Include="ViewModels\PillarViewModelBaseFixture.cs" />
+    <Compile Include="Views\BindablePickerFixture.cs" />
+    <Compile Include="Views\NamedDummyObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Askaiser.Mobile.Pillar\Askaiser.Mobile.Pillar.csproj">
