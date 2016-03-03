@@ -40,7 +40,7 @@
     <Label Text="This ItemsView uses a TemplateSelector and render a specific DataTemplate depending on the type of each element of its ItemsSource."
            HeightRequest="50" VerticalTextAlignment="Center" />
 
-    <v:ItemsView ItemsSource="{Binding Animals}" TemplateSelector="{StaticResource TemplateSelector}" />
+    <v:TemplatedItemsView ItemsSource="{Binding Animals}" TemplateSelector="{StaticResource TemplateSelector}" />
 
   </StackLayout>
 </ContentPage>
