@@ -130,5 +130,25 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
 
             Assert.That(textLength, Is.EqualTo(foobar.Length * 2));
         }
+
+        [Test]
+        public void SpecifyCommandParameterManuallyOverridesEventArgs()
+        {
+            object result = null;
+
+            var behavior = new EventToCommandBehavior
+            {
+                EventName = "TextChanged",
+                Command = new RelayCommand<object>(parameter => result = parameter),
+                CommandParameter = "dummy value that will be set to the return variable"
+            };
+
+            var entry = new Entry();
+
+            entry.Behaviors.Add(behavior);
+            entry.Text = "foobar";
+
+            Assert.AreSame(behavior.CommandParameter, result);
+        }
     }
 }

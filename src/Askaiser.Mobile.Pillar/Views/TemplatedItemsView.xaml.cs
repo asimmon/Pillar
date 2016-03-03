@@ -7,16 +7,16 @@ using Xamarin.Forms;
 
 namespace Askaiser.Mobile.Pillar.Views
 {
-    public partial class ItemsView
+    public partial class TemplatedItemsView : ScrollView
     {
         private readonly ICommand _selectedCommand;
 
-        public ItemsView()
+        public TemplatedItemsView()
         {
             InitializeComponent();
 
             _selectedCommand = new Command<object>(item => SelectedItem = item);
-            this.PropertyChanged += (sender, e) =>
+            PropertyChanged += (sender, e) =>
             {
                 if (e.PropertyName == "Orientation")
                 {
@@ -30,7 +30,7 @@ namespace Askaiser.Mobile.Pillar.Views
         public event EventHandler SelectedItemChanged;
 
         public static readonly BindableProperty ItemsSourceProperty =
-            BindableProperty.Create<ItemsView, IList>(p => p.ItemsSource, default(IList), BindingMode.TwoWay, null, ItemsSourceChanged);
+            BindableProperty.Create<TemplatedItemsView, IList>(p => p.ItemsSource, default(IList), BindingMode.TwoWay, null, ItemsSourceChanged);
 
         public IList ItemsSource
         {
@@ -39,7 +39,7 @@ namespace Askaiser.Mobile.Pillar.Views
         }
 
         public static readonly BindableProperty SelectedItemProperty =
-            BindableProperty.Create<ItemsView, object>(p => p.SelectedItem, default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
+            BindableProperty.Create<TemplatedItemsView, object>(p => p.SelectedItem, default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
 
         public object SelectedItem
         {
@@ -48,7 +48,7 @@ namespace Askaiser.Mobile.Pillar.Views
         }
 
         public static readonly BindableProperty TemplateSelectorProperty =
-            BindableProperty.Create<ItemsView, TemplateSelector>(p => p.TemplateSelector, default(TemplateSelector), BindingMode.Default, null, TemplateSelectorChanged);
+            BindableProperty.Create<TemplatedItemsView, TemplateSelector>(p => p.TemplateSelector, default(TemplateSelector), BindingMode.Default, null, TemplateSelectorChanged);
 
         public TemplateSelector TemplateSelector
         {
@@ -58,13 +58,13 @@ namespace Askaiser.Mobile.Pillar.Views
 
         private static void TemplateSelectorChanged(BindableObject bindable, TemplateSelector oldValue, TemplateSelector newValue)
         {
-            var view = (ItemsView)bindable;
+            var view = (TemplatedItemsView)bindable;
             view.SetItems();
         }
 
         private static void ItemsSourceChanged(BindableObject bindable, IList oldValue, IList newValue)
         {
-            var itemsLayout = (ItemsView)bindable;
+            var itemsLayout = (TemplatedItemsView)bindable;
             itemsLayout.SetItems();
         }
 
@@ -118,7 +118,7 @@ namespace Askaiser.Mobile.Pillar.Views
 
         private static void OnSelectedItemChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var itemsView = (ItemsView)bindable;
+            var itemsView = (TemplatedItemsView)bindable;
 
             if (newValue == oldValue)
                 return;

@@ -98,6 +98,7 @@
     <Compile Include="Behaviors\BindableBehaviorFixture.cs" />
     <Compile Include="Behaviors\EventToCommandBehaviorFixture.cs" />
     <Compile Include="Bootstrapping\PillarBootstrapperFixture.cs" />
+    <Compile Include="Bootstrapping\PillarModuleFixture.cs" />
     <Compile Include="Converters\BooleanConverterFixture.cs" />
     <Compile Include="Factories\ViewFactoryFixture.cs" />
     <Compile Include="Mocks\MockBooleanConverter.cs" />

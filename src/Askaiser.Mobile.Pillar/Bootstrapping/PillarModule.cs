@@ -31,25 +31,27 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
             // default page resolver
             builder.RegisterInstance<Func<Page>>(() =>
             {
-                // Check if we are using MasterDetailPage
-                var masterDetailPage = Application.Current.MainPage as MasterDetailPage;
-
-                var page = masterDetailPage != null
-                    ? masterDetailPage.Detail
-                    : Application.Current.MainPage;
-
-                // Check if page is a NavigationPage
-                var navigationPage = page as IPageContainer<Page>;
-
-                return navigationPage != null
-                    ? navigationPage.CurrentPage
-                        : page;
+                var rootPage = Application.Current.MainPage;
+                return GetCurrentPage(rootPage);
             });
 
             // current PageProxy
             builder.RegisterType<PageProxy>()
                 .As<IPage>()
                 .SingleInstance();
+        }
+
+        public Page GetCurrentPage(Page rootPage)
+        {
+            // Check if we are using MasterDetailPage
+            var masterDetailPage = rootPage as MasterDetailPage;
+
+            var page = masterDetailPage != null ? masterDetailPage.Detail : rootPage;
+
+            // Check if page is a NavigationPage
+            var navigationPage = page as IPageContainer<Page>;
+
+            return navigationPage != null ? navigationPage.CurrentPage : page;
         }
     }
 }

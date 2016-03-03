@@ -63,14 +63,14 @@
     <Compile Include="Views\DataTemplateCollection.cs" />
     <Compile Include="Views\DataTemplateWrapper.cs" />
     <Compile Include="Views\IDataTemplateWrapper.cs" />
-    <Compile Include="Views\ItemsView.xaml.cs">
-      <DependentUpon>ItemsView.xaml</DependentUpon>
+    <Compile Include="Views\TemplatedItemsView.xaml.cs">
+      <DependentUpon>TemplatedItemsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PageProxy.cs" />
     <Compile Include="Views\TemplateSelector.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\ItemsView.xaml">
+    <EmbeddedResource Include="Views\TemplatedItemsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
