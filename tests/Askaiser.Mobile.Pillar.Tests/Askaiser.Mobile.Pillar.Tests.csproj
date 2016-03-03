@@ -95,9 +95,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Behaviors\BindableBehaviorFixture.cs" />
     <Compile Include="Behaviors\EventToCommandBehaviorFixture.cs" />
     <Compile Include="Bootstrapping\PillarBootstrapperFixture.cs" />
+    <Compile Include="Converters\BooleanConverterFixture.cs" />
     <Compile Include="Factories\ViewFactoryFixture.cs" />
+    <Compile Include="Mocks\MockBooleanConverter.cs" />
     <Compile Include="Mocks\MockBootstrapper.cs" />
     <Compile Include="Mocks\MockView.cs" />
     <Compile Include="Mocks\MockViewModel.cs" />

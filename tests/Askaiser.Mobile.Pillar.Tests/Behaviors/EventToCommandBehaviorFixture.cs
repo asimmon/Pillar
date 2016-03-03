@@ -12,6 +12,50 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
     public class EventToCommandBehaviorFixture
     {
         [Test]
+        public void EnsureThatEventNameIsMandatory()
+        {
+            var behavior = new EventToCommandBehavior
+            {
+                EventName = null
+            };
+
+            var entry = new Entry();
+
+            var ex = Assert.Throws<ArgumentException>(() => entry.Behaviors.Add(behavior));
+            
+            Assert.That(ex.Message, Is.EqualTo("EventToCommand: EventName must be specified"));
+        }
+
+        [Test]
+        public void EnsureThatEventExists()
+        {
+            var behavior = new EventToCommandBehavior
+            {
+                EventName = "EventThatDoesNotExists"
+            };
+
+            var entry = new Entry();
+
+            var ex = Assert.Throws<ArgumentException>(() => entry.Behaviors.Add(behavior));
+
+            Assert.That(ex.Message, Is.EqualTo("EventToCommand: Can't find any event named 'EventThatDoesNotExists' on attached type"));
+        }
+
+        [Test]
+        public void EnsureThatDoNothingWhenCommandIsNull()
+        {
+            var behavior = new EventToCommandBehavior
+            {
+                EventName = "TextChanged",
+                Command = null
+            };
+
+            var entry = new Entry();
+            entry.Behaviors.Add(behavior);
+            entry.Text = "foobar";
+        }
+
+        [Test]
         public void HandlesEventWithCommand()
         {
             bool textChanged = false;
