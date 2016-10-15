@@ -12,8 +12,8 @@ namespace Askaiser.Mobile.Pillar.Views
     [ContentProperty("WrappedTemplate")]
     public class DataTemplateWrapper<T> : BindableObject, IDataTemplateWrapper
     {
-        public static readonly BindableProperty WrappedTemplateProperty = BindableProperty.Create<DataTemplateWrapper<T>, DataTemplate>(x => x.WrappedTemplate, null);
-        public static readonly BindableProperty IsDefaultProperty = BindableProperty.Create<DataTemplateWrapper<T>, bool>(x => x.IsDefault, false);
+        public static readonly BindableProperty WrappedTemplateProperty = BindableProperty.Create("WrappedTemplate", typeof(DataTemplate), typeof(DataTemplateWrapper<T>));
+        public static readonly BindableProperty IsDefaultProperty = BindableProperty.Create("IsDefault", typeof(bool), typeof(DataTemplateWrapper<T>), false);
 
         public bool IsDefault
         {

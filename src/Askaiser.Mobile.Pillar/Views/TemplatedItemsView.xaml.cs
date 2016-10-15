@@ -20,7 +20,7 @@ namespace Askaiser.Mobile.Pillar.Views
             {
                 if (e.PropertyName == "Orientation")
                 {
-                    Container.Orientation = (this.Orientation == ScrollOrientation.Horizontal)
+                    Container.Orientation = Orientation == ScrollOrientation.Horizontal
                         ? StackOrientation.Horizontal
                         : StackOrientation.Vertical;
                 }
@@ -30,7 +30,7 @@ namespace Askaiser.Mobile.Pillar.Views
         public event EventHandler SelectedItemChanged;
 
         public static readonly BindableProperty ItemsSourceProperty =
-            BindableProperty.Create<TemplatedItemsView, IList>(p => p.ItemsSource, default(IList), BindingMode.TwoWay, null, ItemsSourceChanged);
+            BindableProperty.Create("ItemsSource", typeof(IList), typeof(TemplatedItemsView), default(IList), BindingMode.TwoWay, null, ItemsSourceChanged);
 
         public IList ItemsSource
         {
@@ -39,7 +39,7 @@ namespace Askaiser.Mobile.Pillar.Views
         }
 
         public static readonly BindableProperty SelectedItemProperty =
-            BindableProperty.Create<TemplatedItemsView, object>(p => p.SelectedItem, default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
+            BindableProperty.Create("SelectedItem", typeof(object), typeof(TemplatedItemsView), default(object), BindingMode.TwoWay, null, OnSelectedItemChanged);
 
         public object SelectedItem
         {
@@ -48,7 +48,7 @@ namespace Askaiser.Mobile.Pillar.Views
         }
 
         public static readonly BindableProperty TemplateSelectorProperty =
-            BindableProperty.Create<TemplatedItemsView, TemplateSelector>(p => p.TemplateSelector, default(TemplateSelector), BindingMode.Default, null, TemplateSelectorChanged);
+            BindableProperty.Create("TemplateSelector", typeof(TemplateSelector), typeof(TemplatedItemsView), default(TemplateSelector), BindingMode.Default, null, TemplateSelectorChanged);
 
         public TemplateSelector TemplateSelector
         {
@@ -56,13 +56,13 @@ namespace Askaiser.Mobile.Pillar.Views
             set { SetValue(TemplateSelectorProperty, value); }
         }
 
-        private static void TemplateSelectorChanged(BindableObject bindable, TemplateSelector oldValue, TemplateSelector newValue)
+        private static void TemplateSelectorChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var view = (TemplatedItemsView)bindable;
             view.SetItems();
         }
 
-        private static void ItemsSourceChanged(BindableObject bindable, IList oldValue, IList newValue)
+        private static void ItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var itemsLayout = (TemplatedItemsView)bindable;
             itemsLayout.SetItems();
@@ -135,7 +135,7 @@ namespace Askaiser.Mobile.Pillar.Views
 
             var handler = SelectedItemChanged;
             if (handler != null)
-                handler(this, EventArgs.Empty);
+                SelectedItemChanged(this, EventArgs.Empty);
         }
     }
 }

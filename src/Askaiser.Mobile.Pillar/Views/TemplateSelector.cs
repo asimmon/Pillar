@@ -15,11 +15,11 @@ namespace Askaiser.Mobile.Pillar.Views
     [ContentProperty("Templates")]
     public class TemplateSelector : BindableObject
     {
-        public static BindableProperty TemplatesProperty = BindableProperty.Create<TemplateSelector, DataTemplateCollection>(x => x.Templates, default(DataTemplateCollection), BindingMode.OneWay, null, TemplatesChanged);
+        public static BindableProperty TemplatesProperty = BindableProperty.Create("Templates", typeof(DataTemplateCollection), typeof(TemplateSelector), default(DataTemplateCollection), BindingMode.OneWay, null, TemplatesChanged);
 
-        public static BindableProperty SelectorFunctionProperty = BindableProperty.Create<TemplateSelector, Func<Type, DataTemplate>>(x => x.SelectorFunction, null);
+        public static BindableProperty SelectorFunctionProperty = BindableProperty.Create("SelectorFunction", typeof(Func<Type, DataTemplate>), typeof(TemplateSelector));
 
-        public static BindableProperty ExceptionOnNoMatchProperty = BindableProperty.Create<TemplateSelector, bool>(x => x.ExceptionOnNoMatch, true);
+        public static BindableProperty ExceptionOnNoMatchProperty = BindableProperty.Create("ExceptionOnNoMatch", typeof(bool), typeof(DataTemplate), true);
 
         /// <summary>
         /// Initialize the TemplateCollections so that each 
@@ -36,12 +36,15 @@ namespace Askaiser.Mobile.Pillar.Views
         /// <param name="bo"></param>
         /// <param name="oldval"></param>
         /// <param name="newval"></param>
-        public static void TemplatesChanged(BindableObject bo, DataTemplateCollection oldval, DataTemplateCollection newval)
+        public static void TemplatesChanged(BindableObject bo, object oldval, object newval)
         {
             var ts = bo as TemplateSelector;
+            var oldCollection = oldval as DataTemplateCollection;
+            var newCollection = newval as DataTemplateCollection;
+
             if (ts == null) return;
-            if (oldval != null) oldval.CollectionChanged -= ts.TemplateSetChanged;
-            newval.CollectionChanged += ts.TemplateSetChanged;
+            if (oldCollection != null) oldCollection.CollectionChanged -= ts.TemplateSetChanged;
+            if (newCollection != null) newCollection.CollectionChanged += ts.TemplateSetChanged;
             ts.Cache = null;
         }
 

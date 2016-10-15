@@ -16,11 +16,11 @@ namespace Askaiser.Mobile.Pillar.Behaviors
     /// </summary>
     public class EventToCommandBehavior : BindableBehavior<View>
     {
-        public static readonly BindableProperty EventNameProperty = BindableProperty.Create<EventToCommandBehavior, string>(p => p.EventName, null);
-        public static readonly BindableProperty CommandProperty = BindableProperty.Create<EventToCommandBehavior, ICommand>(p => p.Command, null);
-        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create<EventToCommandBehavior, object>(p => p.CommandParameter, null);
-        public static readonly BindableProperty EventArgsConverterProperty = BindableProperty.Create<EventToCommandBehavior, IValueConverter>(p => p.EventArgsConverter, null);
-        public static readonly BindableProperty EventArgsConverterParameterProperty = BindableProperty.Create<EventToCommandBehavior, object>(p => p.EventArgsConverterParameter, null);
+        public static readonly BindableProperty EventNameProperty = BindableProperty.Create("EventName", typeof(string), typeof(EventToCommandBehavior));
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create("Command", typeof(ICommand), typeof(EventToCommandBehavior));
+        public static readonly BindableProperty CommandParameterProperty = BindableProperty.Create("CommandParameter", typeof(object), typeof(EventToCommandBehavior));
+        public static readonly BindableProperty EventArgsConverterProperty = BindableProperty.Create("EventArgsConverter", typeof(IValueConverter), typeof(EventToCommandBehavior));
+        public static readonly BindableProperty EventArgsConverterParameterProperty = BindableProperty.Create("EventArgsConverterParameter", typeof(object), typeof(EventToCommandBehavior));
 
         private Delegate _handler;
         private EventInfo _eventInfo;

@@ -14,9 +14,9 @@ namespace Askaiser.Mobile.Pillar.Views
     /// </summary>
     public class BindablePicker : Picker
     {
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create<BindablePicker, IEnumerable>(o => o.ItemsSource, default(IEnumerable), BindingMode.OneWay, null, ItemsSourcePropertyChanged);
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IEnumerable), typeof(BindablePicker), default(IEnumerable), BindingMode.OneWay, null, ItemsSourcePropertyChanged);
 
-        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create<BindablePicker, object>(o => o.SelectedItem, default(object), BindingMode.OneWay, null, SelectedItemPropertyChanged);
+        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create("SelectedItem", typeof(object), typeof(BindablePicker), default(object), BindingMode.OneWay, null, SelectedItemPropertyChanged);
 
         private string _displayMemberPath;
 
@@ -71,12 +71,15 @@ namespace Askaiser.Mobile.Pillar.Views
         /// <param name="bindable">The BindablePicker</param>
         /// <param name="oldValues">The old collection</param>
         /// <param name="newValues">The new collection</param>
-        private static void ItemsSourcePropertyChanged(BindableObject bindable, IEnumerable oldValues, IEnumerable newValues)
+        private static void ItemsSourcePropertyChanged(BindableObject bindable, object oldValues, object newValues)
         {
             var picker = bindable as BindablePicker;
+            var oldEnumerable = oldValues as IEnumerable;
+            var newEnumerable = newValues as IEnumerable;
+
             if (picker != null)
             {
-                picker.ItemsSourceChanged(oldValues, newValues);
+                picker.ItemsSourceChanged(oldEnumerable, newEnumerable);
             }
         }
 
