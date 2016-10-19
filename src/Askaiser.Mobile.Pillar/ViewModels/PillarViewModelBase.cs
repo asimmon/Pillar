@@ -1,6 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-
-namespace Askaiser.Mobile.Pillar.ViewModels
+﻿namespace Askaiser.Mobile.Pillar.ViewModels
 {
     /// <summary>
     /// The preffered ViewModel class of every ViewModel which can be bound to a View

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using Askaiser.Mobile.Pillar.Behaviors;
-using GalaSoft.MvvmLight.Command;
 using Moq;
 using NUnit.Framework;
 using Xamarin.Forms;
@@ -63,7 +62,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
             var behavior = new EventToCommandBehavior
             {
                 EventName = "TextChanged",
-                Command = new RelayCommand(() => textChanged = true)
+                Command = new Command(() => textChanged = true)
             };
 
             var entry = new Entry();
@@ -87,7 +86,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
             var behavior = new EventToCommandBehavior
             {
                 EventName = "TextChanged",
-                Command = new RelayCommand<int>(len => textLength = len),
+                Command = new Command<int>(len => textLength = len),
                 EventArgsConverter = converter.Object
             };
 
@@ -117,7 +116,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
             var behavior = new EventToCommandBehavior
             {
                 EventName = "TextChanged",
-                Command = new RelayCommand<int>(len => textLength = len),
+                Command = new Command<int>(len => textLength = len),
                 EventArgsConverter = converter.Object,
                 EventArgsConverterParameter = foobar
             };
@@ -139,7 +138,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
             var behavior = new EventToCommandBehavior
             {
                 EventName = "TextChanged",
-                Command = new RelayCommand<object>(parameter => result = parameter),
+                Command = new Command<object>(parameter => result = parameter),
                 CommandParameter = "dummy value that will be set to the return variable"
             };
 
