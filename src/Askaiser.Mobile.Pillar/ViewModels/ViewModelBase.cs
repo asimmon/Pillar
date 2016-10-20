@@ -39,10 +39,10 @@ namespace Askaiser.Mobile.Pillar.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             var propertyChanged = PropertyChanged;
-            if (propertyChanged == null)
-                return;
-
-            propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            if (propertyChanged != null)
+            {
+                propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         protected virtual void OnPropertyChanged<T>(Expression<Func<T>> propertyExpression)
