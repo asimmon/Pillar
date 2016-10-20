@@ -50,6 +50,7 @@
     <Compile Include="Factories\IViewFactory.cs" />
     <Compile Include="Factories\ViewFactory.cs" />
     <Compile Include="Interfaces\IDialogProvider.cs" />
+    <Compile Include="Interfaces\IMessenger.cs" />
     <Compile Include="Interfaces\INavigationAware.cs" />
     <Compile Include="Interfaces\IPage.cs" />
     <Compile Include="Interfaces\ISelectable.cs" />
