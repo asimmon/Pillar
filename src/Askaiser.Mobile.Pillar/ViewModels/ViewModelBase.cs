@@ -28,6 +28,7 @@ namespace Askaiser.Mobile.Pillar.ViewModels
 
             field = newValue;
             OnPropertyChanged(propertyExpression);
+
             return true;
         }
 
