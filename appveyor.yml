@@ -1,0 +1,9 @@
+version: 1.0.{build}
+branches:
+  only:
+  - develop
+before_build:
+- cmd: cd src & nuget restore
+build:
+  project: src/Askaiser.Mobile.Pillar.sln
+  verbosity: minimal
