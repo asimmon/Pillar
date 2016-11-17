@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Askaiser.Mobile.Pillar.Ioc.Abstractions;
 using Askaiser.Mobile.Pillar.ViewModels;
-using Autofac;
 using Xamarin.Forms;
 
 namespace Askaiser.Mobile.Pillar.Factories
@@ -9,9 +9,9 @@ namespace Askaiser.Mobile.Pillar.Factories
     public class ViewFactory : IViewFactory
     {
         private readonly IDictionary<Type, Type> _map = new Dictionary<Type, Type>();
-        private readonly IComponentContext _componentContext;
+        private readonly IServiceProvider _componentContext;
 
-        public ViewFactory(IComponentContext componentContext)
+        public ViewFactory(IServiceProvider componentContext)
         {
             _componentContext = componentContext;
             Instance = this;
@@ -60,10 +60,10 @@ namespace Askaiser.Mobile.Pillar.Factories
         public Page Resolve<TViewModel>(out TViewModel viewModel, Action<TViewModel> setStateAction = null)
             where TViewModel : class, IViewModel
         {
-            viewModel = _componentContext.Resolve<TViewModel>();
+            viewModel = _componentContext.GetService<TViewModel>();
 
             var viewType = _map[typeof(TViewModel)];
-            var view = _componentContext.Resolve(viewType) as Page;
+            var view = _componentContext.GetService(viewType) as Page;
 
             if (setStateAction != null)
                 setStateAction(viewModel);
@@ -86,7 +86,7 @@ namespace Askaiser.Mobile.Pillar.Factories
         {
             var type = viewModel.GetType();
             var viewType = _map[type];
-            var view = _componentContext.Resolve(viewType) as Page;
+            var view = _componentContext.GetService(viewType) as Page;
             view.BindingContext = viewModel;
             return view;
         }

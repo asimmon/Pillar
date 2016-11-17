@@ -1,9 +1,9 @@
 ﻿using System;
 using Askaiser.Mobile.Pillar.Factories;
 using Askaiser.Mobile.Pillar.Interfaces;
+using Askaiser.Mobile.Pillar.Ioc.Abstractions;
 using Askaiser.Mobile.Pillar.Services;
 using Askaiser.Mobile.Pillar.Views;
-using Autofac;
 using Xamarin.Forms;
 
 namespace Askaiser.Mobile.Pillar.Bootstrapping
@@ -11,47 +11,51 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
     /// <summary>
     /// Autofac Module that register all the dependencies needed in this library.
     /// </summary>
-    public sealed class PillarModule : Module
+    public sealed class PillarModule
     {
-        protected override void Load(ContainerBuilder builder)
+        public void Load(IServiceCollection builder)
         {
             // service registration
-            builder.RegisterType<DialogService>()
-                .As<IDialogProvider>()
-                .SingleInstance();
+            builder.AddSingleton<IDialogProvider, DialogService>();
+            builder.AddSingleton<IViewFactory, ViewFactory>();
+            builder.AddSingleton<INavigator, Navigator>();
 
-            builder.RegisterType<ViewFactory>()
-                .As<IViewFactory>()
-                .SingleInstance();
-
-            builder.RegisterType<Navigator>()
-                .As<INavigator>()
-                .SingleInstance();
-
-            // default page resolver
-            builder.RegisterInstance<Func<Page>>(() =>
-            {
-                var rootPage = Application.Current.MainPage;
-                return GetCurrentPage(rootPage);
-            });
+            // current page resolver
+            builder.AddTransient<Func<Page>>(provider => GetCurrentPage);
 
             // current PageProxy
-            builder.RegisterType<PageProxy>()
-                .As<IPage>()
-                .SingleInstance();
+            builder.AddSingleton<IPage, PageProxy>();
+        }
+
+        public Page GetCurrentPage()
+        {
+            return GetCurrentPage(Application.Current.MainPage);
         }
 
         public Page GetCurrentPage(Page rootPage)
         {
-            // Check if we are using MasterDetailPage
-            var masterDetailPage = rootPage as MasterDetailPage;
+            var page = rootPage;
+            bool hasMore;
 
-            var page = masterDetailPage != null ? masterDetailPage.Detail : rootPage;
+            do
+            {
+                hasMore = true;
 
-            // Check if page is a NavigationPage
-            var navigationPage = page as IPageContainer<Page>;
+                if (page is MasterDetailPage)
+                {
+                    page = ((MasterDetailPage) page).Detail;
+                }
+                else if (page is IPageContainer<Page>)
+                {
+                    page = ((IPageContainer<Page>) page).CurrentPage;
+                }
+                else
+                {
+                    hasMore = false;
+                }
+            } while (hasMore);
 
-            return navigationPage != null ? navigationPage.CurrentPage : page;
+            return page;
         }
     }
 }

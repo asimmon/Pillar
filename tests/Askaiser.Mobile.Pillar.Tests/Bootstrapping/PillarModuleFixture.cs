@@ -1,4 +1,5 @@
-﻿using Askaiser.Mobile.Pillar.Bootstrapping;
+﻿using System.Collections.Generic;
+using Askaiser.Mobile.Pillar.Bootstrapping;
 using NUnit.Framework;
 using Xamarin.Forms;
 
@@ -13,7 +14,6 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
         public void RunBeforeAnyTests()
         {
             _module = new PillarModule();
-
         }
 
         [Test]
@@ -93,6 +93,42 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
             var currentPage = _module.GetCurrentPage(rootPage);
 
             Assert.AreSame(page, currentPage);
+        }
+
+        [Test]
+        public void GetCurrentPageForInsanePageHierarchy()
+        {
+            var page = new ContentPage();
+
+            var carousel = new CarouselPage
+            {
+                Children = { page }
+            };
+
+            var tabbed = new TabbedPage
+            {
+                Children = { carousel }
+            };
+
+            var navigation = new NavigationPage(tabbed);
+
+            var master = new MasterDetailPage
+            {
+                Detail = navigation,
+                Master = new ContentPage
+                {
+                    Title = "Dummy"
+                }
+            };
+
+            var anotherTabbed = new TabbedPage
+            {
+                Children = { master }
+            };
+
+            var current = _module.GetCurrentPage(anotherTabbed);
+
+            Assert.AreSame(page, current);
         }
     }
 }

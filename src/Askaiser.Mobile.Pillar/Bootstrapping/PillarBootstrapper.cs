@@ -1,5 +1,7 @@
-﻿using Askaiser.Mobile.Pillar.Factories;
-using Autofac;
+﻿using System;
+using Askaiser.Mobile.Pillar.Factories;
+using Askaiser.Mobile.Pillar.Ioc;
+using Askaiser.Mobile.Pillar.Ioc.Abstractions;
 
 namespace Askaiser.Mobile.Pillar.Bootstrapping
 {
@@ -10,12 +12,12 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
     {
         public void Run()
         {
-            var builder = new ContainerBuilder();
+            var builder = new ServiceCollection();
 
             ConfigureContainer(builder);
 
-            var container = builder.Build();
-            var viewFactory = container.Resolve<IViewFactory>();
+            var container = builder.BuildServiceProvider();
+            var viewFactory = container.GetService<IViewFactory>();
 
             RegisterViews(viewFactory);
 
@@ -28,9 +30,10 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
         /// the dependencies of this library.
         /// </summary>
         /// <param name="builder">Used to register dependencies</param>
-        protected virtual void ConfigureContainer(ContainerBuilder builder)
+        protected virtual void ConfigureContainer(IServiceCollection builder)
         {
-            builder.RegisterModule<PillarModule>();
+            var pillarModule = new PillarModule();
+            pillarModule.Load(builder);
         }
 
         /// <summary>
@@ -46,7 +49,7 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
         /// (you will need a reference to your Application instance).
         /// </summary>
         /// <param name="container">The Autofac dependencies container</param>
-        protected abstract void ConfigureApplication(IContainer container);
+        protected abstract void ConfigureApplication(IServiceProvider container);
     }
 }
 

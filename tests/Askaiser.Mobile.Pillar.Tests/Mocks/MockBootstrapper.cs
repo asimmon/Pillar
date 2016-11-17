@@ -1,6 +1,7 @@
-﻿using Askaiser.Mobile.Pillar.Bootstrapping;
+﻿using System;
+using Askaiser.Mobile.Pillar.Bootstrapping;
 using Askaiser.Mobile.Pillar.Factories;
-using Autofac;
+using Askaiser.Mobile.Pillar.Ioc.Abstractions;
 
 namespace Askaiser.Mobile.Pillar.Tests.Mocks
 {
@@ -8,13 +9,13 @@ namespace Askaiser.Mobile.Pillar.Tests.Mocks
     {
         public IViewFactory ViewFactory { get; set; }
 
-        public IContainer Container { get; set; }
+        public IServiceProvider Container { get; set; }
 
-        protected override void ConfigureContainer(ContainerBuilder builder)
+        protected override void ConfigureContainer(IServiceCollection builder)
         {
             base.ConfigureContainer(builder);
-            builder.RegisterType<MockViewModel>();
-            builder.RegisterType<MockView>();
+            builder.AddTransient<MockViewModel>();
+            builder.AddTransient<MockView>();
         }
 
         protected override void RegisterViews(IViewFactory viewFactory)
@@ -23,7 +24,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Mocks
             ViewFactory.Register<MockViewModel, MockView>();
         }
 
-        protected override void ConfigureApplication(IContainer container)
+        protected override void ConfigureApplication(IServiceProvider container)
         {
             Container = container;
         }
