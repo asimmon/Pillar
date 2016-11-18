@@ -2,15 +2,14 @@
 using System.Globalization;
 using Askaiser.Mobile.Pillar.Behaviors;
 using Moq;
-using NUnit.Framework;
+using Xunit;
 using Xamarin.Forms;
 
 namespace Askaiser.Mobile.Pillar.Tests.Behaviors
 {
-    [TestFixture]
     public class EventToCommandBehaviorFixture
     {
-        [Test]
+        [Fact]
         public void EnsureThatEventNameIsMandatory()
         {
             var behavior = new EventToCommandBehavior
@@ -22,10 +21,10 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
 
             var ex = Assert.Throws<ArgumentException>(() => entry.Behaviors.Add(behavior));
             
-            Assert.That(ex.Message, Is.EqualTo("EventToCommand: EventName must be specified"));
+            Assert.Equal("EventToCommand: EventName must be specified", ex.Message);
         }
 
-        [Test]
+        [Fact]
         public void EnsureThatEventExists()
         {
             var behavior = new EventToCommandBehavior
@@ -37,10 +36,10 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
 
             var ex = Assert.Throws<ArgumentException>(() => entry.Behaviors.Add(behavior));
 
-            Assert.That(ex.Message, Is.EqualTo("EventToCommand: Can't find any event named 'EventThatDoesNotExists' on attached type"));
+            Assert.Equal("EventToCommand: Can't find any event named 'EventThatDoesNotExists' on attached type", ex.Message);
         }
 
-        [Test]
+        [Fact]
         public void EnsureThatDoNothingWhenCommandIsNull()
         {
             var behavior = new EventToCommandBehavior
@@ -54,7 +53,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
             entry.Text = "foobar";
         }
 
-        [Test]
+        [Fact]
         public void HandlesEventWithCommand()
         {
             bool textChanged = false;
@@ -71,10 +70,10 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
             entry.Text = "foobar";
             entry.Behaviors.Remove(behavior);
 
-            Assert.That(textChanged, Is.True);
+            Assert.True(textChanged);
         }
 
-        [Test]
+        [Fact]
         public void HandlesEventWithCommandAndEventArgsConverter()
         {
             var converter = new Mock<IValueConverter>();
@@ -96,10 +95,10 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
             entry.Text = "foobar";
             entry.Behaviors.Remove(behavior);
 
-            Assert.That(textLength, Is.GreaterThan(0));
+            Assert.True(textLength > 0);
         }
 
-        [Test]
+        [Fact]
         public void HandlesEventWithCommandAndEventArgsConverterAndEventArgsConverterParameter()
         {
             const string foobar = "foobar";
@@ -127,10 +126,10 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
             entry.Text = foobar;
             entry.Behaviors.Remove(behavior);
 
-            Assert.That(textLength, Is.EqualTo(foobar.Length * 2));
+            Assert.Equal(foobar.Length * 2, textLength);
         }
 
-        [Test]
+        [Fact]
         public void SpecifyCommandParameterManuallyOverridesEventArgs()
         {
             object result = null;
@@ -147,7 +146,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
             entry.Behaviors.Add(behavior);
             entry.Text = "foobar";
 
-            Assert.AreSame(behavior.CommandParameter, result);
+            Assert.Same(result, behavior.CommandParameter);
         }
     }
 }

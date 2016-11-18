@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Askaiser.Mobile.Pillar.Views;
-using NUnit.Framework;
+using Xunit;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Askaiser.Mobile.Pillar.Tests.Views
 {
-    [TestFixture]
     public class BindablePickerFixture
     {
         private BindablePicker _picker;
@@ -16,8 +15,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Views
 
         private ObservableCollection<NamedDummyObject> _observableItems;
 
-        [SetUp]
-        public void RunBeforeAnyTests()
+        public BindablePickerFixture()
         {
             _picker = new BindablePicker();
 
@@ -32,103 +30,103 @@ namespace Askaiser.Mobile.Pillar.Tests.Views
             _observableItems = new ObservableCollection<NamedDummyObject>(_classicList);
         }
 
-        [Test]
+        [Fact]
         public void EnsureThatItemsAreAssignedFromNewItemsSource()
         {
             _picker.ItemsSource = _classicList;
 
-            CollectionAssert.AreEqual(_classicList.Select(i => i.Name), _picker.Items);
+            Assert.Equal(_picker.Items, _classicList.Select(i => i.Name));
         }
 
-        [Test]
+        [Fact]
         public void EnsureThatItemsAreAddedWhenObservableItemsSourceChanges()
         {
             _picker.ItemsSource = _observableItems;
 
             _observableItems.Add(new NamedDummyObject(5, "New item"));
 
-            CollectionAssert.AreEqual(_observableItems.Select(i => i.Name), _picker.Items);
+            Assert.Equal(_picker.Items, _observableItems.Select(i => i.Name));
         }
 
-        [Test]
+        [Fact]
         public void EnsureThatItemsAreRemovedWhenObservableItemsSourceChanges()
         {
             _picker.ItemsSource = _observableItems;
 
             _observableItems.RemoveAt(1);
 
-            CollectionAssert.AreEqual(_observableItems.Select(i => i.Name), _picker.Items);
+            Assert.Equal(_picker.Items, _observableItems.Select(i => i.Name));
         }
 
-        [Test]
+        [Fact]
         public void EnsureThatNewNullItemsSourceRemoveAllItems()
         {
             _picker.ItemsSource = _observableItems;
             _picker.ItemsSource = null;
 
-            Assert.That(_picker.Items.Count, Is.EqualTo(0));
+            Assert.Equal(0, _picker.Items.Count);
         }
 
-        [Test]
+        [Fact]
         public void EnsureThatClearingObservableItemsSourceRemoveAllItems()
         {
             _picker.ItemsSource = _observableItems;
 
             _observableItems.Clear();
 
-            Assert.That(_picker.Items.Count, Is.EqualTo(0));
+            Assert.Equal(0, _picker.Items.Count);
         }
 
-        [Test]
+        [Fact]
         public void EnsureItemsAreUpdatedWhenReplacingObjectsInObservableItemsSource()
         {
             _picker.ItemsSource = _observableItems;
 
             _observableItems[2] = new NamedDummyObject(2, "Lol");
 
-            CollectionAssert.AreEqual(_observableItems.Select(i => i.Name), _picker.Items);
+            Assert.Equal(_picker.Items, _observableItems.Select(i => i.Name));
         }
 
-        [Test]
+        [Fact]
         public void UpdateSelectedIndexUpdatesSelectedItem()
         {
             _picker.ItemsSource = _classicList;
 
             _picker.SelectedIndex = 2;
 
-            Assert.AreEqual(_classicList[2].Name, _picker.SelectedItem);
+            Assert.Equal(_classicList[2].Name, _picker.SelectedItem);
         }
 
-        [Test]
+        [Fact]
         public void AddNullItemToObservableCollectionAddsItemWithEmptyText()
         {
             _picker.ItemsSource = _observableItems;
 
             _observableItems.Add(null);
 
-            Assert.AreEqual("", _picker.Items.LastOrDefault());
+            Assert.Equal("", _picker.Items.LastOrDefault());
         }
 
-        [Test]
+        [Fact]
         public void UseDisplayMemberPathInsteadOfDefaultToString()
         {
             _picker.DisplayMemberPath = "Id";
             _picker.ItemsSource = _classicList;
 
-            CollectionAssert.AreEqual(_classicList.Select(i => Convert.ToString(i.Id)), _picker.Items);
+            Assert.Equal(_picker.Items, _classicList.Select(i => Convert.ToString(i.Id)));
         }
 
-        [Test]
+        [Fact]
         public void ThrowsExceptionWhenDisplayMemberPathDoesNotExists()
         {
             _picker.DisplayMemberPath = "DummyMissingProperty";
 
             var ex = Assert.Throws<ArgumentException>(() => _picker.ItemsSource = _classicList);
 
-            Assert.That(ex.Message, Is.EqualTo("The property DummyMissingProperty of the type Askaiser.Mobile.Pillar.Tests.Views.NamedDummyObject does not exists"));
+            Assert.Equal("The property DummyMissingProperty of the type Askaiser.Mobile.Pillar.Tests.Views.NamedDummyObject does not exists", ex.Message);
         }
 
-        [Test]
+        [Fact]
         public void DisplayMemberPathWithNullPropertiesAddsEmptyTextItems()
         {
             _classicList = new List<NamedDummyObject>
@@ -141,10 +139,10 @@ namespace Askaiser.Mobile.Pillar.Tests.Views
 
             _picker.ItemsSource = _classicList;
 
-            CollectionAssert.AreEqual(_classicList.Select(i => ""), _picker.Items);
+            Assert.Equal(_picker.Items, _classicList.Select(i => ""));
         }
 
-        [Test]
+        [Fact]
         public void ChangingDisplayMemberPathRefreshItems()
         {
             _picker.DisplayMemberPath = "Id";
@@ -153,17 +151,17 @@ namespace Askaiser.Mobile.Pillar.Tests.Views
 
             _picker.DisplayMemberPath = "Name";
 
-            CollectionAssert.AreEqual(_classicList.Select(i => i.Name), _picker.Items);
+            Assert.Equal(_picker.Items, _classicList.Select(i => i.Name));
         }
 
-        [Test]
+        [Fact]
         public void UpdateSelectedItemUpdatesSelectedIndex()
         {
             _picker.ItemsSource = _observableItems;
 
             _picker.SelectedItem = _observableItems[2];
 
-            Assert.AreEqual(2, _picker.SelectedIndex);
+            Assert.Equal(2, _picker.SelectedIndex);
         } 
     }
 }

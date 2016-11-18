@@ -1,14 +1,13 @@
 ﻿using Askaiser.Mobile.Pillar.Interfaces;
 using Askaiser.Mobile.Pillar.Services;
 using Moq;
-using NUnit.Framework;
+using Xunit;
 
 namespace Askaiser.Mobile.Pillar.Tests.Services
 {
-    [TestFixture]
     public class DialogServiceFixture
     {
-        [Test]
+        [Fact]
         public void DisplaysAlert()
         {
             var page = new Mock<IPage>();
@@ -19,7 +18,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
             page.Verify(x => x.DisplayAlert("Alert", "You have been alerted", "OK"));
         }
 
-        [Test]
+        [Fact]
         public async void DisplaysAlertWithResponse()
         {
             var page = new Mock<IPage>();
@@ -31,10 +30,10 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
             var answer = await dialogService.DisplayAlert("Question?", "Would you like to play a game", "Yes", "No");
 
             page.Verify(x => x.DisplayAlert("Question?", "Would you like to play a game", "Yes", "No"));
-            Assert.That(answer, Is.True);
+            Assert.True(answer);
         }
 
-        [Test]
+        [Fact]
         public async void DisplaysActionSheetWithResponse()
         {
             var page = new Mock<IPage>();
@@ -46,7 +45,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
             var answer = await dialogService.DisplayActionSheet("ActionSheet: Send to?", "Cancel", null, "Email", "Twitter", "Facebook");
 
             page.Verify(x => x.DisplayActionSheet("ActionSheet: Send to?", "Cancel", null, "Email", "Twitter", "Facebook"));
-            Assert.That(answer, Is.EqualTo("Yes"));
+            Assert.Equal("Yes", answer);
         }
 
     }

@@ -1,12 +1,11 @@
 ﻿using Askaiser.Mobile.Pillar.Tests.Mocks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Askaiser.Mobile.Pillar.Tests.ViewModels
 {
-    [TestFixture]
     public class PillarViewModelBaseFixture
     {
-        [Test]
+        [Fact]
         public void TestHandlesPropertyChanged()
         {
             bool propertyChanged = false;
@@ -20,7 +19,7 @@ namespace Askaiser.Mobile.Pillar.Tests.ViewModels
 
             viewModel.Title = "Test";
 
-            Assert.That(propertyChanged, Is.True);
+            Assert.Equal(true, propertyChanged);
         }
     }
 }

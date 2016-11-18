@@ -1,60 +1,58 @@
 ﻿using System;
 using System.ComponentModel;
 using Askaiser.Mobile.Pillar.Tests.Mocks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Askaiser.Mobile.Pillar.Tests.ViewModels
 {
-    [TestFixture]
     public class ViewModelBaseFixture
     {
         private MockViewModel _viewModel;
 
-        [SetUp]
-        public void RunBeforeAnyTests()
+        public ViewModelBaseFixture()
         {
             _viewModel = new MockViewModel();
         }
 
-        [Test]
+        [Fact]
         public void SetPropertyWithLambdaPropertyName()
         {
             var handler = new PropertyChangedEventHandler((sender, args) =>
             {
-                Assert.That(sender, Is.EqualTo(_viewModel));
-                Assert.That(args, Is.Not.Null);
+                Assert.Equal(_viewModel, sender);
+                Assert.NotNull(args);
 
-                Assert.That(args.PropertyName, Is.EqualTo("LambdaStringProperty"));
+                Assert.Equal("LambdaStringProperty", args.PropertyName);
             });
 
             _viewModel.PropertyChanged += handler;
             _viewModel.LambdaStringProperty = "Bar";
 
-            Assert.That(_viewModel.LambdaStringProperty, Is.EqualTo("Bar"));
+            Assert.Equal("Bar", _viewModel.LambdaStringProperty);
 
             _viewModel.PropertyChanged -= handler;
         }
 
-        [Test]
+        [Fact]
         public void SetPropertyWitoutLambdaPropertyName()
         {
             var handler = new PropertyChangedEventHandler((sender, args) =>
             {
-                Assert.That(sender, Is.EqualTo(_viewModel));
-                Assert.That(args, Is.Not.Null);
+                Assert.Equal(_viewModel, sender);
+                Assert.NotNull(args);
 
-                Assert.That(args.PropertyName, Is.EqualTo("WithoutLambdaStringProperty"));
+                Assert.Equal("WithoutLambdaStringProperty", args.PropertyName);
             });
 
             _viewModel.PropertyChanged += handler;
             _viewModel.WithoutLambdaStringProperty = "Bar";
 
-            Assert.That(_viewModel.WithoutLambdaStringProperty, Is.EqualTo("Bar"));
+            Assert.Equal("Bar", _viewModel.WithoutLambdaStringProperty);
 
             _viewModel.PropertyChanged -= handler;
         }
 
-        [Test]
+        [Fact]
         public void SetPropertyWitoutLambdaPropertyNameSameValueTwiceChangeNothing()
         {
             var changes = 0;
@@ -68,12 +66,12 @@ namespace Askaiser.Mobile.Pillar.Tests.ViewModels
             _viewModel.WithoutLambdaStringProperty = "Bar";
             _viewModel.WithoutLambdaStringProperty = "Bar";
 
-            Assert.That(changes, Is.EqualTo(1));
+            Assert.Equal(1, changes);
 
             _viewModel.PropertyChanged -= handler;
         }
 
-        [Test]
+        [Fact]
         public void SetPropertyByLambdaSameValueTwiceChangeNothing()
         {
             var changes = 0;
@@ -87,12 +85,12 @@ namespace Askaiser.Mobile.Pillar.Tests.ViewModels
             _viewModel.LambdaStringProperty = "Bar";
             _viewModel.LambdaStringProperty = "Bar"; // same value again
 
-            Assert.That(changes, Is.EqualTo(1));
+            Assert.Equal(1, changes);
 
             _viewModel.PropertyChanged -= handler;
         }
 
-        [Test]
+        [Fact]
         public void TestThrowsArgumentExceptionWhenLambdaPropertyEmpty()
         {
             var viewModel = new MockViewModel();
@@ -105,7 +103,7 @@ namespace Askaiser.Mobile.Pillar.Tests.ViewModels
             viewModel.PropertyChanged -= emptyHandler;
         }
 
-        [Test]
+        [Fact]
         public void TestThrowsArgumentNullExceptionWhenLambdaPropertyNull()
         {
             var viewModel = new MockViewModel();
@@ -118,7 +116,7 @@ namespace Askaiser.Mobile.Pillar.Tests.ViewModels
             viewModel.PropertyChanged -= emptyHandler;
         }
 
-        [Test]
+        [Fact]
         public void TestThrowsArgumentNullExceptionWhenLambdaPropertyNotAProperty()
         {
             var viewModel = new MockViewModel();

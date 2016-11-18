@@ -1,23 +1,22 @@
 ﻿using Askaiser.Mobile.Pillar.Bootstrapping;
-using NUnit.Framework;
+using Xunit;
 using Xamarin.Forms;
 
 namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
 {
-    [TestFixture]
     public class PillarModuleFixture
     {
-        [Test]
+        [Fact]
         public void GetCurrentPageForSimplePage()
         {
             var rootPage = new ContentPage();
 
             var currentPage = PillarModule.GetCurrentPage(rootPage);
 
-            Assert.AreSame(rootPage, currentPage);
+            Assert.Same(currentPage, rootPage);
         }
 
-        [Test]
+        [Fact]
         public void GetCurrentPageForNavigationPage()
         {
             var page = new ContentPage();
@@ -25,10 +24,10 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
 
             var currentPage = PillarModule.GetCurrentPage(rootPage);
 
-            Assert.AreSame(page, currentPage);
+            Assert.Same(currentPage, page);
         }
 
-        [Test]
+        [Fact]
         public async void GetCurrentPageForNavigationPageWithManyPages()
         {
             var firstPage = new ContentPage();
@@ -40,10 +39,10 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
 
             var currentPage = PillarModule.GetCurrentPage(rootPage);
 
-            Assert.AreSame(secondPage, currentPage);
+            Assert.Same(currentPage, secondPage);
         }
 
-        [Test]
+        [Fact]
         public void GetCurrentPageForMasterDetailPage()
         {
             var masterPage = new ContentPage
@@ -60,10 +59,10 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
 
             var currentPage = PillarModule.GetCurrentPage(rootPage);
 
-            Assert.AreSame(detailPage, currentPage);
+            Assert.Same(currentPage, detailPage);
         }
 
-        [Test]
+        [Fact]
         public void GetCurrentPageForNavigationPageInsideMasterDetailPage()
         {
             var masterPage = new ContentPage
@@ -83,10 +82,10 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
 
             var currentPage = PillarModule.GetCurrentPage(rootPage);
 
-            Assert.AreSame(page, currentPage);
+            Assert.Same(currentPage, page);
         }
 
-        [Test]
+        [Fact]
         public void GetCurrentPageForInsanePageHierarchy()
         {
             var page = new ContentPage();
@@ -119,7 +118,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
 
             var current = PillarModule.GetCurrentPage(anotherTabbed);
 
-            Assert.AreSame(page, current);
+            Assert.Same(current, page);
         }
     }
 }

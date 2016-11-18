@@ -1,24 +1,23 @@
 ﻿using Askaiser.Mobile.Pillar.Tests.Mocks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
 {
-    [TestFixture]
     public class PillarBootstrapperFixture
     {
-        [Test]
+        [Fact]
         public void ConfiguresWhenRun()
         {
             var bootstrapper = new MockBootstrapper();
             bootstrapper.Run();
 
-            Assert.That(bootstrapper.ViewFactory, Is.Not.Null);
+            Assert.NotNull(bootstrapper.ViewFactory);
 
             var view = bootstrapper.ViewFactory.Resolve<MockViewModel>();
 
-            Assert.That(view, Is.Not.Null);
+            Assert.NotNull(view);
 
-            Assert.That(bootstrapper.Container, Is.Not.Null);
+            Assert.NotNull(bootstrapper.Container);
         }
     }
 }

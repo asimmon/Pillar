@@ -1,14 +1,13 @@
 ﻿using Askaiser.Mobile.Pillar.Factories;
 using Askaiser.Mobile.Pillar.Interfaces;
 using Askaiser.Mobile.Pillar.Tests.Mocks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Askaiser.Mobile.Pillar.Tests.Factories
 {
-    [TestFixture]
     public class ViewFactoryFixture
     {
-        [Test]
+        [Fact]
         public void ResolvesViewFromViewModelWhenViewModelIsRegisteredWithViewType()
         {
             var container = new AspNetDependencyInjectionAdapter();
@@ -23,20 +22,20 @@ namespace Askaiser.Mobile.Pillar.Tests.Factories
 
             var view = viewFactory.Resolve(out viewModel, x => x.Title = "Test Title");
 
-            Assert.That(view, Is.Not.Null);
-            Assert.That(view, Is.TypeOf<MockView>());
-            Assert.That(viewModel, Is.Not.Null);
-            Assert.That(viewModel.Title, Is.EqualTo("Test Title"));
+            Assert.NotNull(view);
+            Assert.IsType<MockView>(view);
+            Assert.NotNull(viewModel);
+            Assert.Equal("Test Title", viewModel.Title);
 
             view = viewFactory.Resolve<MockViewModel>(x => x.Title = "Test Title 2");
 
-            Assert.That(view, Is.Not.Null);
-            Assert.That(viewModel.Title, Is.EqualTo("Test Title 2"));
+            Assert.NotNull(view);
+            Assert.Equal("Test Title 2", viewModel.Title);
 
             view = viewFactory.Resolve(viewModel);
 
-            Assert.That(view, Is.Not.Null);
-            Assert.That(view, Is.TypeOf<MockView>());
+            Assert.NotNull(view);
+            Assert.IsType<MockView>(view);
         }
     }
 }

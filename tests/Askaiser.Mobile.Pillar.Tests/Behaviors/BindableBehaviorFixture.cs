@@ -1,13 +1,12 @@
 ﻿using Askaiser.Mobile.Pillar.Behaviors;
-using NUnit.Framework;
+using Xunit;
 using Xamarin.Forms;
 
 namespace Askaiser.Mobile.Pillar.Tests.Behaviors
 {
-    [TestFixture]
     public class BindableBehaviorFixture
     {
-        [Test]
+        [Fact]
         public void HasSameExistingBindingContextThanItsAsociatedObject()
         {
             var behavior = new BindableBehavior<Entry>();
@@ -21,10 +20,10 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
 
             entry.Behaviors.Add(behavior);
 
-            Assert.AreSame(bindingContext, behavior.BindingContext);
+            Assert.Same(behavior.BindingContext, bindingContext);
         }
 
-        [Test]
+        [Fact]
         public void GetSameBindingContextWhenAssociatedBindingContextChange()
         {
             var behavior = new BindableBehavior<Entry>();
@@ -41,7 +40,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
 
             entry.BindingContext = newBindingContext;
 
-            Assert.AreSame(newBindingContext, behavior.BindingContext);
+            Assert.Same(behavior.BindingContext, newBindingContext);
         }
     }
 }

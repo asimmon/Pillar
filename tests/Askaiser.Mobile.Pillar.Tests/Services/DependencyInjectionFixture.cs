@@ -1,9 +1,8 @@
 ﻿using Askaiser.Mobile.Pillar.Interfaces;
-using NUnit.Framework;
+using Xunit;
 
 namespace Askaiser.Mobile.Pillar.Tests.Services
 {
-    [TestFixture]
     public class DependencyInjectionFixture
     {
         private IContainerAdapter _container;
@@ -27,8 +26,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
             }
         }
 
-        [SetUp]
-        public void BeforeEachTest()
+        public DependencyInjectionFixture()
         {
             _container = new AspNetDependencyInjectionAdapter();
 
@@ -36,7 +34,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
             _container.RegisterType<IBar, Bar>();
         }
 
-        [Test]
+        [Fact]
         public void SimpleTransients()
         {
             var foo = _container.Resolve<IFoo>();
@@ -47,13 +45,13 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
             Assert.NotNull(bar.InnerFoo);
         }
 
-        [Test]
+        [Fact]
         public void MultipleTransientsAreNotTheSame()
         {
             var foo1 = _container.Resolve<IFoo>();
             var foo2 = _container.Resolve<IFoo>();
 
-            Assert.AreNotSame(foo1, foo2);
+            Assert.NotSame(foo2, foo1);
         }
     }
 

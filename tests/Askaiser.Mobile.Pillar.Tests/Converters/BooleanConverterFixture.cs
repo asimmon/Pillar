@@ -1,18 +1,16 @@
 ﻿using Askaiser.Mobile.Pillar.Converters;
 using Askaiser.Mobile.Pillar.Tests.Mocks;
-using NUnit.Framework;
+using Xunit;
 
 namespace Askaiser.Mobile.Pillar.Tests.Converters
 {
-    [TestFixture]
     public class BooleanConverterFixture
     {
         private object _trueObject;
         private object _falseObject;
         private BooleanConverter<object> _converter;
 
-        [SetUp]
-        public void RunBeforeAnyTests()
+        public BooleanConverterFixture()
         {
             _trueObject = "true object";
             _falseObject = "false object";
@@ -20,32 +18,32 @@ namespace Askaiser.Mobile.Pillar.Tests.Converters
             _converter = new MockBooleanConverter(_trueObject, _falseObject);
         }
 
-        [Test]
+        [Fact]
         public void TestConvertTrueObject()
         {
             var convertedObject = _converter.Convert(true, null, null, null);
-            Assert.AreSame(_trueObject, convertedObject);
+            Assert.Same(convertedObject, _trueObject);
         }
 
-        [Test]
+        [Fact]
         public void TestConvertFalseObject()
         {
             var convertedObject = _converter.Convert(false, null, null, null);
-            Assert.AreSame(_falseObject, convertedObject);
+            Assert.Same(convertedObject, _falseObject);
         }
 
-        [Test]
+        [Fact]
         public void TestConvertBackTrueObject()
         {
             var convertedBoolean = _converter.ConvertBack(_trueObject, null, null, null);
-            Assert.AreEqual(true, convertedBoolean);
+            Assert.Equal(true, convertedBoolean);
         }
 
-        [Test]
+        [Fact]
         public void TestConvertBackFalseObject()
         {
             var convertedObject = _converter.ConvertBack(_falseObject, null, null, null);
-            Assert.AreEqual(false, convertedObject);
+            Assert.Equal(false, convertedObject);
         }
     }
 }
