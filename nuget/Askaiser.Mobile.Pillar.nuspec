@@ -16,14 +16,11 @@ The documentation is available on the project github page.</description>
     <tags>xamarin forms mvvm pcl android ios windowsphone</tags>
     <iconUrl>https://anthonysimmon.com/wp-content/uploads/pillar_118x128.png</iconUrl>
     <dependencies>
-      <dependency id="Autofac" version="3.5.2" />
-      <dependency id="MvvmLightLibs" version="5.2.0.0" />
-      <dependency id="Xamarin.Forms" version="1.5.0.6447" />
+      <dependency id="Xamarin.Forms" version="2.2.0.45" />
     </dependencies>
   </metadata>
   <files>
     <file src="..\src\Askaiser.Mobile.Pillar\bin\Release\Askaiser.Mobile.Pillar.dll" target="lib"/>
-    <file src="..\src\Askaiser.Mobile.Pillar\bin\Release\Askaiser.Mobile.Pillar.pdb" target="lib"/>
     <file src="..\src\Askaiser.Mobile.Pillar\bin\Release\Askaiser.Mobile.Pillar.xml" target="lib"/>
   </files>
 </package>
