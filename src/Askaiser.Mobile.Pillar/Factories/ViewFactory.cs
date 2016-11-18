@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Askaiser.Mobile.Pillar.Ioc.Abstractions;
+using Askaiser.Mobile.Pillar.Interfaces;
 using Askaiser.Mobile.Pillar.ViewModels;
 using Xamarin.Forms;
 
@@ -9,15 +9,12 @@ namespace Askaiser.Mobile.Pillar.Factories
     public class ViewFactory : IViewFactory
     {
         private readonly IDictionary<Type, Type> _map = new Dictionary<Type, Type>();
-        private readonly IServiceProvider _componentContext;
+        private readonly IContainerAdapter _componentContext;
 
-        public ViewFactory(IServiceProvider componentContext)
+        public ViewFactory(IContainerAdapter componentContext)
         {
             _componentContext = componentContext;
-            Instance = this;
         }
-
-        public static IViewFactory Instance { get; private set; }
 
         /// <summary>
         /// Bind a class type that implement <see cref="IViewModel" /> to a <see cref="Page" /> type for later retrieval.
@@ -60,10 +57,10 @@ namespace Askaiser.Mobile.Pillar.Factories
         public Page Resolve<TViewModel>(out TViewModel viewModel, Action<TViewModel> setStateAction = null)
             where TViewModel : class, IViewModel
         {
-            viewModel = _componentContext.GetService<TViewModel>();
+            viewModel = _componentContext.Resolve<TViewModel>();
 
             var viewType = _map[typeof(TViewModel)];
-            var view = _componentContext.GetService(viewType) as Page;
+            var view = _componentContext.Resolve(viewType) as Page;
 
             if (setStateAction != null)
                 setStateAction(viewModel);
@@ -86,7 +83,7 @@ namespace Askaiser.Mobile.Pillar.Factories
         {
             var type = viewModel.GetType();
             var viewType = _map[type];
-            var view = _componentContext.GetService(viewType) as Page;
+            var view = _componentContext.Resolve(viewType) as Page;
             view.BindingContext = viewModel;
             return view;
         }

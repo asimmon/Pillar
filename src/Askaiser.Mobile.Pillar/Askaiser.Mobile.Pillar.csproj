@@ -49,6 +49,7 @@
     <Compile Include="Exceptions\NoDataTemplateMatchException.cs" />
     <Compile Include="Factories\IViewFactory.cs" />
     <Compile Include="Factories\ViewFactory.cs" />
+    <Compile Include="Interfaces\IContainerAdapter.cs" />
     <Compile Include="Interfaces\IDialogProvider.cs" />
     <Compile Include="Interfaces\IMessenger.cs" />
     <Compile Include="Interfaces\INavigationAware.cs" />

@@ -1,6 +1,5 @@
 ﻿using Askaiser.Mobile.Pillar.Factories;
-using Askaiser.Mobile.Pillar.Ioc;
-using Askaiser.Mobile.Pillar.Ioc.Abstractions;
+using Askaiser.Mobile.Pillar.Interfaces;
 using Askaiser.Mobile.Pillar.Tests.Mocks;
 using NUnit.Framework;
 
@@ -12,10 +11,9 @@ namespace Askaiser.Mobile.Pillar.Tests.Factories
         [Test]
         public void ResolvesViewFromViewModelWhenViewModelIsRegisteredWithViewType()
         {
-            var builder = new ServiceCollection();
-            builder.AddSingleton<MockViewModel>();
-            builder.AddSingleton<MockView>();
-            var container = builder.BuildServiceProvider();
+            var container = new AspNetDependencyInjectionAdapter();
+            container.RegisterSingleton<MockViewModel>();
+            container.RegisterSingleton<MockView>();
 
             var viewFactory = new ViewFactory(container);
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Askaiser.Mobile.Pillar.Bootstrapping;
+﻿using Askaiser.Mobile.Pillar.Bootstrapping;
 using NUnit.Framework;
 using Xamarin.Forms;
 
@@ -21,7 +20,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
         {
             var rootPage = new ContentPage();
 
-            var currentPage = _module.GetCurrentPage(rootPage);
+            var currentPage = PillarModule.GetCurrentPage(rootPage);
 
             Assert.AreSame(rootPage, currentPage);
         }
@@ -32,7 +31,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
             var page = new ContentPage();
             var rootPage = new NavigationPage(page);
 
-            var currentPage = _module.GetCurrentPage(rootPage);
+            var currentPage = PillarModule.GetCurrentPage(rootPage);
 
             Assert.AreSame(page, currentPage);
         }
@@ -47,7 +46,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
 
             await rootPage.PushAsync(secondPage);
 
-            var currentPage = _module.GetCurrentPage(rootPage);
+            var currentPage = PillarModule.GetCurrentPage(rootPage);
 
             Assert.AreSame(secondPage, currentPage);
         }
@@ -67,7 +66,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
                 Detail = detailPage
             };
 
-            var currentPage = _module.GetCurrentPage(rootPage);
+            var currentPage = PillarModule.GetCurrentPage(rootPage);
 
             Assert.AreSame(detailPage, currentPage);
         }
@@ -90,7 +89,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
                 Detail = detailPage
             };
 
-            var currentPage = _module.GetCurrentPage(rootPage);
+            var currentPage = PillarModule.GetCurrentPage(rootPage);
 
             Assert.AreSame(page, currentPage);
         }
@@ -117,7 +116,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
                 Detail = navigation,
                 Master = new ContentPage
                 {
-                    Title = "Dummy"
+                    Title = "mandatory title"
                 }
             };
 
@@ -126,7 +125,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
                 Children = { master }
             };
 
-            var current = _module.GetCurrentPage(anotherTabbed);
+            var current = PillarModule.GetCurrentPage(anotherTabbed);
 
             Assert.AreSame(page, current);
         }

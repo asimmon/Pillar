@@ -1,7 +1,6 @@
 ﻿using System;
 using Askaiser.Mobile.Pillar.Factories;
 using Askaiser.Mobile.Pillar.Interfaces;
-using Askaiser.Mobile.Pillar.Ioc.Abstractions;
 using Askaiser.Mobile.Pillar.Services;
 using Askaiser.Mobile.Pillar.Views;
 using Xamarin.Forms;
@@ -13,26 +12,27 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
     /// </summary>
     public sealed class PillarModule
     {
-        public void Load(IServiceCollection builder)
+        public void Load(IContainerAdapter container)
         {
             // service registration
-            builder.AddSingleton<IDialogProvider, DialogService>();
-            builder.AddSingleton<IViewFactory, ViewFactory>();
-            builder.AddSingleton<INavigator, Navigator>();
+            container.RegisterSingleton(container); // the container itself can be injected
+            container.RegisterSingleton<IDialogProvider, DialogService>();
+            container.RegisterSingleton<IViewFactory, ViewFactory>();
+            container.RegisterSingleton<INavigator, Navigator>();
 
             // current page resolver
-            builder.AddTransient<Func<Page>>(provider => GetCurrentPage);
+            container.RegisterType<Func<Page>>(() => GetCurrentPage);
 
             // current PageProxy
-            builder.AddSingleton<IPage, PageProxy>();
+            container.RegisterSingleton<IPage, PageProxy>();
         }
 
-        public Page GetCurrentPage()
+        private static Page GetCurrentPage()
         {
             return GetCurrentPage(Application.Current.MainPage);
         }
 
-        public Page GetCurrentPage(Page rootPage)
+        public static Page GetCurrentPage(Page rootPage)
         {
             var page = rootPage;
             bool hasMore;
@@ -43,11 +43,11 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
 
                 if (page is MasterDetailPage)
                 {
-                    page = ((MasterDetailPage) page).Detail;
+                    page = ((MasterDetailPage)page).Detail;
                 }
                 else if (page is IPageContainer<Page>)
                 {
-                    page = ((IPageContainer<Page>) page).CurrentPage;
+                    page = ((IPageContainer<Page>)page).CurrentPage;
                 }
                 else
                 {

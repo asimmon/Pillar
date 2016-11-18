@@ -1,7 +1,5 @@
-﻿using System;
-using Askaiser.Mobile.Pillar.Factories;
-using Askaiser.Mobile.Pillar.Ioc;
-using Askaiser.Mobile.Pillar.Ioc.Abstractions;
+﻿using Askaiser.Mobile.Pillar.Factories;
+using Askaiser.Mobile.Pillar.Interfaces;
 
 namespace Askaiser.Mobile.Pillar.Bootstrapping
 {
@@ -10,18 +8,29 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
     /// </summary>
     public abstract class PillarBootstrapper
     {
+        public IContainerAdapter Container { get; protected set; }
+
         public void Run()
         {
-            var builder = new ServiceCollection();
+            Container = GetContainer();
 
-            ConfigureContainer(builder);
+            ConfigureContainer(Container);
 
-            var container = builder.BuildServiceProvider();
-            var viewFactory = container.GetService<IViewFactory>();
+            var viewFactory = Container.Resolve<IViewFactory>();
 
             RegisterViews(viewFactory);
 
-            ConfigureApplication(container);
+            ConfigureApplication(Container);
+        }
+
+        /// <summary>
+        /// Creates the dependendy injection container used in the whole application.
+        /// Override this method to create your own container decorator.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual IContainerAdapter GetContainer()
+        {
+            return new AspNetDependencyInjectionAdapter();
         }
 
         /// <summary>
@@ -29,11 +38,11 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
         /// Don't forget to call base.ConfigureContainer(builder) to register
         /// the dependencies of this library.
         /// </summary>
-        /// <param name="builder">Used to register dependencies</param>
-        protected virtual void ConfigureContainer(IServiceCollection builder)
+        /// <param name="container">Used to register dependencies</param>
+        protected virtual void ConfigureContainer(IContainerAdapter container)
         {
             var pillarModule = new PillarModule();
-            pillarModule.Load(builder);
+            pillarModule.Load(container);
         }
 
         /// <summary>
@@ -49,7 +58,7 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
         /// (you will need a reference to your Application instance).
         /// </summary>
         /// <param name="container">The Autofac dependencies container</param>
-        protected abstract void ConfigureApplication(IServiceProvider container);
+        protected abstract void ConfigureApplication(IContainerAdapter container);
     }
 }
 
