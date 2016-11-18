@@ -20,7 +20,7 @@ The documentation is available on the project github page.</description>
     </dependencies>
   </metadata>
   <files>
-    <file src="..\src\Askaiser.Mobile.Pillar\bin\Release\Askaiser.Mobile.Pillar.dll" target="lib"/>
-    <file src="..\src\Askaiser.Mobile.Pillar\bin\Release\Askaiser.Mobile.Pillar.xml" target="lib"/>
+    <file src="../src/Askaiser.Mobile.Pillar/bin/Release/Askaiser.Mobile.Pillar.dll" target="lib"/>
+    <file src="../src/Askaiser.Mobile.Pillar/bin/Release/Askaiser.Mobile.Pillar.xml" target="lib"/>
   </files>
 </package>
