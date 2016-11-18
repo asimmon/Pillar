@@ -7,14 +7,6 @@ namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping
     [TestFixture]
     public class PillarModuleFixture
     {
-        private PillarModule _module;
-
-        [SetUp]
-        public void RunBeforeAnyTests()
-        {
-            _module = new PillarModule();
-        }
-
         [Test]
         public void GetCurrentPageForSimplePage()
         {
