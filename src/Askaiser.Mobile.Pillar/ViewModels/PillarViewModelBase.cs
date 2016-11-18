@@ -5,7 +5,7 @@
     /// in the app bootstrapping configuration.
     /// It already contains some useful observable properties.
     /// </summary>
-    /// <seealso cref="GalaSoft.MvvmLight.ViewModelBase" />
+    /// <seealso cref="ViewModelBase" />
     /// <seealso cref="IViewModel" />
     public abstract class PillarViewModelBase : ViewModelBase, IViewModel
     {
