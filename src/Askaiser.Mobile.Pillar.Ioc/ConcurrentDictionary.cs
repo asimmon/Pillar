@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Threading;
 
+// ReSharper disable once CheckNamespace
 namespace System.Collections.Concurrent
 {
     /// <summary>
@@ -320,14 +321,12 @@ namespace System.Collections.Concurrent
         }
 
         /// <summary>
-        /// Attempts to add the specified key and value to the <see cref="ConcurrentDictionary{TKey,
-        /// TValue}"/>.
+        /// Attempts to add the specified key and value to the <see cref="ConcurrentDictionary{TKey, TValue}"/>.
         /// </summary>
         /// <param name="key">The key of the element to add.</param>
         /// <param name="value">The value of the element to add. The value can be a null reference (Nothing
         /// in Visual Basic) for reference types.</param>
-        /// <returns>true if the key/value pair was added to the <see cref="ConcurrentDictionary{TKey,
-        /// TValue}"/>
+        /// <returns>true if the key/value pair was added to the <see cref="ConcurrentDictionary{TKey, TValue}"/>
         /// successfully; otherwise, false.</returns>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null reference
         /// (Nothing in Visual Basic).</exception>
@@ -344,8 +343,7 @@ namespace System.Collections.Concurrent
         /// Determines whether the <see cref="ConcurrentDictionary{TKey, TValue}"/> contains the specified
         /// key.
         /// </summary>
-        /// <param name="key">The key to locate in the <see cref="ConcurrentDictionary{TKey,
-        /// TValue}"/>.</param>
+        /// <param name="key">The key to locate in the <see cref="ConcurrentDictionary{TKey, TValue}"/>.</param>
         /// <returns>true if the <see cref="ConcurrentDictionary{TKey, TValue}"/> contains an element with
         /// the specified key; otherwise, false.</returns>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is a null reference
@@ -425,7 +423,7 @@ namespace System.Collections.Concurrent
 
                             if (prev == null)
                             {
-                                Volatile.Write<Node>(ref tables._buckets[bucketNo], curr._next);
+                                Volatile.Write(ref tables._buckets[bucketNo], curr._next);
                             }
                             else
                             {
@@ -475,7 +473,7 @@ namespace System.Collections.Concurrent
 
             // We can get away w/out a lock here.
             // The Volatile.Read ensures that the load of the fields of 'n' doesn't move before the load from buckets[i].
-            Node n = Volatile.Read<Node>(ref tables._buckets[bucketNo]);
+            Node n = Volatile.Read(ref tables._buckets[bucketNo]);
 
             while (n != null)
             {
@@ -770,7 +768,7 @@ namespace System.Collections.Concurrent
             for (int i = 0; i < buckets.Length; i++)
             {
                 // The Volatile.Read ensures that the load of the fields of 'current' doesn't move before the load from buckets[i].
-                Node current = Volatile.Read<Node>(ref buckets[i]);
+                Node current = Volatile.Read(ref buckets[i]);
 
                 while (current != null)
                 {
@@ -850,7 +848,7 @@ namespace System.Collections.Concurrent
                     }
 
                     // The key was not found in the bucket. Insert the key-value pair.
-                    Volatile.Write<Node>(ref tables._buckets[bucketNo], new Node(key, value, hashcode, tables._buckets[bucketNo]));
+                    Volatile.Write(ref tables._buckets[bucketNo], new Node(key, value, hashcode, tables._buckets[bucketNo]));
                     checked
                     {
                         tables._countPerLock[lockNo]++;
@@ -1336,7 +1334,7 @@ namespace System.Collections.Concurrent
         /// </remarks>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((ConcurrentDictionary<TKey, TValue>)this).GetEnumerator();
+            return GetEnumerator();
         }
 
         #endregion
@@ -1392,7 +1390,7 @@ namespace System.Collections.Concurrent
         {
             if (key == null) ThrowKeyNullException();
 
-            return (key is TKey) && this.ContainsKey((TKey)key);
+            return (key is TKey) && ContainsKey((TKey)key);
         }
 
         /// <summary>Provides an <see cref="T:System.Collections.Generics.IDictionaryEnumerator"/> for the
@@ -1509,7 +1507,7 @@ namespace System.Collections.Concurrent
                 if (!(key is TKey)) throw new ArgumentException("The key was of an incorrect type for this dictionary.");
                 if (!(value is TValue)) throw new ArgumentException("The value was of an incorrect type for this dictionary.");
 
-                ((ConcurrentDictionary<TKey, TValue>)this)[(TKey)key] = (TValue)value;
+                this[(TKey)key] = (TValue)value;
             }
         }
 

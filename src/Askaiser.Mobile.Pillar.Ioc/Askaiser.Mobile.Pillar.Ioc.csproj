@@ -40,9 +40,7 @@
     <Compile Include="Abstractions\IServiceCollection.cs" />
     <Compile Include="Abstractions\IServiceScope.cs" />
     <Compile Include="Abstractions\IServiceScopeFactory.cs" />
-    <Compile Include="Abstractions\ISupportRequiredService.cs" />
     <Compile Include="Abstractions\ObjectFactory.cs" />
-    <Compile Include="Abstractions\ServiceCollectionDescriptorExtensions.cs" />
     <Compile Include="Abstractions\ServiceCollectionServiceExtensions.cs" />
     <Compile Include="Abstractions\ServiceDescriptor.cs" />
     <Compile Include="Abstractions\ServiceLifetime.cs" />
