@@ -10,7 +10,6 @@ namespace Askaiser.Mobile.Pillar.Tests.Mocks
 
         protected override void ConfigureContainer(IContainerAdapter container)
         {
-            base.ConfigureContainer(container);
             container.RegisterType<MockViewModel>();
             container.RegisterType<MockView>();
         }

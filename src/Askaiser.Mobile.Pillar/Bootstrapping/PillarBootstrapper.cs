@@ -14,7 +14,7 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
         {
             Container = GetContainer();
 
-            ConfigureContainer(Container);
+            ConfigureContainerInternal(Container);
 
             var viewFactory = Container.Resolve<IViewFactory>();
 
@@ -39,11 +39,15 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
         /// the dependencies of this library.
         /// </summary>
         /// <param name="container">Used to register dependencies</param>
-        protected virtual void ConfigureContainer(IContainerAdapter container)
+        private void ConfigureContainerInternal(IContainerAdapter container)
         {
             var pillarModule = new PillarModule();
             pillarModule.Load(container);
+
+            ConfigureContainer(container);
         }
+
+        protected abstract void ConfigureContainer(IContainerAdapter container);
 
         /// <summary>
         /// Implement this method to bind each View type to a ViewModel type.
