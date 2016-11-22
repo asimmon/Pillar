@@ -19,6 +19,7 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
             container.RegisterSingleton<IDialogProvider, DialogService>();
             container.RegisterSingleton<IViewFactory, ViewFactory>();
             container.RegisterSingleton<INavigator, Navigator>();
+            container.RegisterSingleton<IMessenger, Messenger>();
 
             // current page resolver
             container.RegisterType<Func<Page>>(() => GetCurrentPage);
