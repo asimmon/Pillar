@@ -9,7 +9,7 @@
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <projectUrl>https://github.com/asimmon/Pillar</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Pillar is lightweight MVVM framework for Xamarin.Forms 1.x and 2.x. With this framework, you won't have to deal with page navigation or messed up code-behind anymore. Now, it's all about view models, and navigation between view models. It rely on Autofac for dependency injection and MvvmLight for basic MVVM features and helper classes.
+    <description>Pillar is lightweight MVVM framework for Xamarin.Forms 2.x. With this framework, you won't have to deal with page navigation or messed up code-behind anymore. Now, it's all about view models, and navigation between view models.
 
 The documentation is available on the project github page.</description>
     <copyright>Copyright Anthony Simmon 2015-2016</copyright>
@@ -22,5 +22,8 @@ The documentation is available on the project github page.</description>
   <files>
     <file src="../src/Askaiser.Mobile.Pillar/bin/Release/Askaiser.Mobile.Pillar.dll" target="lib/portable-net45+win8+wpa81+wp8" />
     <file src="../src/Askaiser.Mobile.Pillar/bin/Release/Askaiser.Mobile.Pillar.xml" target="lib/portable-net45+win8+wpa81+wp8" />
+    
+    <file src="../src/Askaiser.Mobile.Pillar/bin/Release/Askaiser.Mobile.Pillar.Ioc.dll" target="lib/portable-net45+win8+wpa81+wp8" />
+    <file src="../src/Askaiser.Mobile.Pillar/bin/Release/Askaiser.Mobile.Pillar.Ioc.xml" target="lib/portable-net45+win8+wpa81+wp8" />
   </files>
 </package>
