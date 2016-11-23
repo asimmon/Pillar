@@ -8,44 +8,20 @@ namespace Askaiser.Mobile.Pillar.Interfaces
     {
         object Resolve(Type serviceType);
 
-        T Resolve<T>()
-            where T : class;
-
-        void RegisterType<TInterface>()
-            where TInterface : class;
-
-        void RegisterType<TFrom, TTo>()
-            where TFrom : class
-            where TTo : class, TFrom;
-
-        void RegisterType<TInterface>(Func<TInterface> implementationFactory)
-            where TInterface : class;
+        void RegisterType(Type serviceType, Type implementationType);
 
         void RegisterType(Type serviceType, Func<object> implementationFactory);
 
-        void RegisterType(Type serviceType, Type implementationType);
-
-        void RegisterSingleton<TInterface>()
-            where TInterface : class;
-
-        void RegisterSingleton<TFrom, TTo>()
-            where TFrom : class
-            where TTo : class, TFrom;
-
-        void RegisterSingleton<TInterface>(TInterface implementationInstance)
-            where TInterface : class;
+        void RegisterSingleton(Type serviceType, Type implementationType);
 
         void RegisterSingleton(Type serviceType, object implementationInstance);
-
-        void RegisterSingleton<TInterface>(Func<TInterface> implementationFactory)
-            where TInterface : class;
 
         void RegisterSingleton(Type serviceType, Func<object> implementationFactory);
     }
 
     public class AspNetDependencyInjectionAdapter : IContainerAdapter
     {
-        private IServiceCollection _services;
+        private readonly IServiceCollection _services;
         private IServiceProvider _provider;
 
         public AspNetDependencyInjectionAdapter()
@@ -62,42 +38,11 @@ namespace Askaiser.Mobile.Pillar.Interfaces
             }
         }
 
-        public void Clear()
-        {
-            _services.Clear();
-        }
-
         public object Resolve(Type serviceType)
         {
             BuildProvider();
 
             return _provider.GetService(serviceType);
-        }
-
-        public T Resolve<T>()
-            where T : class
-        {
-            BuildProvider();
-
-            return _provider.GetService<T>();
-        }
-
-        public void RegisterType<TInterface>() where TInterface : class
-        {
-            RegisterType<TInterface, TInterface>();
-        }
-
-        public void RegisterType<TFrom, TTo>()
-            where TFrom : class
-            where TTo : class, TFrom
-        {
-            _services.AddTransient<TFrom, TTo>();
-        }
-
-        public void RegisterType<TInterface>(Func<TInterface> implementationFactory)
-            where TInterface : class
-        {
-            _services.AddTransient(c => implementationFactory());
         }
 
         public void RegisterType(Type serviceType, Func<object> implementationFactory)
@@ -110,22 +55,9 @@ namespace Askaiser.Mobile.Pillar.Interfaces
             _services.AddTransient(serviceType, implementationType);
         }
 
-        public void RegisterSingleton<TInterface>() where TInterface : class
+        public void RegisterSingleton(Type serviceType, Type implementationType)
         {
-            RegisterSingleton<TInterface, TInterface>();
-        }
-
-        public void RegisterSingleton<TFrom, TTo>()
-            where TFrom : class
-            where TTo : class, TFrom
-        {
-            _services.AddSingleton<TFrom, TTo>();
-        }
-
-        public void RegisterSingleton<TInterface>(TInterface implementationInstance)
-            where TInterface : class
-        {
-            _services.AddSingleton(implementationInstance);
+            _services.AddSingleton(serviceType, implementationType);
         }
 
         public void RegisterSingleton(Type serviceType, object implementationInstance)
@@ -133,15 +65,71 @@ namespace Askaiser.Mobile.Pillar.Interfaces
             _services.AddSingleton(serviceType, implementationInstance);
         }
 
-        public void RegisterSingleton<TInterface>(Func<TInterface> implementationFactory)
-            where TInterface : class
-        {
-            _services.AddSingleton(c => implementationFactory());
-        }
-
         public void RegisterSingleton(Type serviceType, Func<object> implementationFactory)
         {
             _services.AddSingleton(serviceType, c => implementationFactory());
+        }
+    }
+
+    /// <summary>
+    /// Generic extension methods
+    /// </summary>
+    public static class ContainerAdapterExtensions
+    {
+        // resolve
+
+        public static T Resolve<T>(this IContainerAdapter adapter)
+            where T : class
+        {
+            return (T)adapter.Resolve(typeof(T));
+        }
+
+        // transient generics
+
+        public static void RegisterType<TFrom, TTo>(this IContainerAdapter adapter)
+            where TFrom : class
+            where TTo : class, TFrom
+        {
+            adapter.RegisterType(typeof(TFrom), typeof(TTo));
+        }
+
+        public static void RegisterType<TInterface>(this IContainerAdapter adapter)
+            where TInterface : class
+        {
+            adapter.RegisterType(typeof(TInterface), typeof(TInterface));
+        }
+
+        public static void RegisterType<TInterface>(this IContainerAdapter adapter, Func<TInterface> implementationFactory)
+            where TInterface : class
+        {
+            adapter.RegisterType(typeof(TInterface), implementationFactory);
+        }
+
+        // singletons generics
+
+        public static void RegisterSingleton<TInterface>(this IContainerAdapter adapter)
+            where TInterface : class
+        {
+            adapter.RegisterSingleton<TInterface, TInterface>();
+        }
+
+        public static void RegisterSingleton<TFrom, TTo>(this IContainerAdapter adapter)
+            where TFrom : class
+            where TTo : class, TFrom
+        {
+            adapter.RegisterSingleton(typeof(TFrom), typeof(TTo));
+        }
+
+        public static void RegisterSingleton<TInterface>(this IContainerAdapter adapter, TInterface implementationInstance)
+            where TInterface : class
+        {
+            adapter.RegisterSingleton(typeof(TInterface), implementationInstance);
+        }
+
+        public static void RegisterSingleton<TInterface>(this IContainerAdapter adapter, Func<TInterface> implementationFactory)
+            where TInterface : class
+        {
+            adapter.RegisterSingleton(typeof(TInterface), implementationFactory);
         }
     }
 }
