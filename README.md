@@ -1,9 +1,9 @@
 # Pillar
 
-[![Build Status](https://travis-ci.org/asimmon/Pillar.svg?branch=master)](https://travis-ci.org/asimmon/Pillar)
+[![Build Status](https://ci.appveyor.com/api/projects/status/2qrtolh41cn80ssi/branch/develop?svg=true)](https://ci.appveyor.com/project/asimmon/pillar/branch/develop)
 [![NuGet version](https://badge.fury.io/nu/Askaiser.Mobile.Pillar.svg)](https://badge.fury.io/nu/Askaiser.Mobile.Pillar)
 
-Pillar is a MVVM framework for [Xamarin.Forms](https://xamarin.com/forms) 1.x and 2.x. With this framework, you won't have to deal with page navigation or messed up code-behind anymore. Now, it's all about **view models**, and **navigation between view models**. It rely on [Autofac](http://autofac.org/) for dependency injection and [MvvmLight](https://mvvmlight.codeplex.com/) for basic MVVM features and helper classes.
+Pillar is a standalone MVVM framework for [Xamarin.Forms](https://xamarin.com/forms) 2.2+. With this framework, you won't have to deal with page navigation or messed up code-behind anymore. Now, it's all about **view models**, and **navigation between view models**. It uses a modified version of the [ASP.NET Core Dependency Injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection) for dependency injection. You can easily use your own IoC container by implementing an adapter class.
 
 ## Features
 
@@ -16,7 +16,7 @@ Pillar is a MVVM framework for [Xamarin.Forms](https://xamarin.com/forms) 1.x an
 
 ## Get started
 
-[Install the nuget package](https://www.nuget.org/packages/Askaiser.Mobile.Pillar/) and its dependencies:
+[Install the nuget package](https://www.nuget.org/packages/Askaiser.Mobile.Pillar/):
 
     Install-Package Askaiser.Mobile.Pillar
 
@@ -227,4 +227,4 @@ The rest of the documentation will be available soon in the wiki section. Checko
 
 Thank you for your interest in this framework.
 
-I would like to thanks Jonathan Yates (http://adventuresinxamarinforms.com/) for his tutorials. It has been a great source of inspiration and he is doing a very good job.
+I would like to thanks Jonathan Yates (https://web.archive.org/web/20161015115825/https://adventuresinxamarinforms.com/) for his tutorials. It has been a great source of inspiration and he is doing a very good job.
