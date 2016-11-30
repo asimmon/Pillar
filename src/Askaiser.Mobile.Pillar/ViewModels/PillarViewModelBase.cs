@@ -75,12 +75,6 @@
         /// </summary>
         public virtual void NavigatedFrom()
         { }
-
-        /// <summary>
-        /// Releases unmanaged and - optionally - managed resources.
-        /// </summary>
-        public virtual void Dispose()
-        { }
     }
 }
 
