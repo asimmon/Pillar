@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Askaiser.Mobile.Pillar.Interfaces;
 using Xamarin.Forms;
 using Xunit;
@@ -76,6 +77,32 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
             _container.Resolve<IFoo>();
 
             Assert.Throws<InvalidOperationException>(() => _container.RegisterType<ContentPage>());
+        }
+
+        [Fact]
+        public void RegisterTypeFactory()
+        {
+            _container = new AspNetDependencyInjectionAdapter();
+
+            _container.RegisterType<IFoo>(() => new Foo());
+
+            var foo1 = _container.Resolve<IFoo>();
+            var foo2 = _container.Resolve<IFoo>();
+
+            Assert.NotSame(foo1, foo2);
+        }
+
+        [Fact]
+        public void RegisterSingletonFactory()
+        {
+            _container = new AspNetDependencyInjectionAdapter();
+
+            _container.RegisterSingleton<IFoo>(() => new Foo());
+
+            var foo1 = _container.Resolve<IFoo>();
+            var foo2 = _container.Resolve<IFoo>();
+
+            Assert.Same(foo1, foo2);
         }
     }
 }
