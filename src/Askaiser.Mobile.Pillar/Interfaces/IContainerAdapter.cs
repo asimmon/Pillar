@@ -40,9 +40,20 @@ namespace Askaiser.Mobile.Pillar.Interfaces
 
         public object Resolve(Type serviceType)
         {
+            if (serviceType == null)
+            {
+                throw new ArgumentNullException(nameof(serviceType));
+            }
+
             BuildProvider();
 
-            return _provider.GetService(serviceType);
+            var service = _provider.GetService(serviceType);
+            if (service == null)
+            {
+                throw new InvalidOperationException($"No service for type '{serviceType}' has been registered.");
+            }
+
+            return service;
         }
 
         public void RegisterType(Type serviceType, Func<object> implementationFactory)

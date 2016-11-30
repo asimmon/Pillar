@@ -1,4 +1,6 @@
-﻿using Askaiser.Mobile.Pillar.Interfaces;
+﻿using System;
+using System.Text;
+using Askaiser.Mobile.Pillar.Interfaces;
 using Xunit;
 
 namespace Askaiser.Mobile.Pillar.Tests.Services
@@ -52,6 +54,12 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
             var foo2 = _container.Resolve<IFoo>();
 
             Assert.NotSame(foo2, foo1);
+        }
+
+        [Fact]
+        public void ResolveUnregisteredDependency()
+        {
+            Assert.Throws<InvalidOperationException>(() => _container.Resolve<StringBuilder>());
         }
     }
 
