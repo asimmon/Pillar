@@ -23,18 +23,29 @@ namespace Askaiser.Mobile.Pillar.Interfaces
     {
         private readonly IServiceCollection _services;
         private IServiceProvider _provider;
+        private bool _isBuilt;
 
         public AspNetDependencyInjectionAdapter()
         {
             _services = new ServiceCollection();
             _provider = null;
+            _isBuilt = false;
         }
 
         private void BuildProvider()
         {
-            if (_provider == null)
+            if (!_isBuilt)
             {
                 _provider = _services.BuildServiceProvider();
+                _isBuilt = true;
+            }
+        }
+
+        private void EnsureThatProviderIsNotBuildYet()
+        {
+            if (_isBuilt)
+            {
+                throw new InvalidOperationException("Could not register any new dependency, the container is already built.");
             }
         }
 
@@ -58,26 +69,31 @@ namespace Askaiser.Mobile.Pillar.Interfaces
 
         public void RegisterType(Type serviceType, Func<object> implementationFactory)
         {
+            EnsureThatProviderIsNotBuildYet();
             _services.AddTransient(serviceType, c => implementationFactory());
         }
 
         public void RegisterType(Type serviceType, Type implementationType)
         {
+            EnsureThatProviderIsNotBuildYet();
             _services.AddTransient(serviceType, implementationType);
         }
 
         public void RegisterSingleton(Type serviceType, Type implementationType)
         {
+            EnsureThatProviderIsNotBuildYet();
             _services.AddSingleton(serviceType, implementationType);
         }
 
         public void RegisterSingleton(Type serviceType, object implementationInstance)
         {
+            EnsureThatProviderIsNotBuildYet();
             _services.AddSingleton(serviceType, implementationInstance);
         }
 
         public void RegisterSingleton(Type serviceType, Func<object> implementationFactory)
         {
+            EnsureThatProviderIsNotBuildYet();
             _services.AddSingleton(serviceType, c => implementationFactory());
         }
     }
