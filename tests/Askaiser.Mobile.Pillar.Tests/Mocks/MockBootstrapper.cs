@@ -17,13 +17,13 @@ namespace Askaiser.Mobile.Pillar.Tests.Mocks
 
         public IViewFactory ViewFactory { get; set; }
 
-        protected override void ConfigureContainer(IContainerAdapter container)
+        protected override void RegisterDependencies(IContainerAdapter container)
         {
             container.RegisterType<MockViewModel>();
             container.RegisterType<MockView>();
         }
 
-        protected override void RegisterViews(IViewFactory viewFactory)
+        protected override void BindViewModelsToViews(IViewFactory viewFactory)
         {
             ViewFactory = viewFactory;
             ViewFactory.Register<MockViewModel, MockView>();
