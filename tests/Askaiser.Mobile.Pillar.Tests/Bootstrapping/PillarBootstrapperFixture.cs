@@ -1,4 +1,5 @@
 ﻿using Askaiser.Mobile.Pillar.Tests.Mocks;
+using Xamarin.Forms;
 using Xunit;
 
 namespace Askaiser.Mobile.Pillar.Tests.Bootstrapping

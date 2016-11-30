@@ -1,5 +1,6 @@
 ﻿using Askaiser.Mobile.Pillar.Factories;
 using Askaiser.Mobile.Pillar.Interfaces;
+using Xamarin.Forms;
 
 namespace Askaiser.Mobile.Pillar.Bootstrapping
 {
@@ -9,6 +10,13 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
     public abstract class PillarBootstrapper
     {
         public IContainerAdapter Container { get; protected set; }
+
+        public Application App { get; private set; }
+
+        protected PillarBootstrapper(Application app)
+        {
+            App = app;
+        }
 
         public void Run()
         {
@@ -62,7 +70,19 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
         /// (you will need a reference to your Application instance).
         /// </summary>
         /// <param name="container">The Autofac dependencies container</param>
-        protected abstract void ConfigureApplication(IContainerAdapter container);
+        private void ConfigureApplication(IContainerAdapter container)
+        {
+            var viewFactory = container.Resolve<IViewFactory>();
+
+            var page = GetFirstPage(viewFactory);
+
+            if (App != null) // for unit testing purpose only
+            {
+                App.MainPage = new NavigationPage(page);
+            }
+        }
+
+        protected abstract Page GetFirstPage(IViewFactory viewFactory);
     }
 }
 

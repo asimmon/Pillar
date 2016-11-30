@@ -1,11 +1,20 @@
 ﻿using Askaiser.Mobile.Pillar.Bootstrapping;
 using Askaiser.Mobile.Pillar.Factories;
 using Askaiser.Mobile.Pillar.Interfaces;
+using Xamarin.Forms;
 
 namespace Askaiser.Mobile.Pillar.Tests.Mocks
 {
     public class MockBootstrapper : PillarBootstrapper
     {
+        public MockBootstrapper(Application app)
+            : base(app)
+        { }
+
+        public MockBootstrapper()
+            : base(null)
+        { }
+
         public IViewFactory ViewFactory { get; set; }
 
         protected override void ConfigureContainer(IContainerAdapter container)
@@ -20,9 +29,9 @@ namespace Askaiser.Mobile.Pillar.Tests.Mocks
             ViewFactory.Register<MockViewModel, MockView>();
         }
 
-        protected override void ConfigureApplication(IContainerAdapter container)
+        protected override Page GetFirstPage(IViewFactory viewFactory)
         {
-            Container = container;
+            return viewFactory.Resolve<MockViewModel>();
         }
     }
 }
