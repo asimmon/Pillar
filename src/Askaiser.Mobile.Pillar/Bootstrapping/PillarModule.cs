@@ -16,6 +16,7 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
         {
             // service registration
             container.RegisterSingleton(container); // the container itself can be injected
+
             container.RegisterSingleton<IDialogProvider, DialogService>();
             container.RegisterSingleton<IViewFactory, ViewFactory>();
             container.RegisterSingleton<INavigator, Navigator>();

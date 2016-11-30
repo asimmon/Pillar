@@ -59,7 +59,11 @@ namespace Askaiser.Mobile.Pillar.Factories
         {
             viewModel = _componentContext.Resolve<TViewModel>();
 
-            var viewType = _map[typeof(TViewModel)];
+            var viewModelType = typeof(TViewModel);
+            if (!_map.ContainsKey(viewModelType))
+                throw new InvalidOperationException($"Could not find a view type mapped to the view model type {viewModelType.FullName}");
+
+            var viewType = _map[viewModelType];
             var view = _componentContext.Resolve(viewType) as Page;
 
             if (setStateAction != null)
@@ -81,8 +85,11 @@ namespace Askaiser.Mobile.Pillar.Factories
         public Page Resolve<TViewModel>(TViewModel viewModel)
             where TViewModel : class, IViewModel
         {
-            var type = viewModel.GetType();
-            var viewType = _map[type];
+            var viewModelType = viewModel.GetType();
+            if (!_map.ContainsKey(viewModelType))
+                throw new InvalidOperationException($"Could not a view type mapped to the view model type {viewModelType.FullName}");
+
+            var viewType = _map[viewModelType];
             var view = _componentContext.Resolve(viewType) as Page;
             view.BindingContext = viewModel;
             return view;
