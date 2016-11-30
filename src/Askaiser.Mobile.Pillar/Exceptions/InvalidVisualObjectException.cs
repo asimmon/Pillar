@@ -25,8 +25,11 @@ namespace Askaiser.Mobile.Pillar.Exceptions
         /// <param name="inflatedtype">The actual type the datatemplate inflated to.</param>
         /// <param name="name">The calling methods name, uses [CallerMemberName]</param>
         public InvalidVisualObjectException(Type inflatedtype, [CallerMemberName] string name = null) :
-            base(string.Format("Invalid template inflated in {0}. Datatemplates must inflate to Xamarin.Forms.View(and subclasses) "
-            + "or a Xamarin.Forms.ViewCell(or subclasses).\nActual Type received: [{1}]", name, inflatedtype.Name)) { }
+            base(
+                $"Invalid template inflated in {name}. Datatemplates must inflate to Xamarin.Forms.View(and subclasses) or a Xamarin.Forms.ViewCell(or subclasses).\nActual Type received: [{inflatedtype.Name}]"
+            )
+        { }
+
         /// <summary>
         /// The actual type the datatemplate inflated to.
         /// </summary>

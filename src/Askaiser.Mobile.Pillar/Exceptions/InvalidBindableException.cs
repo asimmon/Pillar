@@ -25,7 +25,7 @@ namespace Askaiser.Mobile.Pillar.Exceptions
         /// <param name="expected">The expected type</param>
         /// <param name="name">The calling methods name, uses [CallerMemberName]</param>
         public InvalidBindableException(BindableObject bindable, Type expected,[CallerMemberName]string name=null) 
-            : base(string.Format("Invalid bindable passed to {0} expected a {1} received a {2}", name, expected.Name, bindable.GetType().Name))
+            : base($"Invalid bindable passed to {name} expected a {expected.Name} received a {bindable.GetType().Name}")
         {
         }
 

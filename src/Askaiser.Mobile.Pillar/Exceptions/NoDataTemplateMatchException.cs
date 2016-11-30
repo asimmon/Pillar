@@ -25,7 +25,7 @@ namespace Askaiser.Mobile.Pillar.Exceptions
         /// <param name="tomatch">The type that a match was attempted for</param>
         /// <param name="candidates">All types examined during the match process</param>
         public NoDataTemplateMatchException(Type tomatch, List<Type> candidates) :
-            base(string.Format("Could not find a template for type [{0}]", tomatch.Name))
+            base($"Could not find a template for type [{tomatch.Name}]")
         {
             AttemptedMatch = tomatch;
             TypesExamined = candidates;

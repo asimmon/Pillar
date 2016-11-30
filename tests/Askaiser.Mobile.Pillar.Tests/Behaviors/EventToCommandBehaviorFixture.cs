@@ -36,7 +36,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Behaviors
 
             var ex = Assert.Throws<ArgumentException>(() => entry.Behaviors.Add(behavior));
 
-            Assert.Equal("EventToCommand: Can't find any event named 'EventThatDoesNotExists' on attached type", ex.Message);
+            Assert.Equal("EventToCommand: Cannot find any event named 'EventThatDoesNotExists' on attached type", ex.Message);
         }
 
         [Fact]

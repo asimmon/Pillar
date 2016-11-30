@@ -76,7 +76,7 @@ namespace Askaiser.Mobile.Pillar.Behaviors
         {
             base.OnAttachedTo(visualElement);
 
-            if (String.IsNullOrWhiteSpace(EventName))
+            if (string.IsNullOrWhiteSpace(EventName))
                 throw new ArgumentException("EventToCommand: EventName must be specified");
 
             var events = AssociatedObject.GetType().GetRuntimeEvents().ToArray();
@@ -84,7 +84,7 @@ namespace Askaiser.Mobile.Pillar.Behaviors
             {
                 _eventInfo = events.FirstOrDefault(e => e.Name == EventName);
                 if (_eventInfo == null)
-                    throw new ArgumentException(String.Format("EventToCommand: Can't find any event named '{0}' on attached type", EventName));
+                    throw new ArgumentException($"EventToCommand: Cannot find any event named '{EventName}' on attached type");
 
                 AddEventHandler(_eventInfo, AssociatedObject, OnFired);
             }
