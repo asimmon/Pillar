@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Text;
 using Askaiser.Mobile.Pillar.Interfaces;
+using Xamarin.Forms;
 using Xunit;
 
 namespace Askaiser.Mobile.Pillar.Tests.Services
@@ -9,14 +9,16 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
     {
         private IContainerAdapter _container;
 
-        private interface IFoo { }
+        private interface IFoo
+        { }
 
         private interface IBar
         {
             IFoo InnerFoo { get; }
         }
 
-        private class Foo : IFoo { }
+        private class Foo : IFoo
+        { }
 
         private class Bar : IBar
         {
@@ -59,8 +61,21 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
         [Fact]
         public void ResolveUnregisteredDependency()
         {
-            Assert.Throws<InvalidOperationException>(() => _container.Resolve<StringBuilder>());
+            Assert.Throws<InvalidOperationException>(() => _container.Resolve<ContentPage>());
+        }
+
+        [Fact]
+        public void ResolveNullType()
+        {
+            Assert.Throws<ArgumentNullException>(() => _container.Resolve(null));
+        }
+
+        [Fact]
+        public void CannotRegisterDependencyAfterResolve()
+        {
+            _container.Resolve<IFoo>();
+
+            Assert.Throws<InvalidOperationException>(() => _container.RegisterType<ContentPage>());
         }
     }
-
 }
