@@ -10,9 +10,9 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
     /// <summary>
     /// Autofac Module that register all the dependencies needed in this library.
     /// </summary>
-    public sealed class PillarModule
+    public static class PillarModule
     {
-        public void Load(IContainerAdapter container)
+        internal static void RegisterPillarDependencies(this IContainerAdapter container)
         {
             // service registration
             container.RegisterSingleton(container); // the container itself can be injected
@@ -37,11 +37,11 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
         public static Page GetCurrentPage(Page rootPage)
         {
             var page = rootPage;
-            bool hasMore;
+            bool containsAnotherPage;
 
             do
             {
-                hasMore = true;
+                containsAnotherPage = true;
 
                 if (page is MasterDetailPage)
                 {
@@ -53,9 +53,9 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
                 }
                 else
                 {
-                    hasMore = false;
+                    containsAnotherPage = false;
                 }
-            } while (hasMore);
+            } while (containsAnotherPage);
 
             return page;
         }

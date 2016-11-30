@@ -49,8 +49,7 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
         /// <param name="container">Used to register dependencies</param>
         private void RegisterAllDependencies(IContainerAdapter container)
         {
-            var pillarModule = new PillarModule();
-            pillarModule.Load(container);
+            container.RegisterPillarDependencies();
 
             RegisterDependencies(container);
         }
