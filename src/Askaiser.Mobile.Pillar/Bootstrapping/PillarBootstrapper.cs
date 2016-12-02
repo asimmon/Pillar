@@ -1,5 +1,6 @@
 ﻿using Askaiser.Mobile.Pillar.Factories;
 using Askaiser.Mobile.Pillar.Interfaces;
+using Askaiser.Mobile.Pillar.ViewModels;
 using Xamarin.Forms;
 
 namespace Askaiser.Mobile.Pillar.Bootstrapping
@@ -73,11 +74,19 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
         {
             var viewFactory = container.Resolve<IViewFactory>();
 
-            var page = GetFirstPage(viewFactory);
+            var view = GetFirstPage(viewFactory);
+            var viewModel = view.BindingContext as IViewModel;
+
 
             if (App != null) // for unit testing purpose only
             {
-                App.MainPage = new NavigationPage(page);
+                if (viewModel != null)
+                    viewModel.ViewEntering();
+
+                App.MainPage = new NavigationPage(view);
+
+                if (viewModel != null)
+                    viewModel.ViewEntered();
             }
         }
 

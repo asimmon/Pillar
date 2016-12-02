@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\INavigator.cs" />
+    <Compile Include="Services\NavigationExtensions.cs" />
     <Compile Include="Services\Navigator.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\PillarViewModelBase.cs" />

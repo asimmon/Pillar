@@ -30,31 +30,6 @@
         public bool NoHistory { get; set; }
 
         /// <summary>
-        /// FOR XAML USE ONLY!
-        /// Magical object which allow us to use the ViewModelLocator pattern without the limitations of a static context.
-        /// It means that we can use dependency injection, that we can write testable code without static classed or methods.
-        /// You will need to register a class with singleton lifecycle (the ViewModelLocator instance)
-        /// and add an RegistrationActivated event handler in Autofac.
-        /// Every time that a IViewModel will be requested you will resolve and inject the the ViewModelLocator instance:
-        /// 
-        /// <example>
-        /// <code lang="C#">
-        /// private static void RegistrationActivated(object sender, ActivatedEventArgs&lt;object&gt; e)
-        /// {
-        ///     var vm = e.Instance as IViewModel;
-        ///     if (vm != null)
-        ///     {
-        ///         vm.Locator = e.Context.Resolve&lt;ViewModelLocator&gt;();
-        ///     }
-        /// }
-        /// </code>
-        /// </example>
-        /// 
-        /// See the online documentation for a concrete example.
-        /// </summary>
-        public object Locator { get; set; }
-
-        /// <summary>
         /// Indicates that a long running or background process is running.
         /// You might want to use this with a BooleanConverter to show / hide controls during the process.
         /// </summary>
@@ -64,16 +39,16 @@
             set { Set(() => IsBusy, ref _isBusy, value); }
         }
 
-        /// <summary>
-        /// Method called when you navigate (go to) this ViewModel.
-        /// </summary>
-        public virtual void NavigatedTo()
+        public virtual void ViewEntering()
         { }
 
-        /// <summary>
-        /// Method called when you navigate (go back) to this ViewModel.
-        /// </summary>
-        public virtual void NavigatedFrom()
+        public virtual void ViewEntered()
+        { }
+
+        public virtual void ViewLeaving()
+        { }
+
+        public virtual void ViewLeaved()
         { }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Askaiser.Mobile.Pillar.Factories;
 using Askaiser.Mobile.Pillar.Interfaces;
@@ -37,81 +36,114 @@ namespace Askaiser.Mobile.Pillar.Services
             get { return _page.Navigation; }
         }
 
-        private IViewModel CurrentViewModel
-        {
-            get
-            {
-                if (Navigation == null || Navigation.NavigationStack == null)
-                    return null;
-
-                var firstPage = Navigation.NavigationStack.FirstOrDefault();
-                if (firstPage == null)
-                    return null;
-
-                return firstPage.BindingContext as IViewModel;
-            }
-        }
-
         public async Task<IViewModel> PopAsync()
         {
-            var view = await Navigation.PopAsync();
-            var viewModel = view.BindingContext as IViewModel;
+            var previousViewModel = Navigation.GetCurrentViewModel();
+            var nextViewModel = Navigation.GetPreviousViewModel();
 
-            if (viewModel != null)
-                viewModel.NavigatedFrom();
+            if (nextViewModel != null)
+                nextViewModel.ViewEntering();
 
-            return viewModel;
+            if (previousViewModel != null)
+                previousViewModel.ViewLeaving();
+
+            await Navigation.PopAsync().ConfigureAwait(false);
+
+            if (nextViewModel != null)
+                nextViewModel.ViewEntered();
+
+            if (previousViewModel != null)
+                previousViewModel.ViewLeaved();
+
+            return nextViewModel;
         }
 
         public async Task<IViewModel> PopModalAsync()
         {
-            var view = await Navigation.PopModalAsync();
-            var viewModel = view.BindingContext as IViewModel;
+            var previousViewModel = Navigation.GetCurrentViewModel();
 
-            if (viewModel != null)
-                viewModel.NavigatedFrom();
+            // TODO nextViewModel.ViewEntering();
 
-            return viewModel;
+            if (previousViewModel != null)
+                previousViewModel.ViewLeaving();
+
+            var nextView = await Navigation.PopModalAsync().ConfigureAwait(false);
+            var nextViewModel = nextView.BindingContext as IViewModel;
+
+            if (nextViewModel != null)
+                nextViewModel.ViewEntered();
+
+            if (previousViewModel != null)
+                previousViewModel.ViewLeaved();
+
+            return nextViewModel;
         }
 
         public async Task PopToRootAsync()
         {
-            await Navigation.PopToRootAsync();
+            await Navigation.PopToRootAsync().ConfigureAwait(false);
         }
 
         public async Task<TViewModel> PushAsync<TViewModel>(Action<TViewModel> setStateAction = null)
             where TViewModel : class, IViewModel
         {
-            TViewModel viewModel;
-            var view = _viewFactory.Resolve(out viewModel, setStateAction);
+            var previousiew = Navigation.GetCurrentView();
+            var previousViewModel = Navigation.GetCurrentViewModel();
 
-            var currentViewModel = CurrentViewModel;
-            if (currentViewModel != null && currentViewModel.NoHistory)
+            TViewModel nextViewModel;
+            var nextView = _viewFactory.Resolve(out nextViewModel, setStateAction);
+
+            // About to entering a new view and leaving the current one
+            nextViewModel.ViewEntering();
+
+            if (previousViewModel != null)
+                previousViewModel.ViewLeaving();
+
+            if (previousViewModel != null && previousViewModel.NoHistory)
             {
-                Navigation.InsertPageBefore(view, Navigation.NavigationStack.FirstOrDefault());
+                Navigation.InsertPageBefore(nextView, previousiew);
                 await Navigation.PopAsync().ConfigureAwait(false);
             }
-            else await Navigation.PushAsync(view);
+            else await Navigation.PushAsync(nextView).ConfigureAwait(false);
 
-            viewModel.NavigatedTo();
-            return viewModel;
+            // Entered the new view and leaved the previous one
+            nextViewModel.ViewEntered();
+
+            if (previousViewModel != null)
+                previousViewModel.ViewLeaved();
+
+            return nextViewModel;
         }
 
         public async Task<TViewModel> PushAsync<TViewModel>(TViewModel viewModel)
             where TViewModel : class, IViewModel
         {
-            var view = _viewFactory.Resolve(viewModel);
+            var nextViewModel = viewModel;
+            var nextView = _viewFactory.Resolve(nextViewModel);
 
-            var currentViewModel = CurrentViewModel;
-            if (currentViewModel != null && currentViewModel.NoHistory)
+            var previousView = Navigation.GetCurrentView();
+            var previousViewModel = Navigation.GetCurrentViewModel();
+
+            // About to entering a new view and leaving the current one
+            nextViewModel.ViewEntering();
+
+            if (previousViewModel != null)
+                previousViewModel.ViewLeaving();
+
+            if (previousViewModel != null && previousViewModel.NoHistory)
             {
-                Navigation.InsertPageBefore(view, Navigation.NavigationStack.FirstOrDefault());
+                Navigation.InsertPageBefore(nextView, previousView);
                 await Navigation.PopAsync().ConfigureAwait(false);
             }
-            else await Navigation.PushAsync(view);
+            else await Navigation.PushAsync(nextView);
 
-            viewModel.NavigatedTo();
-            return viewModel;
+            // Entered the new view and leaved the previous one
+            nextViewModel.ViewEntered();
+
+            if (previousViewModel != null)
+                previousViewModel.ViewLeaved();
+
+            return nextViewModel;
         }
 
         public async Task<TViewModel> PushModalAsync<TViewModel>(Action<TViewModel> setStateAction = null)
@@ -119,26 +151,20 @@ namespace Askaiser.Mobile.Pillar.Services
         {
             TViewModel viewModel;
             var view = _viewFactory.Resolve(out viewModel, setStateAction);
-            await Navigation.PushModalAsync(view);
+
+            await Navigation.PushModalAsync(view).ConfigureAwait(false);
+
             return viewModel;
         }
 
         public async Task<TViewModel> PushModalAsync<TViewModel>(TViewModel viewModel)
             where TViewModel : class, IViewModel
         {
-            var view = _viewFactory.Resolve(viewModel);
-            await Navigation.PushModalAsync(view);
-            return viewModel;
-        }
+            var nextView = _viewFactory.Resolve(viewModel);
 
-        public void ClearHistory()
-        {
-            var existingPages = Navigation.NavigationStack.ToList();
-            foreach (var page in existingPages)
-            {
-                Navigation.RemovePage(page);
-            }
+            await Navigation.PushModalAsync(nextView).ConfigureAwait(false);
+
+            return viewModel;
         }
     }
 }
-

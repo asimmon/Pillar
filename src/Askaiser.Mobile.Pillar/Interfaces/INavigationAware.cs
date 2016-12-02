@@ -2,9 +2,13 @@
 {
     public interface INavigationAware
     {
-        void NavigatedTo();
+        void ViewEntering();
 
-        void NavigatedFrom();
+        void ViewEntered();
+
+        void ViewLeaving();
+
+        void ViewLeaved();
     }
 }
 

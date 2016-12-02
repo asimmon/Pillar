@@ -81,10 +81,12 @@
     <Compile Include="Mocks\MockBootstrapper.cs" />
     <Compile Include="Mocks\MockView.cs" />
     <Compile Include="Mocks\MockViewModel.cs" />
+    <Compile Include="Mocks\MoqExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DependencyInjectionFixture.cs" />
     <Compile Include="Services\DialogServiceFixture.cs" />
     <Compile Include="Services\MessengerFixture.cs" />
+    <Compile Include="Services\NavigationExtensionsFixture.cs" />
     <Compile Include="Services\NavigatorFixture.cs" />
     <Compile Include="ViewModels\PillarViewModelBaseFixture.cs" />
     <Compile Include="ViewModels\ViewModelBaseFixture.cs" />
