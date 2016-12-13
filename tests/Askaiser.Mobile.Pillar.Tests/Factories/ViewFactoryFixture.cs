@@ -1,6 +1,8 @@
-﻿using Askaiser.Mobile.Pillar.Factories;
+﻿using System;
+using Askaiser.Mobile.Pillar.Factories;
 using Askaiser.Mobile.Pillar.Interfaces;
 using Askaiser.Mobile.Pillar.Tests.Mocks;
+using Moq;
 using Xunit;
 
 namespace Askaiser.Mobile.Pillar.Tests.Factories
@@ -36,6 +38,36 @@ namespace Askaiser.Mobile.Pillar.Tests.Factories
 
             Assert.NotNull(view);
             Assert.IsType<MockView>(view);
+        }
+
+        [Fact]
+        public void ResolveWithOutParameterUnregisteredViewViewModelPairThrowsException()
+        {
+            var fakeContainer = new Mock<IContainerAdapter>().Object;
+            var viewFactory = new ViewFactory(fakeContainer);
+
+            MockViewModel viewModel;
+
+            Assert.Throws<InvalidOperationException>(() => viewFactory.Resolve(out viewModel));
+        }
+
+        [Fact]
+        public void ResolveUnregisteredViewViewModelPairThrowsException()
+        {
+            var fakeContainer = new Mock<IContainerAdapter>().Object;
+            var viewFactory = new ViewFactory(fakeContainer);
+
+            Assert.Throws<InvalidOperationException>(() => viewFactory.Resolve<MockViewModel>());
+        }
+
+        [Fact]
+        public void ResolveInstanceUnregisteredViewViewModelPairThrowsException()
+        {
+            var fakeContainer = new Mock<IContainerAdapter>().Object;
+            var viewFactory = new ViewFactory(fakeContainer);
+
+            var viewModel = new MockViewModel();
+            Assert.Throws<InvalidOperationException>(() => viewFactory.Resolve(viewModel));
         }
     }
 }
