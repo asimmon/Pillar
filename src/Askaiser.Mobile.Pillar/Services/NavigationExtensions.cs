@@ -47,5 +47,16 @@ namespace Askaiser.Mobile.Pillar.Services
             var previousView = GetPreviousView(navigation);
             return previousView?.BindingContext as IViewModel;
         }
+
+        public static Page GetFirstView(this INavigation navigation)
+        {
+            return navigation?.NavigationStack?.FirstOrDefault();
+        }
+
+        public static IViewModel GetFirstViewModel(this INavigation navigation)
+        {
+            var firstView = GetFirstView(navigation);
+            return firstView?.BindingContext as IViewModel;
+        }
     }
 }

@@ -61,16 +61,11 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
             public ViewModelC(TextWriter trace) : base("c", trace) { }
         }
 
-        private class TraceableView : ContentPage
-        {
-            public override string ToString() => $"View {Title.ToUpper()}";
-        }
+        private class ViewA : ContentPage { }
 
-        private class ViewA : TraceableView { }
+        private class ViewB : ContentPage { }
 
-        private class ViewB : TraceableView { }
-
-        private class ViewC : TraceableView { }
+        private class ViewC : ContentPage { }
 
         public NavigatorFixture()
         {
@@ -97,9 +92,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
             ViewModelA unusedA;
             ViewModelB unusedB;
             ViewModelC unusedC;
-            viewFactoryMock.Setup(vf => vf.Resolve(out unusedA, It.IsAny<Action<ViewModelA>>()))
-                .OutCallback((out ViewModelA vm, Action<ViewModelA> setStateAction) => vm = _vmA)
-                .Returns(() => _vA);
+            viewFactoryMock.Setup(vf => vf.Resolve(out unusedA, It.IsAny<Action<ViewModelA>>()));
 
             viewFactoryMock.Setup(vf => vf.Resolve(out unusedB, It.IsAny<Action<ViewModelB>>()))
                 .OutCallback((out ViewModelB vm, Action<ViewModelB> setStateAction) => vm = _vmB)
@@ -239,6 +232,20 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
             Assert.Same(_vA, _navigationPage.CurrentPage);
             Assert.Same(_vmA, _navigationPage.CurrentPage.BindingContext);
             Assert.Equal(1, _navigationPage.Navigation.NavigationStack.Count);
+        }
+
+        [Fact]
+        public async Task PopToRootAsyncWithManyViewsInNavigationStack()
+        {
+            await _navigator.PushAsync(_vmB);
+            await _navigator.PushAsync(_vmC);
+            await _navigator.PopToRootAsync();
+
+            Assert.Same(_vA, _navigationPage.CurrentPage);
+            Assert.Same(_vmA, _navigationPage.CurrentPage.BindingContext);
+            Assert.Equal(1, _navigationPage.Navigation.NavigationStack.Count);
+
+            Assert.Equal("egb-lga-edb-lda-egc-lgb-edc-ldb-ega-lgc-eda-ldc-", _trace.ToString());
         }
     }
 }

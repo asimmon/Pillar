@@ -70,5 +70,23 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
             Assert.Same(view, _navigation.GetCurrentView());
             Assert.Same(null, _navigation.GetCurrentViewModel()); // cannot cast to IViewModel
         }
+
+        [Fact]
+        public async Task FirstViewAndViewModelAfterNavigation()
+        {
+            await _navigation.PushAsync(_vB);
+
+            Assert.Same(_vA, _navigation.GetFirstView());
+            Assert.Same(_vmA, _navigation.GetFirstViewModel());
+        }
+
+        [Fact]
+        public async Task FirstViewAndViewModelAfterNavigationPushAndPop()
+        {
+            await _navigation.PushAsync(_vB);
+
+            Assert.Same(_vA, _navigation.GetFirstView());
+            Assert.Same(_vmA, _navigation.GetFirstViewModel());
+        }
     }
 }

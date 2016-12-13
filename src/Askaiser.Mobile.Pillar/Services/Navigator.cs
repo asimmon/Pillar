@@ -60,28 +60,30 @@ namespace Askaiser.Mobile.Pillar.Services
 
         public async Task<IViewModel> PopModalAsync()
         {
-            var previousViewModel = Navigation.GetCurrentViewModel();
-
-            // TODO nextViewModel.ViewEntering();
-
-            if (previousViewModel != null)
-                previousViewModel.ViewLeaving();
-
             var nextView = await Navigation.PopModalAsync().ConfigureAwait(false);
             var nextViewModel = nextView.BindingContext as IViewModel;
-
-            if (nextViewModel != null)
-                nextViewModel.ViewEntered();
-
-            if (previousViewModel != null)
-                previousViewModel.ViewLeaved();
 
             return nextViewModel;
         }
 
         public async Task PopToRootAsync()
         {
+            var nextViewModel = Navigation.GetFirstViewModel();
+            var previousViewModel = Navigation.GetCurrentViewModel();
+
+            if (nextViewModel != null)
+                nextViewModel.ViewEntering();
+
+            if (previousViewModel != null)
+                previousViewModel.ViewLeaving();
+
             await Navigation.PopToRootAsync().ConfigureAwait(false);
+
+            if (nextViewModel != null)
+                nextViewModel.ViewEntered();
+
+            if (previousViewModel != null)
+                previousViewModel.ViewLeaved();
         }
 
         public async Task<TViewModel> PushAsync<TViewModel>(Action<TViewModel> setStateAction = null)

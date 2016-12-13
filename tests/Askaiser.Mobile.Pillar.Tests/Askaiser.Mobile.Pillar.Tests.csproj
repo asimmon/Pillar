@@ -87,6 +87,7 @@
     <Compile Include="Services\DialogServiceFixture.cs" />
     <Compile Include="Services\MessengerFixture.cs" />
     <Compile Include="Services\NavigationExtensionsFixture.cs" />
+    <Compile Include="Services\NavigatorModalFixture.cs" />
     <Compile Include="Services\NavigatorFixture.cs" />
     <Compile Include="ViewModels\PillarViewModelBaseFixture.cs" />
     <Compile Include="ViewModels\ViewModelBaseFixture.cs" />
