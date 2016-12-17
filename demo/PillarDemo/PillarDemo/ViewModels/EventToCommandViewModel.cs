@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Askaiser.Mobile.Pillar.ViewModels;
+using Pillar.ViewModels;
 using GalaSoft.MvvmLight.Command;
 using PillarDemo.Models;
 

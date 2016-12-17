@@ -1,8 +1,8 @@
 language: csharp
-solution: src/Askaiser.Mobile.Pillar.sln
+solution: src/Pillar.sln
 install:
-  - nuget restore src/Askaiser.Mobile.Pillar.sln
+  - nuget restore src/Pillar.sln
   - nuget install xunit.runner.console -Version 2.1.0 -OutputDirectory testrunner
 script:
-  - xbuild /p:Configuration=Release src/Askaiser.Mobile.Pillar.sln
-  - mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/Askaiser.Mobile.Pillar.Tests/bin/Release/Askaiser.Mobile.Pillar.Tests.dll
+  - xbuild /p:Configuration=Release src/Pillar.sln
+  - mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./tests/Pillar.Tests/bin/Release/Pillar.Tests.dll

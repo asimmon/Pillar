@@ -1,4 +1,4 @@
-﻿using Askaiser.Mobile.Pillar.ViewModels;
+﻿using Pillar.ViewModels;
 using Autofac;
 using Autofac.Core;
 using GalaSoft.MvvmLight.Messaging;

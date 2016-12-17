@@ -1,4 +1,4 @@
-﻿using Askaiser.Mobile.Pillar.ViewModels;
+﻿using Pillar.ViewModels;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using PillarDemo.Models;
