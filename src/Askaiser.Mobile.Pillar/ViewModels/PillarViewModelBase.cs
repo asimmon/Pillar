@@ -16,7 +16,7 @@
         /// Represents the page Title.
         /// It's up to you to bind this property to a Page title.
         /// </summary>
-        public string Title
+        public virtual string Title
         {
             get { return _title; }
             set { Set(() => Title, ref _title, value); }
@@ -33,21 +33,33 @@
         /// Indicates that a long running or background process is running.
         /// You might want to use this with a BooleanConverter to show / hide controls during the process.
         /// </summary>
-        public bool IsBusy
+        public virtual bool IsBusy
         {
             get { return _isBusy; }
             set { Set(() => IsBusy, ref _isBusy, value); }
         }
 
+        /// <summary>
+        /// Method called before that the associated view is pushed on the navigation stack
+        /// </summary>
         public virtual void ViewEntering()
         { }
 
+        /// <summary>
+        /// Method called after that the associated view is pushed on the navigation stack
+        /// </summary>
         public virtual void ViewEntered()
         { }
 
+        /// <summary>
+        /// Method called before that the associated view is poped from the navigation stack
+        /// </summary>
         public virtual void ViewLeaving()
         { }
 
+        /// <summary>
+        /// Method called after that the associated view is poped from the navigation stack
+        /// </summary>
         public virtual void ViewLeaved()
         { }
     }
