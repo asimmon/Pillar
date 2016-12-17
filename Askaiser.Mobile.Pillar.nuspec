@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Askaiser.Mobile.Pillar</id>
+    <version>0.0.4</version>
+    <title>Pillar</title>
+    <authors>Anthony Simmon</authors>
+    <owners>Anthony Simmon</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/asimmon/Pillar</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Pillar is lightweight MVVM framework for Xamarin.Forms 2.x. With this framework, you won't have to deal with page navigation or messed up code-behind anymore. Now, it's all about view models, and navigation between view models.
+
+The documentation is available on the project github page.</description>
+    <copyright>Copyright Anthony Simmon 2015-2016</copyright>
+    <tags>xamarin forms mvvm pcl android ios windowsphone</tags>
+    <iconUrl>https://anthonysimmon.com/wp-content/uploads/pillar_118x128.png</iconUrl>
+    <dependencies>
+      <dependency id="Xamarin.Forms" version="2.2.0.45" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="src/Pillar/bin/Release/Pillar.dll" target="lib/portable-net45+win8+wpa81+wp8" />
+    <file src="src/Pillar/bin/Release/Pillar.xml" target="lib/portable-net45+win8+wpa81+wp8" />
+    
+    <file src="src/Pillar/bin/Release/Pillar.Ioc.dll" target="lib/portable-net45+win8+wpa81+wp8" />
+    <file src="src/Pillar/bin/Release/Pillar.Ioc.xml" target="lib/portable-net45+win8+wpa81+wp8" />
+  </files>
+</package>

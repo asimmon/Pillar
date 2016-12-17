@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using Askaiser.Mobile.Pillar.ViewModels;
+using Pillar.ViewModels;
 using PillarDemo.Models;
 
 namespace PillarDemo.ViewModels

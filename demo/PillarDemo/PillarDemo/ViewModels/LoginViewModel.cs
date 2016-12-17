@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Askaiser.Mobile.Pillar.Services;
-using Askaiser.Mobile.Pillar.ViewModels;
+using Pillar.Services;
+using Pillar.ViewModels;
 using GalaSoft.MvvmLight.Command;
 using PillarDemo.Models;
 

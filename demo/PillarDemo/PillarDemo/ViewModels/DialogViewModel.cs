@@ -1,6 +1,6 @@
 ﻿using System;
-using Askaiser.Mobile.Pillar.Interfaces;
-using Askaiser.Mobile.Pillar.ViewModels;
+using Pillar.Interfaces;
+using Pillar.ViewModels;
 using GalaSoft.MvvmLight.Command;
 
 namespace PillarDemo.ViewModels

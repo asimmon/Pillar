@@ -5,5 +5,5 @@ branches:
 before_build:
 - cmd: cd src & nuget restore
 build:
-  project: src/Askaiser.Mobile.Pillar.sln
+  project: src/Pillar.sln
   verbosity: minimal

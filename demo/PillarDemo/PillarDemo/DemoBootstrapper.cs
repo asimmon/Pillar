@@ -1,5 +1,5 @@
-﻿using Askaiser.Mobile.Pillar.Bootstrapping;
-using Askaiser.Mobile.Pillar.Factories;
+﻿using Pillar.Bootstrapping;
+using Pillar.Factories;
 using Autofac;
 using PillarDemo.ViewModels;
 using PillarDemo.Views;
