@@ -8,7 +8,7 @@ using Xamarin.Forms;
 namespace Askaiser.Mobile.Pillar.Bootstrapping
 {
     /// <summary>
-    /// Autofac Module that register all the dependencies needed in this library.
+    /// Class that help register all the dependencies needed in this library.
     /// </summary>
     public static class PillarModule
     {

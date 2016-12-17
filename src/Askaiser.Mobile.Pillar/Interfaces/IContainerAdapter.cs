@@ -1,9 +1,10 @@
 ﻿using System;
-using Askaiser.Mobile.Pillar.Ioc;
-using Askaiser.Mobile.Pillar.Ioc.Abstractions;
 
 namespace Askaiser.Mobile.Pillar.Interfaces
 {
+    /// <summary>
+    /// Depedency injection registration and resolving abstraction
+    /// </summary>
     public interface IContainerAdapter
     {
         object Resolve(Type serviceType);
@@ -17,146 +18,5 @@ namespace Askaiser.Mobile.Pillar.Interfaces
         void RegisterSingleton(Type serviceType, object implementationInstance);
 
         void RegisterSingleton(Type serviceType, Func<object> implementationFactory);
-    }
-
-    public class AspNetDependencyInjectionAdapter : IContainerAdapter
-    {
-        private readonly IServiceCollection _services;
-        private IServiceProvider _provider;
-        private bool _isBuilt;
-
-        public AspNetDependencyInjectionAdapter()
-        {
-            _services = new ServiceCollection();
-            _provider = null;
-            _isBuilt = false;
-        }
-
-        private void BuildProvider()
-        {
-            if (!_isBuilt)
-            {
-                _provider = _services.BuildServiceProvider();
-                _isBuilt = true;
-            }
-        }
-
-        private void EnsureThatProviderIsNotBuildYet()
-        {
-            if (_isBuilt)
-            {
-                throw new InvalidOperationException("Could not register any new dependency, the container is already built.");
-            }
-        }
-
-        public object Resolve(Type serviceType)
-        {
-            if (serviceType == null)
-            {
-                throw new ArgumentNullException(nameof(serviceType));
-            }
-
-            BuildProvider();
-
-            var service = _provider.GetService(serviceType);
-            if (service == null)
-            {
-                throw new InvalidOperationException($"No service for type '{serviceType}' has been registered.");
-            }
-
-            return service;
-        }
-
-        public void RegisterType(Type serviceType, Func<object> implementationFactory)
-        {
-            EnsureThatProviderIsNotBuildYet();
-            _services.AddTransient(serviceType, c => implementationFactory());
-        }
-
-        public void RegisterType(Type serviceType, Type implementationType)
-        {
-            EnsureThatProviderIsNotBuildYet();
-            _services.AddTransient(serviceType, implementationType);
-        }
-
-        public void RegisterSingleton(Type serviceType, Type implementationType)
-        {
-            EnsureThatProviderIsNotBuildYet();
-            _services.AddSingleton(serviceType, implementationType);
-        }
-
-        public void RegisterSingleton(Type serviceType, object implementationInstance)
-        {
-            EnsureThatProviderIsNotBuildYet();
-            _services.AddSingleton(serviceType, implementationInstance);
-        }
-
-        public void RegisterSingleton(Type serviceType, Func<object> implementationFactory)
-        {
-            EnsureThatProviderIsNotBuildYet();
-            _services.AddSingleton(serviceType, c => implementationFactory());
-        }
-    }
-
-    /// <summary>
-    /// Generic extension methods
-    /// </summary>
-    public static class ContainerAdapterExtensions
-    {
-        // resolve
-
-        public static T Resolve<T>(this IContainerAdapter adapter)
-            where T : class
-        {
-            return (T)adapter.Resolve(typeof(T));
-        }
-
-        // transient generics
-
-        public static void RegisterType<TFrom, TTo>(this IContainerAdapter adapter)
-            where TFrom : class
-            where TTo : class, TFrom
-        {
-            adapter.RegisterType(typeof(TFrom), typeof(TTo));
-        }
-
-        public static void RegisterType<TInterface>(this IContainerAdapter adapter)
-            where TInterface : class
-        {
-            adapter.RegisterType(typeof(TInterface), typeof(TInterface));
-        }
-
-        public static void RegisterType<TInterface>(this IContainerAdapter adapter, Func<TInterface> implementationFactory)
-            where TInterface : class
-        {
-            adapter.RegisterType(typeof(TInterface), implementationFactory);
-        }
-
-        // singletons generics
-
-        public static void RegisterSingleton<TInterface>(this IContainerAdapter adapter)
-            where TInterface : class
-        {
-            adapter.RegisterSingleton<TInterface, TInterface>();
-        }
-
-        public static void RegisterSingleton<TFrom, TTo>(this IContainerAdapter adapter)
-            where TFrom : class
-            where TTo : class, TFrom
-        {
-            adapter.RegisterSingleton(typeof(TFrom), typeof(TTo));
-        }
-
-        public static void RegisterSingleton<TInterface>(this IContainerAdapter adapter, TInterface implementationInstance)
-            where TInterface : class
-        {
-            adapter.RegisterSingleton(typeof(TInterface), implementationInstance);
-        }
-
-        public static void RegisterSingleton<TInterface>(this IContainerAdapter adapter, Func<TInterface> implementationFactory)
-            where TInterface : class
-        {
-            adapter.RegisterSingleton(typeof(TInterface), implementationFactory);
-        }
     }
 }

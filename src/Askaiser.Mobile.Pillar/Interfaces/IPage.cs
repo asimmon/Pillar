@@ -9,6 +9,9 @@ namespace Askaiser.Mobile.Pillar.Interfaces
     /// <seealso cref="IDialogProvider" />
     public interface IPage : IDialogProvider
     {
+        /// <summary>
+        /// The current navigation object
+        /// </summary>
         INavigation Navigation { get; }
     }
 }

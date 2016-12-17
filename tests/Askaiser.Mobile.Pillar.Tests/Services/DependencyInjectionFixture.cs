@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using Askaiser.Mobile.Pillar.Interfaces;
 using Xamarin.Forms;
 using Xunit;
@@ -33,7 +32,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
 
         public DependencyInjectionFixture()
         {
-            _container = new AspNetDependencyInjectionAdapter();
+            _container = new PillarDefaultIoc();
 
             _container.RegisterType<IFoo, Foo>();
             _container.RegisterType<IBar, Bar>();
@@ -82,7 +81,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
         [Fact]
         public void RegisterTypeFactory()
         {
-            _container = new AspNetDependencyInjectionAdapter();
+            _container = new PillarDefaultIoc();
 
             _container.RegisterType<IFoo>(() => new Foo());
 
@@ -95,7 +94,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Services
         [Fact]
         public void RegisterSingletonFactory()
         {
-            _container = new AspNetDependencyInjectionAdapter();
+            _container = new PillarDefaultIoc();
 
             _container.RegisterSingleton<IFoo>(() => new Foo());
 

@@ -39,27 +39,19 @@
             set { Set(() => IsBusy, ref _isBusy, value); }
         }
 
-        /// <summary>
-        /// Method called before that the associated view is pushed on the navigation stack
-        /// </summary>
+        /// <inheritdoc />
         public virtual void ViewEntering()
         { }
 
-        /// <summary>
-        /// Method called after that the associated view is pushed on the navigation stack
-        /// </summary>
+        /// <inheritdoc />
         public virtual void ViewEntered()
         { }
 
-        /// <summary>
-        /// Method called before that the associated view is poped from the navigation stack
-        /// </summary>
+        /// <inheritdoc />
         public virtual void ViewLeaving()
         { }
 
-        /// <summary>
-        /// Method called after that the associated view is poped from the navigation stack
-        /// </summary>
+        /// <inheritdoc />
         public virtual void ViewLeaved()
         { }
     }

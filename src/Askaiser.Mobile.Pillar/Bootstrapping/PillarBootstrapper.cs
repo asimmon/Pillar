@@ -39,7 +39,7 @@ namespace Askaiser.Mobile.Pillar.Bootstrapping
         /// <returns></returns>
         protected virtual IContainerAdapter GetContainer()
         {
-            return new AspNetDependencyInjectionAdapter();
+            return new PillarDefaultIoc();
         }
 
         /// <summary>

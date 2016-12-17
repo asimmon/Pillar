@@ -12,7 +12,7 @@ namespace Askaiser.Mobile.Pillar.Tests.Factories
         [Fact]
         public void ResolvesViewFromViewModelWhenViewModelIsRegisteredWithViewType()
         {
-            var container = new AspNetDependencyInjectionAdapter();
+            var container = new PillarDefaultIoc();
             container.RegisterSingleton<MockViewModel>();
             container.RegisterSingleton<MockView>();
 
