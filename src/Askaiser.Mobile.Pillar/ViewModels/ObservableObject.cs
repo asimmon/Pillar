@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace Askaiser.Mobile.Pillar.ViewModels
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public class ObservableObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

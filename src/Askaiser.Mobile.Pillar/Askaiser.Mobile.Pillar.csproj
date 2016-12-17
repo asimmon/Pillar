@@ -65,7 +65,7 @@
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\PillarViewModelBase.cs" />
     <Compile Include="ViewModels\SelectableViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="Views\BindablePicker.cs" />
     <Compile Include="Views\DataTemplateCollection.cs" />
     <Compile Include="Views\DataTemplateWrapper.cs" />

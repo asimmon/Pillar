@@ -5,9 +5,9 @@
     /// in the app bootstrapping configuration.
     /// It already contains some useful observable properties.
     /// </summary>
-    /// <seealso cref="ViewModelBase" />
+    /// <seealso cref="ObservableObject" />
     /// <seealso cref="IViewModel" />
-    public abstract class PillarViewModelBase : ViewModelBase, IViewModel
+    public abstract class PillarViewModelBase : ObservableObject, IViewModel
     {
         private string _title;
         private bool _isBusy;
