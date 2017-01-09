@@ -25,6 +25,11 @@ namespace Pillar.Services
         /// </summary>
         private readonly IViewFactory _viewFactory;
 
+        /// <summary>
+        /// Initializes an instance of the class <see cref="Navigator"/>.
+        /// </summary>
+        /// <param name="page">A way to access the current displayed page</param>
+        /// <param name="viewFactory">A view factory that creates pages base on a viewModel type</param>
         public Navigator(IPage page, IViewFactory viewFactory)
         {
             _page = page;
@@ -36,6 +41,7 @@ namespace Pillar.Services
             get { return _page.Navigation; }
         }
 
+        /// <inheritdoc />
         public async Task<IViewModel> PopAsync()
         {
             var previousViewModel = Navigation.GetCurrentViewModel();
@@ -58,6 +64,7 @@ namespace Pillar.Services
             return nextViewModel;
         }
 
+        /// <inheritdoc />
         public async Task<IViewModel> PopModalAsync()
         {
             var nextView = await Navigation.PopModalAsync().ConfigureAwait(false);
@@ -66,6 +73,7 @@ namespace Pillar.Services
             return nextViewModel;
         }
 
+        /// <inheritdoc />
         public async Task PopToRootAsync()
         {
             var nextViewModel = Navigation.GetFirstViewModel();
@@ -86,6 +94,7 @@ namespace Pillar.Services
                 previousViewModel.ViewLeaved();
         }
 
+        /// <inheritdoc />
         public async Task<TViewModel> PushAsync<TViewModel>(Action<TViewModel> setStateAction = null)
             where TViewModel : class, IViewModel
         {
@@ -117,6 +126,7 @@ namespace Pillar.Services
             return nextViewModel;
         }
 
+        /// <inheritdoc />
         public async Task<TViewModel> PushAsync<TViewModel>(TViewModel viewModel)
             where TViewModel : class, IViewModel
         {
@@ -148,6 +158,7 @@ namespace Pillar.Services
             return nextViewModel;
         }
 
+        /// <inheritdoc />
         public async Task<TViewModel> PushModalAsync<TViewModel>(Action<TViewModel> setStateAction = null)
             where TViewModel : class, IViewModel
         {
@@ -159,6 +170,7 @@ namespace Pillar.Services
             return viewModel;
         }
 
+        /// <inheritdoc />
         public async Task<TViewModel> PushModalAsync<TViewModel>(TViewModel viewModel)
             where TViewModel : class, IViewModel
         {

@@ -10,8 +10,12 @@ namespace Pillar.Behaviors
     /// <typeparam name="T">The type of the objects with which this <see cref="Behavior"/> can be associated.</typeparam>
     public class BindableBehavior<T> : Behavior<T> where T : BindableObject
     {
+        /// <summary>
+        /// The associated Xamarin.Forms visual element
+        /// </summary>
         public T AssociatedObject { get; private set; }
 
+        /// <inheritdoc />
         protected override void OnAttachedTo(T visualElement)
         {
             base.OnAttachedTo(visualElement);
@@ -29,6 +33,7 @@ namespace Pillar.Behaviors
             OnBindingContextChanged();
         }
 
+        /// <inheritdoc />
         protected override void OnDetachingFrom(T view)
         {
             view.BindingContextChanged -= OnBindingContextChanged;

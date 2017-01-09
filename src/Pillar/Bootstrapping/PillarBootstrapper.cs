@@ -16,11 +16,19 @@ namespace Pillar.Bootstrapping
 
         public Application App { get; private set; }
 
+        /// <summary>
+        /// Initialize an instance of the class <see cref="PillarBootstrapper"/>.
+        /// </summary>
+        /// <param name="app">The Xamarin.Forms application</param>
         protected PillarBootstrapper(Application app)
         {
             App = app;
         }
 
+        /// <summary>
+        /// Call this method to start your application.
+        /// Show the first page configured with the <see cref="GetFirstPage"/> method.
+        /// </summary>
         public void Run()
         {
             Container = GetContainer();
@@ -57,6 +65,10 @@ namespace Pillar.Bootstrapping
             RegisterDependencies(container);
         }
 
+        /// <summary>
+        /// Implement this method to register your dependencies.
+        /// </summary>
+        /// <param name="container">The dependency container</param>
         protected abstract void RegisterDependencies(IContainerAdapter container);
 
         /// <summary>
