@@ -2,6 +2,9 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // 
 // Modifications copyright (c) 2016 Anthony Simmon
+
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -10,8 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Threading;
 
-// ReSharper disable once CheckNamespace
-namespace System.Collections.Concurrent
+namespace Pillar.Ioc
 {
     /// <summary>
     /// Represents a thread-safe collection of keys and values.
