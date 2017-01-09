@@ -4,9 +4,11 @@ using System.Linq;
 using System.Windows.Input;
 using Pillar.Interfaces;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace Pillar.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TemplatedItemsView : ScrollView
     {
         private readonly ICommand _selectedCommand;
