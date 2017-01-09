@@ -71,7 +71,7 @@ namespace Pillar.Bootstrapping
         /// and then retrieve a page and set it as MainPage
         /// (you will need a reference to your Application instance).
         /// </summary>
-        /// <param name="container">The Autofac dependencies container</param>
+        /// <param name="container">The dependency container</param>
         private void ConfigureApplication(IContainerAdapter container)
         {
             var viewFactory = container.Resolve<IViewFactory>();

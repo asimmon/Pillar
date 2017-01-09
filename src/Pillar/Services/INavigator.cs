@@ -6,7 +6,7 @@ namespace Pillar.Services
 {
     /// <summary>
     /// Provides a ViewModel-based navigation. You need to bind each
-    /// ViewModel type to a View typein a AutofacBootstrapper based class.
+    /// ViewModel type to a View type in a <see cref="Bootstrapping.PillarBootstrapper"/> based class.
     /// </summary>
     public interface INavigator
     {
@@ -30,7 +30,7 @@ namespace Pillar.Services
 
         /// <summary>
         /// Asynchronously go to the Page associated to a ViewModel type.
-        /// The instance of the TViewModel type will be resolved with Autofac.
+        /// The instance of the TViewModel type will be resolved with the dependency container.
         /// </summary>
         /// <typeparam name="TViewModel">The type of the ViewModel</typeparam>
         /// <param name="setStateAction">A callback to apply to the ViewModel. Can be used to pass data.</param>
@@ -49,7 +49,7 @@ namespace Pillar.Services
 
         /// <summary>
         /// Asynchronously open a modal Page associated to a ViewModel type.
-        /// The instance of the TViewModel type will be resolved with Autofac.
+        /// The instance of the TViewModel type will be resolved with the dependency container.
         /// </summary>
         /// <typeparam name="TViewModel">The type of the ViewModel</typeparam>
         /// <param name="setStateAction">A callback to apply to the ViewModel. Can be used to pass data.</param>
