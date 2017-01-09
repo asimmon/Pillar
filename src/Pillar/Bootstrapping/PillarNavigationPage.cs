@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Pillar.Interfaces;
 using Pillar.Services;
 using Xamarin.Forms;
@@ -26,13 +25,9 @@ namespace Pillar.Bootstrapping
 
         protected override bool OnBackButtonPressed()
         {
-            Debug.WriteLine("PillarNavigationPage.OnBackButtonPressed start");
-
             // remove modal page from stack if exists
             if (CurrentPage.SendBackButtonPressed())
                 return true;
-
-            Debug.WriteLine("PillarNavigationPage.OnBackButtonPressed calling navigator");
 
             _navigator.PopAsync().ContinueWith(task =>
             {
