@@ -42,6 +42,7 @@
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="Bootstrapping\PillarBootstrapper.cs" />
     <Compile Include="Bootstrapping\PillarModule.cs" />
+    <Compile Include="Bootstrapping\PillarNavigationPage.cs" />
     <Compile Include="Converters\BooleanConverter.cs" />
     <Compile Include="Converters\ItemTappedEventArgsConverter.cs" />
     <Compile Include="Converters\NegateConverter.cs" />

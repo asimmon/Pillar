@@ -1,5 +1,7 @@
-﻿using Pillar.Factories;
+﻿using System;
+using Pillar.Factories;
 using Pillar.Interfaces;
+using Pillar.Services;
 using Pillar.ViewModels;
 using Xamarin.Forms;
 
@@ -73,24 +75,53 @@ namespace Pillar.Bootstrapping
         private void ConfigureApplication(IContainerAdapter container)
         {
             var viewFactory = container.Resolve<IViewFactory>();
+            var navigator = container.Resolve<INavigator>();
 
-            var view = GetFirstPage(viewFactory);
-            var viewModel = view.BindingContext as IViewModel;
+            // Get the first page to show to the user
+            var detailPage = GetFirstPage(viewFactory);
+            if (detailPage == null)
+                throw new ArgumentException($"An instance of a Page must be returned in {GetType().FullName}.GetFirstPage()");
 
+            var detailViewModel = detailPage.BindingContext as IViewModel;
 
-            if (App != null) // for unit testing purpose only
+            // We might need to use a MasterDetailsPage if this method returns something
+            var masterPage = GetMasterPage(viewFactory);
+            IViewModel masterViewModel = null;
+
+            if (masterPage != null)
             {
-                if (viewModel != null)
-                    viewModel.ViewEntering();
+                masterViewModel = masterPage.BindingContext as IViewModel;
+            }
 
-                App.MainPage = new NavigationPage(view);
+            // The unit tests cannot go through this block as we don't have an application instance to test
+            if (App != null)
+            {
+                // Navigation events, entering
+                if (masterViewModel != null) masterViewModel.ViewEntering();
+                if (detailViewModel != null) detailViewModel.ViewEntering();
 
-                if (viewModel != null)
-                    viewModel.ViewEntered();
+                Page navPage = new PillarNavigationPage(detailPage, navigator);
+                App.MainPage = masterPage == null
+                    ? navPage
+                    : new MasterDetailPage { Master = masterPage, Detail = navPage };
+
+                // Navigation events, entered
+                if (masterViewModel != null) masterViewModel.ViewEntered();
+                if (detailViewModel != null) detailViewModel.ViewEntered();
             }
         }
 
+        /// <summary>
+        /// Implement this method to return the first page that will be shown to the user
+        /// </summary>
         protected abstract Page GetFirstPage(IViewFactory viewFactory);
+
+        /// <summary>
+        /// Override this method if you want to use a MasterDetailsPage wrapper in your application
+        /// </summary>
+        protected virtual Page GetMasterPage(IViewFactory viewFactory)
+        {
+            return null;
+        }
     }
 }
-
