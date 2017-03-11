@@ -33,7 +33,7 @@ public class MyAppBootstrapper : PillarBootstrapper
 
     public MyAppBootstrapper(Application app)
     {
-        _app = app;
+        _app = app; 
     }
 
     // 2. Register your dependencies or Autofac modules here.
