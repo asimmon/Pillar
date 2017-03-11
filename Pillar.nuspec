@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Askaiser.Mobile.Pillar</id>
+    <id>Pillar</id>
     <version>0.0.4</version>
     <title>Pillar</title>
     <authors>Anthony Simmon</authors>
