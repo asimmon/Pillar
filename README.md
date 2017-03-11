@@ -277,6 +277,14 @@ The result:
 The ItemsView class provides an Orientation property, just like the StackLayout class.
 If a template is not defined for a specific type, the TemplateSelector will look for the first template with the IsDefault property set to true.
 
+## Other services
+
+Pillar exposes some services that can be injected in your dependencies controllers:
+
+* **IContainerAdapter**: The IoC container itself. Can be use only to retrieve dependencies. Registering dependencies must be done in the application boostrapper.
+* **IMessenger**: An abstraction of the default Xamarin Forms MessagingCenter. You will be able to mock it in your unit tests.
+* **IDialogProvider**: A service that allows you to display alerts, confirmation message boxes and action sheets. See the demo app for usage.
+
 The rest of the documentation will be available soon. Checkout the demo app to see examples of each features of Pillar.
 
 Thank you for your interest in this framework.
