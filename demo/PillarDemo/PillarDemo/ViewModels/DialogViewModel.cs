@@ -45,14 +45,14 @@ namespace PillarDemo.ViewModels
         {
             bool confirmed = await _dialogProvider.DisplayAlert("Confirm dialog", "This is a simple confirm dialog", "OK", "Cancel");
 
-            LatestAction = string.Format("Showed an alert dialog and clicked {0}", (confirmed ? "OK" : "Cancel"));
+            LatestAction = $"Showed an alert dialog and clicked {(confirmed ? "OK" : "Cancel")}";
         }
 
         public async void ShowActionSheet()
         {
             var chosenOption = await _dialogProvider.DisplayActionSheet("ActionSheet example", "Cancel", null, "Foo", "Bar", "Qux");
 
-            LatestAction = string.Format("Showed an action sheet and choosed {0}", chosenOption);
+            LatestAction = $"Showed an action sheet and choosed {chosenOption}";
         }
     }
 }
