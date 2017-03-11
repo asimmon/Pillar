@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Pillar;
 using PillarDemo.Models;
 using Xamarin.Forms;

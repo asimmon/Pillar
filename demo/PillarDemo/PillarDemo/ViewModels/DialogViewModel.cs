@@ -1,5 +1,4 @@
-﻿using System;
-using Pillar;
+﻿using Pillar;
 using Xamarin.Forms;
 
 namespace PillarDemo.ViewModels
