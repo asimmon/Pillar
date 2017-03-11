@@ -69,8 +69,8 @@ namespace PillarDemo.ViewModels
 
         public bool CanLogin()
         {
-            return !String.IsNullOrWhiteSpace(_email)
-                && !String.IsNullOrWhiteSpace(_password)
+            return !string.IsNullOrWhiteSpace(_email)
+                && !string.IsNullOrWhiteSpace(_password)
                 && !IsBusy;
         }
     }
