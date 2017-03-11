@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:c="clr-namespace:Askaiser.Mobile.Pillar.Converters;assembly=Askaiser.Mobile.Pillar"
+             xmlns:c="clr-namespace:Pillar;assembly=Pillar"
              x:Class="PillarDemo.DemoApp">
   <Application.Resources>
     <ResourceDictionary>

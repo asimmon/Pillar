@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Askaiser.Mobile.Pillar.Services;
-using Askaiser.Mobile.Pillar.ViewModels;
-using GalaSoft.MvvmLight.Command;
+using Pillar;
 using PillarDemo.Models;
+using Xamarin.Forms;
 
 namespace PillarDemo.ViewModels
 {
@@ -21,7 +20,7 @@ namespace PillarDemo.ViewModels
             set
             {
                 if (Set(() => Email, ref _email, value))
-                    LoginCommand.RaiseCanExecuteChanged();
+                    LoginCommand.ChangeCanExecute();
             }
         }
 
@@ -31,7 +30,7 @@ namespace PillarDemo.ViewModels
             set
             {
                 if (Set(() => Password, ref _password, value))
-                    LoginCommand.RaiseCanExecuteChanged();
+                    LoginCommand.ChangeCanExecute();
             }
         }
 
@@ -41,7 +40,7 @@ namespace PillarDemo.ViewModels
             set { Set(() => RememberMe, ref _rememberMe, value); }
         }
 
-        public RelayCommand LoginCommand { get; private set; }
+        public Command LoginCommand { get; private set; }
 
         public LoginViewModel(INavigator navigator)
         {
@@ -50,7 +49,7 @@ namespace PillarDemo.ViewModels
             IsBusy = false;
             NoHistory = true;
             Title = "Login";
-            LoginCommand = new RelayCommand(Login, CanLogin);
+            LoginCommand = new Command(Login, CanLogin);
         }
 
         public async void Login()
@@ -70,8 +69,8 @@ namespace PillarDemo.ViewModels
 
         public bool CanLogin()
         {
-            return !String.IsNullOrWhiteSpace(_email)
-                && !String.IsNullOrWhiteSpace(_password)
+            return !string.IsNullOrWhiteSpace(_email)
+                && !string.IsNullOrWhiteSpace(_password)
                 && !IsBusy;
         }
     }

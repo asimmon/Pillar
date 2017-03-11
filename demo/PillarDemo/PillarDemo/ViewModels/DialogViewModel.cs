@@ -1,7 +1,5 @@
-﻿using System;
-using Askaiser.Mobile.Pillar.Interfaces;
-using Askaiser.Mobile.Pillar.ViewModels;
-using GalaSoft.MvvmLight.Command;
+﻿using Pillar;
+using Xamarin.Forms;
 
 namespace PillarDemo.ViewModels
 {
@@ -17,11 +15,11 @@ namespace PillarDemo.ViewModels
             set { Set(() => LatestAction, ref _latestAction, value); }
         }
 
-        public RelayCommand ShowAlertCommand { get; private set; }
+        public Command ShowAlertCommand { get; private set; }
 
-        public RelayCommand ShowConfirmCommand { get; private set; }
+        public Command ShowConfirmCommand { get; private set; }
 
-        public RelayCommand ShowActionSheetCommand { get; private set; }
+        public Command ShowActionSheetCommand { get; private set; }
 
         public DialogViewModel(IDialogProvider dialogProvider)
         {
@@ -30,9 +28,9 @@ namespace PillarDemo.ViewModels
             Title = "Dialog example";
             LatestAction = "Did nothing yet";
 
-            ShowAlertCommand = new RelayCommand(ShowAlert);
-            ShowConfirmCommand = new RelayCommand(ShowConfirm);
-            ShowActionSheetCommand = new RelayCommand(ShowActionSheet);
+            ShowAlertCommand = new Command(ShowAlert);
+            ShowConfirmCommand = new Command(ShowConfirm);
+            ShowActionSheetCommand = new Command(ShowActionSheet);
         }
 
         public async void ShowAlert()
@@ -46,14 +44,14 @@ namespace PillarDemo.ViewModels
         {
             bool confirmed = await _dialogProvider.DisplayAlert("Confirm dialog", "This is a simple confirm dialog", "OK", "Cancel");
 
-            LatestAction = String.Format("Showed an alert dialog and clicked {0}", (confirmed ? "OK" : "Cancel"));
+            LatestAction = $"Showed an alert dialog and clicked {(confirmed ? "OK" : "Cancel")}";
         }
 
         public async void ShowActionSheet()
         {
             var chosenOption = await _dialogProvider.DisplayActionSheet("ActionSheet example", "Cancel", null, "Foo", "Bar", "Qux");
 
-            LatestAction = String.Format("Showed an action sheet and choosed {0}", chosenOption);
+            LatestAction = $"Showed an action sheet and choosed {chosenOption}";
         }
     }
 }

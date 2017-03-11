@@ -1,5 +1,4 @@
-﻿using System;
-using GalaSoft.MvvmLight;
+﻿using Pillar;
 
 namespace PillarDemo.Models
 {
@@ -32,7 +31,7 @@ namespace PillarDemo.Models
 
         public override string ToString()
         {
-            return String.Format("{0} <{1}>", Name, Email);
+            return $"{Name} <{Email}>";
         }
     }
 }

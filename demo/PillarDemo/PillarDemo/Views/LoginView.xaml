@@ -25,6 +25,7 @@
     </StackLayout>
   </ScrollView>
 
+  <!--
   <ContentPage.ToolbarItems>
     <ToolbarItem Command="{Binding Locator.Help.ShowLoginHelpCommand}">
       <ToolbarItem.Icon>
@@ -32,4 +33,5 @@
       </ToolbarItem.Icon>
     </ToolbarItem>
   </ContentPage.ToolbarItems>
+  -->
 </ContentPage>

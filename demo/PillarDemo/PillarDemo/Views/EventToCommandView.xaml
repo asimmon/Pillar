@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:c="clr-namespace:Askaiser.Mobile.Pillar.Converters;assembly=Askaiser.Mobile.Pillar"
-             xmlns:b="clr-namespace:Askaiser.Mobile.Pillar.Behaviors;assembly=Askaiser.Mobile.Pillar"
+             xmlns:c="clr-namespace:Pillar;assembly=Pillar"
+             xmlns:b="clr-namespace:Pillar;assembly=Pillar"
              x:Class="PillarDemo.Views.EventToCommandView"
              Title="{Binding Title}">
   <ContentPage.Resources>
