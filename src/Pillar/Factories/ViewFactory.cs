@@ -58,10 +58,13 @@ namespace Pillar
             viewModel = _componentContext.Resolve<TViewModel>();
 
             var viewModelType = typeof(TViewModel);
-            if (!_map.ContainsKey(viewModelType))
-                throw new InvalidOperationException($"Could not find a view type mapped to the view model type {viewModelType.FullName}");
 
-            var viewType = _map[viewModelType];
+            Type viewType;
+            if (!_map.TryGetValue(viewModelType, out viewType))
+            {
+                throw new InvalidOperationException($"Could not find a view type mapped to the view model type {viewModelType.FullName}");
+            }
+
             var view = _componentContext.Resolve(viewType) as Page;
 
             if (setStateAction != null)
@@ -84,10 +87,13 @@ namespace Pillar
             where TViewModel : class, IViewModel
         {
             var viewModelType = viewModel.GetType();
-            if (!_map.ContainsKey(viewModelType))
-                throw new InvalidOperationException($"Could not a view type mapped to the view model type {viewModelType.FullName}");
 
-            var viewType = _map[viewModelType];
+            Type viewType;
+            if (!_map.TryGetValue(viewModelType, out viewType))
+            {
+                throw new InvalidOperationException($"Could not a view type mapped to the view model type {viewModelType.FullName}");
+            }
+
             var view = _componentContext.Resolve(viewType) as Page;
             view.BindingContext = viewModel;
             return view;
