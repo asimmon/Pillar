@@ -25,7 +25,7 @@ namespace Pillar.Ioc
     /// concurrently from multiple threads.
     /// </remarks>
     [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
-    [DebuggerDisplay("Count = {Count}")]
+    [DebuggerDisplay("Count = {" + nameof(Count) + "}")]
     public class ConcurrentDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>
     {
         /// <summary>
