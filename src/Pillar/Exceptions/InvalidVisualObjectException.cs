@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Pillar.Exceptions
+namespace Pillar
 {
     /// <summary>
     /// Thrown when datatemplate inflates to an object 

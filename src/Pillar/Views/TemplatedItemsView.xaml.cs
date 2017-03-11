@@ -2,10 +2,9 @@
 using System.Collections;
 using System.Linq;
 using System.Windows.Input;
-using Pillar.Interfaces;
 using Xamarin.Forms;
 
-namespace Pillar.Views
+namespace Pillar
 {
     public partial class TemplatedItemsView : ScrollView
     {

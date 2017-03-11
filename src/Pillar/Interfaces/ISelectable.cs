@@ -1,4 +1,4 @@
-﻿namespace Pillar.Interfaces
+﻿namespace Pillar
 {
     public interface ISelectable
     {

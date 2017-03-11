@@ -1,7 +1,7 @@
 using System;
 using Xamarin.Forms;
 
-namespace Pillar.Views
+namespace Pillar
 {
     /// <summary>
     /// Wrapper for a DataTemplate.

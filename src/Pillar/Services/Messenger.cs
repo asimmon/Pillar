@@ -1,8 +1,7 @@
 ﻿using System;
-using Pillar.Interfaces;
 using Xamarin.Forms;
 
-namespace Pillar.Services
+namespace Pillar
 {
     public sealed class Messenger : IMessenger
     {

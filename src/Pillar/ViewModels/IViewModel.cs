@@ -1,6 +1,4 @@
-﻿using Pillar.Interfaces;
-
-namespace Pillar.ViewModels
+﻿namespace Pillar
 {
     /// <summary>
     /// A ViewModel abstraction implemented in <see cref="PillarViewModelBase"/>

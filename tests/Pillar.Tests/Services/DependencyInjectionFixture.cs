@@ -1,5 +1,4 @@
 ﻿using System;
-using Pillar.Interfaces;
 using Xamarin.Forms;
 using Xunit;
 

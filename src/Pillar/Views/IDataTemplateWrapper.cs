@@ -1,7 +1,7 @@
 using System;
 using Xamarin.Forms;
 
-namespace Pillar.Views
+namespace Pillar
 {
     /// <summary>
     /// Interface to enable DataTemplateCollection to hold

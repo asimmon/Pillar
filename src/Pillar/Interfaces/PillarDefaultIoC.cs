@@ -2,7 +2,7 @@
 using Pillar.Ioc;
 using Pillar.Ioc.Abstractions;
 
-namespace Pillar.Interfaces
+namespace Pillar
 {
     public class PillarDefaultIoc : IContainerAdapter
     {

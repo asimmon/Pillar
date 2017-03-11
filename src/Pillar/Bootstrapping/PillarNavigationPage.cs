@@ -1,9 +1,7 @@
 ﻿using System;
-using Pillar.Interfaces;
-using Pillar.Services;
 using Xamarin.Forms;
 
-namespace Pillar.Bootstrapping
+namespace Pillar
 {
     /// <summary>
     /// Custom navigation page that call Pillar's navigator to pop back when

@@ -1,6 +1,4 @@
-﻿using Pillar.Interfaces;
-
-namespace Pillar.ViewModels
+﻿namespace Pillar
 {
     public class SelectableViewModel : PillarViewModelBase, ISelectable
     {

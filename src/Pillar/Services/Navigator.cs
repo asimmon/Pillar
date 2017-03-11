@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Pillar.Factories;
-using Pillar.Interfaces;
-using Pillar.ViewModels;
 using Xamarin.Forms;
 
-namespace Pillar.Services
+namespace Pillar
 {
     /// <summary>
     /// The implementation of the ViewModel-based navigation.

@@ -1,5 +1,4 @@
-﻿using Pillar.Bootstrapping;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xunit;
 
 namespace Pillar.Tests.Bootstrapping

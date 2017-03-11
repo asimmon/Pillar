@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Pillar.ViewModels;
 
-namespace Pillar.Services
+namespace Pillar
 {
     /// <summary>
     /// Provides a ViewModel-based navigation. You need to bind each
-    /// ViewModel type to a View type in a <see cref="Bootstrapping.PillarBootstrapper"/> based class.
+    /// ViewModel type to a View type in a <see cref="PillarBootstrapper"/> based class.
     /// </summary>
     public interface INavigator
     {

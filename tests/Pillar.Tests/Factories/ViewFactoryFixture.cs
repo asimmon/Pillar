@@ -1,7 +1,5 @@
 ﻿using System;
 using Moq;
-using Pillar.Factories;
-using Pillar.Interfaces;
 using Pillar.Tests.Mocks;
 using Xunit;
 

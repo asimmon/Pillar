@@ -1,6 +1,4 @@
-﻿using Pillar.Converters;
-
-namespace Pillar.Tests.Mocks
+﻿namespace Pillar.Tests.Mocks
 {
     public class MockBooleanConverter : BooleanConverter<object>
     {

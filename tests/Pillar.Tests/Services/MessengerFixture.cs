@@ -1,5 +1,4 @@
-﻿using Pillar.Services;
-using Xunit;
+﻿using Xunit;
 
 namespace Pillar.Tests.Services
 {

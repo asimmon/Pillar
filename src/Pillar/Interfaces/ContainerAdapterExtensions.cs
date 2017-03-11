@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pillar.Interfaces
+namespace Pillar
 {
     /// <summary>
     /// Add generic functionnalities to the IOC container adapter

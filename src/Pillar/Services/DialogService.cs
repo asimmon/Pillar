@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Pillar.Interfaces;
 
-namespace Pillar.Services
+namespace Pillar
 {
     public class DialogService : IDialogProvider
     {

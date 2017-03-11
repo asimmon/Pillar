@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
-using Pillar.Exceptions;
 using Xamarin.Forms;
 
-namespace Pillar.Views
+namespace Pillar
 {
     /// <summary>
     /// 

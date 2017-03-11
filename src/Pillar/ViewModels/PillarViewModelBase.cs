@@ -1,4 +1,4 @@
-﻿namespace Pillar.ViewModels
+﻿namespace Pillar
 {
     /// <summary>
     /// The preffered ViewModel class of every ViewModel which can be bound to a View

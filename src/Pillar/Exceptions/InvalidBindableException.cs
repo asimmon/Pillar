@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
-namespace Pillar.Exceptions
+namespace Pillar
 {
     /// <summary>
     /// Thrown when an invalid bindable object has been passed to a callback

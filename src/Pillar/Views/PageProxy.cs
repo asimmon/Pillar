@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Pillar.Interfaces;
 using Xamarin.Forms;
 
-namespace Pillar.Views
+namespace Pillar
 {
     /// <summary>
     /// Page abstration that allows us to get the current navigation object,
