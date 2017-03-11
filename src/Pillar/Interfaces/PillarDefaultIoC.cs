@@ -1,6 +1,5 @@
 ﻿using System;
 using Pillar.Ioc;
-using Pillar.Ioc.Abstractions;
 
 namespace Pillar
 {

@@ -6,7 +6,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Pillar.Ioc.Abstractions
+namespace Pillar.Ioc
 {
     [DebuggerDisplay("Lifetime = {Lifetime}, ServiceType = {ServiceType}, ImplementationType = {ImplementationType}")]
     public class ServiceDescriptor

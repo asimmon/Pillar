@@ -4,7 +4,6 @@
 // Modifications copyright (c) 2016 Anthony Simmon
 
 using System;
-using Pillar.Ioc.Abstractions;
 
 namespace Pillar.Ioc
 {

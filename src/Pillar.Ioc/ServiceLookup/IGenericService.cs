@@ -4,9 +4,8 @@
 // Modifications copyright (c) 2016 Anthony Simmon
 
 using System;
-using Pillar.Ioc.Abstractions;
 
-namespace Pillar.Ioc.ServiceLookup
+namespace Pillar.Ioc
 {
     internal interface IGenericService
     {

@@ -5,7 +5,7 @@
 
 using System.Linq.Expressions;
 
-namespace Pillar.Ioc.ServiceLookup
+namespace Pillar.Ioc
 {
     /// <summary>
     /// Summary description for IServiceCallSite

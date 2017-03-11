@@ -5,7 +5,7 @@
 
 using System.Collections.Generic;
 
-namespace Pillar.Ioc.Abstractions
+namespace Pillar.Ioc
 {
     /// <summary>
     /// Specifies the contract for a collection of service descriptors.

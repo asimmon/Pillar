@@ -6,9 +6,8 @@
 using System;
 using System.Linq.Expressions;
 using System.Runtime.ExceptionServices;
-using Pillar.Ioc.Abstractions;
 
-namespace Pillar.Ioc.ServiceLookup
+namespace Pillar.Ioc
 {
     internal class CreateInstanceCallSite : IServiceCallSite
     {

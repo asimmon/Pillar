@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Pillar.Ioc.Abstractions
+namespace Pillar.Ioc
 {
     /// <summary>
     /// The result of <see cref="ActivatorUtilities.CreateFactory(Type, Type[])"/>.
