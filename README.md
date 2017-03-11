@@ -1,6 +1,6 @@
 # Pillar
 
-[![Build Status](https://ci.appveyor.com/api/projects/status/2qrtolh41cn80ssi/branch/develop?svg=true)](https://ci.appveyor.com/project/asimmon/pillar/branch/develop)
+[![Build Status](https://ci.appveyor.com/api/projects/status/2qrtolh41cn80ssi/branch/master?svg=true)](https://ci.appveyor.com/project/asimmon/pillar/branch/develop)
 [![NuGet version](https://badge.fury.io/nu/Pillar.svg)](https://badge.fury.io/nu/Pillar)
 
 Pillar is a standalone MVVM framework for [Xamarin.Forms](https://xamarin.com/forms). With this framework, you won't have to deal with page navigation or messed up code-behind anymore. Now, it's all about **view models**, and **navigation between view models**. It uses a embedded custom version of the [ASP.NET Core Dependency Injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection) for dependency injection. You can easily use your own IoC container by implementing an adapter class.
@@ -81,7 +81,7 @@ The view models that will be associated to pages need to extend the `PillarViewM
 With Pillar, view models and pages are fully decoupled. To navigate between view models, you need to inject the `INavigator` Pillar service into your view models (do not confuse `INavigator` with `INavigation` from Xamarin.Forms). This service provides the following methods:
 
 ```C#
-// Navigate to a view model (the lifecycle is managed by Autofac)
+// Navigate to a view model
 await _navigator.PushAsync<HomeViewModel>();
 await _navigator.PushModalAsync<HomeViewModel>();
 
