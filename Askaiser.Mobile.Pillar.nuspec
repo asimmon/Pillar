@@ -25,5 +25,7 @@ The documentation is available on the project github page.</description>
     
     <file src="src/Pillar/bin/Release/Pillar.Ioc.dll" target="lib/portable-net45+win8+wpa81+wp8" />
     <file src="src/Pillar/bin/Release/Pillar.Ioc.xml" target="lib/portable-net45+win8+wpa81+wp8" />
+    
+    <file src="nuget/YourAppBootstrapper.cs.pp" target="content" />
   </files>
 </package>
