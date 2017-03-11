@@ -1,7 +1,6 @@
 ﻿using System;
-using Pillar.Interfaces;
-using Pillar.ViewModels;
-using GalaSoft.MvvmLight.Command;
+using Pillar;
+using Xamarin.Forms;
 
 namespace PillarDemo.ViewModels
 {
@@ -17,11 +16,11 @@ namespace PillarDemo.ViewModels
             set { Set(() => LatestAction, ref _latestAction, value); }
         }
 
-        public RelayCommand ShowAlertCommand { get; private set; }
+        public Command ShowAlertCommand { get; private set; }
 
-        public RelayCommand ShowConfirmCommand { get; private set; }
+        public Command ShowConfirmCommand { get; private set; }
 
-        public RelayCommand ShowActionSheetCommand { get; private set; }
+        public Command ShowActionSheetCommand { get; private set; }
 
         public DialogViewModel(IDialogProvider dialogProvider)
         {
@@ -30,9 +29,9 @@ namespace PillarDemo.ViewModels
             Title = "Dialog example";
             LatestAction = "Did nothing yet";
 
-            ShowAlertCommand = new RelayCommand(ShowAlert);
-            ShowConfirmCommand = new RelayCommand(ShowConfirm);
-            ShowActionSheetCommand = new RelayCommand(ShowActionSheet);
+            ShowAlertCommand = new Command(ShowAlert);
+            ShowConfirmCommand = new Command(ShowConfirm);
+            ShowActionSheetCommand = new Command(ShowActionSheet);
         }
 
         public async void ShowAlert()

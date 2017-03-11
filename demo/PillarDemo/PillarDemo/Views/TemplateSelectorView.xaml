@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:v="clr-namespace:Pillar.Views;assembly=Pillar"
+             xmlns:v="clr-namespace:Pillar;assembly=Pillar"
              xmlns:m="clr-namespace:PillarDemo.Models;assembly=PillarDemo"
              x:Class="PillarDemo.Views.TemplateSelectorView"
              Title="{Binding Title}">

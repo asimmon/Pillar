@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Pillar.ViewModels;
-using GalaSoft.MvvmLight.Command;
+using Pillar;
 using PillarDemo.Models;
+using Xamarin.Forms;
 
 namespace PillarDemo.ViewModels
 {
@@ -18,7 +18,7 @@ namespace PillarDemo.ViewModels
 
         public ObservableCollection<Person> People { get; private set; }
 
-        public RelayCommand<Person> SayHelloCommand { get; private set; }
+        public Command<Person> SayHelloCommand { get; private set; }
 
         public EventToCommandViewModel()
         {
@@ -32,7 +32,7 @@ namespace PillarDemo.ViewModels
                 new Person("Thierry Smith")
             };
 
-            SayHelloCommand = new RelayCommand<Person>(SayHello);
+            SayHelloCommand = new Command<Person>(SayHello);
         }
 
         public void SayHello(Person person)

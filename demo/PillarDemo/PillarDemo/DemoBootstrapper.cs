@@ -1,6 +1,4 @@
-﻿using Pillar.Bootstrapping;
-using Pillar.Factories;
-using Autofac;
+﻿using Pillar;
 using PillarDemo.ViewModels;
 using PillarDemo.Views;
 using Xamarin.Forms;
@@ -9,21 +7,32 @@ namespace PillarDemo
 {
     public class DemoBootstrapper : PillarBootstrapper
     {
-        private readonly Application _app;
-
         public DemoBootstrapper(Application app)
+            : base(app)
+        { }
+
+        protected override void RegisterDependencies(IContainerAdapter container)
         {
-            _app = app;
+            container.RegisterSingleton<LoginViewModel>();
+            container.RegisterSingleton<LoginView>();
+
+            container.RegisterSingleton<HomeViewModel>();
+            container.RegisterSingleton<HomeView>();
+
+            container.RegisterType<EventToCommandViewModel>();
+            container.RegisterType<EventToCommandView>();
+
+            container.RegisterType<DialogViewModel>();
+            container.RegisterType<DialogView>();
+
+            container.RegisterType<TemplateSelectorViewModel>();
+            container.RegisterType<TemplateSelectorView>();
+
+            container.RegisterType<MessengerViewModel>();
+            container.RegisterType<MessengerView>();
         }
 
-        protected override void ConfigureContainer(ContainerBuilder builder)
-        {
-            base.ConfigureContainer(builder);
-
-            builder.RegisterModule<DemoModule>();
-        }
-
-        protected override void RegisterViews(IViewFactory viewFactory)
+        protected override void BindViewModelsToViews(IViewFactory viewFactory)
         {
             viewFactory.Register<LoginViewModel, LoginView>();
             viewFactory.Register<HomeViewModel, HomeView>();
@@ -33,12 +42,9 @@ namespace PillarDemo
             viewFactory.Register<DialogViewModel, DialogView>();
         }
 
-        protected override void ConfigureApplication(IContainer container)
+        protected override Page GetFirstPage(IViewFactory viewFactory)
         {
-            var viewFactory = container.Resolve<IViewFactory>();
-            var page = viewFactory.Resolve<LoginViewModel>();
-
-            _app.MainPage = new NavigationPage(page);
+            return viewFactory.Resolve<LoginViewModel>();
         }
     }
 }

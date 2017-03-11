@@ -1,12 +1,11 @@
-﻿using Pillar.Services;
-using Pillar.ViewModels;
-using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
+﻿using System;
+using Pillar;
 using PillarDemo.Models;
+using Xamarin.Forms;
 
 namespace PillarDemo.ViewModels
 {
-    public class HomeViewModel : PillarViewModelBase
+    public class HomeViewModel : PillarViewModelBase, IDisposable
     {
         private readonly INavigator _navigator;
         private readonly IMessenger _messenger;
@@ -19,13 +18,13 @@ namespace PillarDemo.ViewModels
             set { Set(() => CurrentUser, ref _currentUser, value); }
         }
 
-        public RelayCommand GoToEventToCommandCommand { get; private set; }
+        public Command GoToEventToCommandCommand { get; private set; }
 
-        public RelayCommand GoToTemplateSelectorCommand { get; private set; }
+        public Command GoToTemplateSelectorCommand { get; private set; }
 
-        public RelayCommand GoToMessengerCommand { get; private set; }
+        public Command GoToMessengerCommand { get; private set; }
 
-        public RelayCommand GoToDialogCommand { get; private set; }
+        public Command GoToDialogCommand { get; private set; }
 
         public HomeViewModel(INavigator navigator, IMessenger messenger)
         {
@@ -34,12 +33,12 @@ namespace PillarDemo.ViewModels
 
             Title = "Demos";
 
-            GoToEventToCommandCommand = new RelayCommand(GoToEventToCommand);
-            GoToTemplateSelectorCommand = new RelayCommand(GoToTemplateSelector);
-            GoToMessengerCommand = new RelayCommand(GoToMessenger);
-            GoToDialogCommand = new RelayCommand(GoToDialog);
+            GoToEventToCommandCommand = new Command(GoToEventToCommand);
+            GoToTemplateSelectorCommand = new Command(GoToTemplateSelector);
+            GoToMessengerCommand = new Command(GoToMessenger);
+            GoToDialogCommand = new Command(GoToDialog);
 
-            messenger.Register<NotificationMessage<Person>>(this, CurrentUserChanged);
+            messenger.Subscribe<MessengerViewModel, Person>(this, Constants.CurrentUserChanged, CurrentUserChanged);
         }
 
         public async void GoToEventToCommand()
@@ -62,17 +61,14 @@ namespace PillarDemo.ViewModels
             await _navigator.PushAsync<DialogViewModel>();
         }
 
-        public void CurrentUserChanged(NotificationMessage<Person> msg)
+        public void CurrentUserChanged(MessengerViewModel sender, Person person)
         {
-            if (msg.Notification == Constants.CurrentUserChanged)
-            {
-                CurrentUser = msg.Content;
-            }
+            CurrentUser = person;
         }
 
-        public override void Dispose()
+        public void Dispose()
         {
-            _messenger.Unregister(this);
+            _messenger.Unsubscribe<MessengerViewModel, string>(this, Constants.CurrentUserChanged);
         }
     }
 }
