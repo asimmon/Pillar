@@ -3,13 +3,13 @@
 [![Build Status](https://ci.appveyor.com/api/projects/status/2qrtolh41cn80ssi/branch/develop?svg=true)](https://ci.appveyor.com/project/asimmon/pillar/branch/develop)
 [![NuGet version](https://badge.fury.io/nu/Pillar.svg)](https://badge.fury.io/nu/Pillar)
 
-Pillar is a standalone MVVM framework for [Xamarin.Forms](https://xamarin.com/forms) 2.2+. With this framework, you won't have to deal with page navigation or messed up code-behind anymore. Now, it's all about **view models**, and **navigation between view models**. It uses a modified version of the [ASP.NET Core Dependency Injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection) for dependency injection. You can easily use your own IoC container by implementing an adapter class.
+Pillar is a standalone MVVM framework for [Xamarin.Forms](https://xamarin.com/forms). With this framework, you won't have to deal with page navigation or messed up code-behind anymore. Now, it's all about **view models**, and **navigation between view models**. It uses a embedded custom version of the [ASP.NET Core Dependency Injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection) for dependency injection. You can easily use your own IoC container by implementing an adapter class.
 
 ## Features
 
 * [ViewModel navigation](#navigation), you won't need to manipulate pages in your view models
 * Design your apps with unit testing in mind with dependency injection
-* Flexible, you can use differents patterns: ViewModel first, Messaging, ViewModelLocator (without static classes, wiki page coming soon)
+* Flexible, you can use differents patterns: ViewModel first, Messaging, write your own ViewModelLocator that uses the IoC container
 * [EventToCommand](#eventtocommandbehavior) behavior and useful converters included
 * Useful views: [ItemsView repeater](#itemsview-with-templateselector-by-type), with optional DataTemplate selector by item type
 * Not intrusive, you can reuse your view models in other projects (WPF for example) with very few modifications 
@@ -22,44 +22,40 @@ Pillar is a standalone MVVM framework for [Xamarin.Forms](https://xamarin.com/fo
 
 Extend the `PillarBootstrapper` class to configure your view models and views. Then, in your Application class, instantiate it and call the `Run` method.
 
+Starting from Pillar 1.0.0, a sample class that extends `PillarBootstrapper` is added to your project after the package installation.
+
 Here is an example:
 
 ```C#
-public class MyAppBootstrapper : PillarBootstrapper
+using Xamarin.Forms;
+using Pillar;
+
+public class YourAppBootstrapper : PillarBootstrapper
 {
-    // 1. Keep a reference of the Application instance to set the main page later.
-    // You will start the app with new MyAppBootstrapper(this).Run();
-    private readonly Application _app;
+    // 1. PillarBootstrapper need to keep a reference of the Application
+    public YourAppBootstrapper(Application app)
+        : base(app)
+    { }
 
-    public MyAppBootstrapper(Application app)
+    // 2. Register your dependencies through the built-in container
+    // You can learn how to use the IoC container of your choice further in this documentation
+    protected override void RegisterDependencies(IContainerAdapter container)
     {
-        _app = app; 
+        container.RegisterType<HomeViewModel>(); 
+        container.RegisterType<HomePage>();
     }
 
-    // 2. Register your dependencies or Autofac modules here.
-    // Don't forget to call the base implementation to register Pillar dependencies.
-    protected override void ConfigureContainer(ContainerBuilder builder)
+    // 3. Bind your view models to your views with Pillar's view factory.
+    protected override void BindViewModelsToViews(IViewFactory viewFactory)
     {
-		base.ConfigureContainer(builder);
-        
-        builder.RegisterType<LoginViewModel>();
-        builder.RegisterType<LoginView>();
+        viewFactory.Register<HomeViewModel, HomePage>();
     }
 
-    // 3. Map your view models to your views with the Pillar view factory.
-    protected override void RegisterViews(IViewFactory viewFactory)
+    // 4. Return the first page of your application by resolving it from the view factory.
+    // Your app is now ready to start!
+    protected override Page GetFirstPage(IViewFactory viewFactory)
     {
-        viewFactory.Register<LoginViewModel, LoginView>();
-    }
-
-    // 4. Grab your first view model and its corresponding page,
-    // and set it as your application main page. Your app is now started!
-    protected override void ConfigureApplication(IContainer container)
-    {
-        var viewFactory = container.Resolve<IViewFactory>();
-        var page = viewFactory.Resolve<LoginViewModel>();
-
-        _app.MainPage = new NavigationPage(page);
+        return viewFactory.Resolve<HomeViewModel>();
     }
 }
 
@@ -67,12 +63,14 @@ public class App : Application
 {
     public App()
     {
-        new MyAppBootstrapper(this).Run();
+        InitializeComponent();
+
+        new YourAppBootstrapper(this).Run();
     }
 }
 ```
 
-The view models that will be associated to pages need to extend the `PillarViewModelBase`, or you will get a compilation error. It is a child class of the ViewModelBase from MvvmLight library. This class provides useful observable properties for mobile applications:
+The view models that will be associated to pages need to extend the `PillarViewModelBase`, or you will get a compilation error. It is a child class of the ViewModelBase class. This class provides useful observable properties for mobile applications:
 
 * **Title** (*string*): You can bound it to the associated page Title
 * **NoHistory** (*boolean*): If true, it will remove the previous page from the navigation stack
@@ -133,16 +131,16 @@ Pillars provides a behavior that allows you to bind any view event to a command.
 
 ```XML
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:b="clr-namespace:HelloEventToCommand.Behaviors;assembly=HelloEventToCommand" xmlns:c="clr-namespace:HelloEventToCommand.Converters;assembly=HelloEventToCommand" x:Class="HelloEventToCommand.Views.HomeView">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:p="clr-namespace:Pillar;assembly=Pillar" x:Class="HelloEventToCommand.Views.HomePage">
   <ContentPage.Resources>
     <ResourceDictionary>
-      <c:ItemTappedEventArgsConverter x:Key="ItemTappedConverter" />
+      <p:ItemTappedEventArgsConverter x:Key="ItemTappedConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>
 
   <ListView ItemsSource="{Binding People}">
     <ListView.Behaviors>
-      <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SayHelloCommand}" EventArgsConverter="{StaticResource ItemTappedConverter}" />
+      <p:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SayHelloCommand}" EventArgsConverter="{StaticResource ItemTappedConverter}" />
     </ListView.Behaviors>
     <ListView.ItemTemplate>
       <DataTemplate>
@@ -172,7 +170,7 @@ The ItemsView is a  way for displaying a list of items. When used with the Templ
 ```XML
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:v="clr-namespace:Pillar.Views;assembly=Pillar"
+             xmlns:v="clr-namespace:Pillar;assembly=Pillar"
              xmlns:vm="clr-namespace:HelloXam.ViewModels;assembly=HelloXam"
              x:Class="HelloXam.Views.FirstView" Title="First">
   <ContentPage.Resources>
@@ -223,7 +221,7 @@ The result:
 The ItemsView class provides an Orientation property, just like the StackLayout class.
 If a template is not defined for a specific type, the TemplateSelector will look for the first template with the IsDefault property set to true.
 
-The rest of the documentation will be available soon in the wiki section. Checkout the demo app to see examples of each features of Pillar.
+The rest of the documentation will be available soon. Checkout the demo app to see examples of each features of Pillar.
 
 Thank you for your interest in this framework.
 
