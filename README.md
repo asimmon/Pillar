@@ -9,7 +9,8 @@ Pillar is a standalone MVVM framework for [Xamarin.Forms](https://xamarin.com/fo
 
 * [ViewModel navigation](#navigation), you won't need to manipulate pages in your view models
 * Design your apps with unit testing in mind with dependency injection
-* Flexible, you can use differents patterns: ViewModel first, Messaging, write your own ViewModelLocator that uses the IoC container
+* Use the built-in IoC container or override it with the IoC container of your choice
+* Flexible, you can use differents patterns: ViewModel first, Messaging, etc.
 * [EventToCommand](#eventtocommandbehavior) behavior and useful converters included
 * Useful views: [ItemsView repeater](#itemsview-with-templateselector-by-type), with optional DataTemplate selector by item type
 * Not intrusive, you can reuse your view models in other projects (WPF for example) with very few modifications 
