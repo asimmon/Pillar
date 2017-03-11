@@ -8,4 +8,4 @@ using System.Reflection;
 [assembly: AssemblyCopyright("Copyright © Anthony Simmon 2015-2017")]
 [assembly: NeutralResourcesLanguage("en")]
 
-[assembly: AssemblyVersion("0.0.4")]
+[assembly: AssemblyVersion("1.0.0")]
