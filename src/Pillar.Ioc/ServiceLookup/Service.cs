@@ -8,9 +8,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using Pillar.Ioc.Abstractions;
 
-namespace Pillar.Ioc.ServiceLookup
+namespace Pillar.Ioc
 {
     internal class Service : IService
     {

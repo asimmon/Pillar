@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using Moq;
-using Pillar.Behaviors;
 using Xamarin.Forms;
 using Xunit;
 

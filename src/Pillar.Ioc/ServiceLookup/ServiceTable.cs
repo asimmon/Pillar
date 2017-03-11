@@ -4,13 +4,11 @@
 // Modifications copyright (c) 2016 Anthony Simmon
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-using Pillar.Ioc.Abstractions;
 
-namespace Pillar.Ioc.ServiceLookup
+namespace Pillar.Ioc
 {
     internal class ServiceTable
     {

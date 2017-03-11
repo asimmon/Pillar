@@ -1,5 +1,4 @@
-﻿using Pillar.Converters;
-using Pillar.Tests.Mocks;
+﻿using Pillar.Tests.Mocks;
 using Xunit;
 
 namespace Pillar.Tests.Converters

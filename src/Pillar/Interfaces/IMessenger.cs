@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pillar.Interfaces
+namespace Pillar
 {
     public interface IMessenger
     {

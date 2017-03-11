@@ -1,11 +1,7 @@
 ﻿using System;
-using Pillar.Factories;
-using Pillar.Interfaces;
-using Pillar.Services;
-using Pillar.Views;
 using Xamarin.Forms;
 
-namespace Pillar.Bootstrapping
+namespace Pillar
 {
     /// <summary>
     /// Class that help register all the dependencies needed in this library.

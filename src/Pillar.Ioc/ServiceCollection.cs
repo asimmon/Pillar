@@ -5,7 +5,6 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using Pillar.Ioc.Abstractions;
 
 namespace Pillar.Ioc
 {

@@ -2,11 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Moq;
-using Pillar.Factories;
-using Pillar.Interfaces;
-using Pillar.Services;
 using Pillar.Tests.Mocks;
-using Pillar.ViewModels;
 using Xamarin.Forms;
 using Xunit;
 

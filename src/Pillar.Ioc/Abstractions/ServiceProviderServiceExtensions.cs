@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Pillar.Ioc.Abstractions
+namespace Pillar.Ioc
 {
     /// <summary>
     /// Extension methods for getting services from an <see cref="IServiceProvider" />.

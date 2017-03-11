@@ -1,11 +1,7 @@
 ﻿using System;
-using Pillar.Factories;
-using Pillar.Interfaces;
-using Pillar.Services;
-using Pillar.ViewModels;
 using Xamarin.Forms;
 
-namespace Pillar.Bootstrapping
+namespace Pillar
 {
     /// <summary>
     /// This is where you configure, register and bind your ViewModels and Views.

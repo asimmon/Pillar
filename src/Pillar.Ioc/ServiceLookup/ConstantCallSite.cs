@@ -5,7 +5,7 @@
 
 using System.Linq.Expressions;
 
-namespace Pillar.Ioc.ServiceLookup
+namespace Pillar.Ioc
 {
     internal class ConstantCallSite : IServiceCallSite
     {

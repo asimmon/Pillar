@@ -1,7 +1,4 @@
-﻿using Pillar.Bootstrapping;
-using Pillar.Factories;
-using Pillar.Interfaces;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Pillar.Tests.Mocks
 {

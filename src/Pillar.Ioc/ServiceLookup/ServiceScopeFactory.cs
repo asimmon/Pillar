@@ -3,9 +3,7 @@
 // 
 // Modifications copyright (c) 2016 Anthony Simmon
 
-using Pillar.Ioc.Abstractions;
-
-namespace Pillar.Ioc.ServiceLookup
+namespace Pillar.Ioc
 {
     internal class ServiceScopeFactory : IServiceScopeFactory
     {

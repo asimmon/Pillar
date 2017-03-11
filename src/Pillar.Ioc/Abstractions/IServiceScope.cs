@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Pillar.Ioc.Abstractions
+namespace Pillar.Ioc
 {
     /// <summary>
     /// The <see cref="System.IDisposable.Dispose"/> method ends the scope lifetime. Once Dispose

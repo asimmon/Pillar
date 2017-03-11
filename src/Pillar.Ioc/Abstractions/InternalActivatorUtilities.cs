@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 
-namespace Pillar.Ioc.Abstractions
+namespace Pillar.Ioc
 {
     // Do not take a dependency on this class unless you are explicitly trying to avoid taking a
     // dependency on Microsoft.AspNetCore.DependencyInjection.Abstractions.

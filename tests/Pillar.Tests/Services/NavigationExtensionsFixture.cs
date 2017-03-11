@@ -1,6 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Pillar.Services;
-using Pillar.ViewModels;
 using Xamarin.Forms;
 using Xunit;
 

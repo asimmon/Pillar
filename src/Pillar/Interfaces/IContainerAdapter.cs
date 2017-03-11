@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pillar.Interfaces
+namespace Pillar
 {
     /// <summary>
     /// Depedency injection registration and resolving abstraction

@@ -1,8 +1,7 @@
 ﻿using System.Linq;
-using Pillar.ViewModels;
 using Xamarin.Forms;
 
-namespace Pillar.Services
+namespace Pillar
 {
     /// <summary>
     /// Extensions methods to access current or previous view in the navigation stack

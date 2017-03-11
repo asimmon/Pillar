@@ -4,10 +4,9 @@
 // Modifications copyright (c) 2016 Anthony Simmon
 
 using System;
-using System.Collections.Concurrent;
 using System.Diagnostics;
 
-namespace Pillar.Ioc.Internal
+namespace Pillar.Ioc
 {
     internal static class ConcurrentDictionaryExtensions
     {

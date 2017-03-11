@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Pillar.Ioc.Abstractions
+namespace Pillar.Ioc
 {
     /// <summary>
     /// Helper code for the various activator services.

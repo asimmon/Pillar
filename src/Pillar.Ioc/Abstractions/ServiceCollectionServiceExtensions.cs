@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Pillar.Ioc.Abstractions
+namespace Pillar.Ioc
 {
     /// <summary>
     /// Extension methods for adding services to an <see cref="IServiceCollection" />.

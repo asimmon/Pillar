@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace Pillar.Behaviors
+namespace Pillar
 {
     /// <summary>
     /// This base behavior class is aware of the binding context of its associated view,

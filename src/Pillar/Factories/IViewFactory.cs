@@ -1,8 +1,7 @@
 ﻿using System;
-using Pillar.ViewModels;
 using Xamarin.Forms;
 
-namespace Pillar.Factories
+namespace Pillar
 {
     public interface IViewFactory
     {

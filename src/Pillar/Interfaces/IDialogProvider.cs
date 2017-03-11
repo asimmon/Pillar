@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Pillar.Interfaces
+namespace Pillar
 {
     /// <summary>
     /// Displays popups or actionsheet on any page.

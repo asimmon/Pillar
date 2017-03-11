@@ -5,9 +5,8 @@
 
 using System;
 using System.Collections.Generic;
-using Pillar.Ioc.Abstractions;
 
-namespace Pillar.Ioc.ServiceLookup
+namespace Pillar.Ioc
 {
     internal interface IService
     {

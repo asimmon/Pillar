@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Pillar.Interfaces
+namespace Pillar
 {
     /// <summary>
     /// Page abstraction that allow us to always get the current singular Page

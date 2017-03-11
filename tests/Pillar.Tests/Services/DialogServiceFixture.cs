@@ -1,6 +1,4 @@
 ﻿using Moq;
-using Pillar.Interfaces;
-using Pillar.Services;
 using Xunit;
 
 namespace Pillar.Tests.Services

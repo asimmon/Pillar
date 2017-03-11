@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace Pillar.Converters
+namespace Pillar
 {
     /// <summary>
     /// Provides an abstract type converter to convert

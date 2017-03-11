@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Pillar.Exceptions
+namespace Pillar
 {
     /// <summary>
     /// exception thrown when a template cannot

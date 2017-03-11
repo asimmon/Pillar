@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Pillar.Views;
 using Xunit;
 
 namespace Pillar.Tests.Views

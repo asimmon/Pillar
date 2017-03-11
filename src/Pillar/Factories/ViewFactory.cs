@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Pillar.Interfaces;
-using Pillar.ViewModels;
 using Xamarin.Forms;
 
-namespace Pillar.Factories
+namespace Pillar
 {
     public class ViewFactory : IViewFactory
     {

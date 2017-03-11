@@ -1,4 +1,4 @@
-﻿namespace Pillar.Interfaces
+﻿namespace Pillar
 {
     /// <summary>
     /// Provides navigation events

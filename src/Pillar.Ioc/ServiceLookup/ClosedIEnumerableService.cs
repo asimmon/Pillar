@@ -7,9 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Pillar.Ioc.Abstractions;
 
-namespace Pillar.Ioc.ServiceLookup
+namespace Pillar.Ioc
 {
     internal class ClosedIEnumerableService : IService
     {

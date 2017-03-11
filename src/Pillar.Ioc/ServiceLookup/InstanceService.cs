@@ -6,9 +6,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Pillar.Ioc.Abstractions;
 
-namespace Pillar.Ioc.ServiceLookup
+namespace Pillar.Ioc
 {
     /// <summary>
     /// Summary description for InstanceService

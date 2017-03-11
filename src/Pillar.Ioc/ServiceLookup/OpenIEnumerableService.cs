@@ -5,9 +5,8 @@
 
 using System;
 using System.Reflection;
-using Pillar.Ioc.Abstractions;
 
-namespace Pillar.Ioc.ServiceLookup
+namespace Pillar.Ioc
 {
     internal class OpenIEnumerableService : IGenericService
     {

@@ -2,7 +2,7 @@
 <ScrollView
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="Pillar.Views.TemplatedItemsView"
+	x:Class="Pillar.TemplatedItemsView"
 	Orientation="Horizontal">
 
   <StackLayout x:Name="Container" Orientation="Vertical" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand"  />

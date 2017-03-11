@@ -1,5 +1,4 @@
-﻿using Pillar.Behaviors;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xunit;
 
 namespace Pillar.Tests.Behaviors

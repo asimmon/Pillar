@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Pillar.ViewModels;
 
 namespace Pillar.Tests.Mocks
 {

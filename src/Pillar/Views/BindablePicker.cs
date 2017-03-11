@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Xamarin.Forms;
 
-namespace Pillar.Views
+namespace Pillar
 {
     /// <summary>
     /// An extension of the Picker with new features:

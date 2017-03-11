@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace Pillar.Views
+namespace Pillar
 {
     /// <summary>
     /// Collection class of IDataTemplateWrapper
