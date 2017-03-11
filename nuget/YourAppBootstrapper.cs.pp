@@ -1,4 +1,5 @@
 using Xamarin.Forms;
+using Pillar;
 
 namespace $rootnamespace$
 {
@@ -35,6 +36,7 @@ namespace $rootnamespace$
             // TODO Return a Xamarin Forms Page resolved by the view factory
 
             // return viewFactory.Resolve<HomeViewModel>();
+            return null;
         }
     }
 }
