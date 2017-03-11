@@ -163,6 +163,62 @@ The EventToCommandBehavior class has the following properties:
 * **EventArgsConverter** (*IValueConverter*): Optional converter that will convert an EventArgs to something that will be passed as command parameter. Overrides any user defined command parameter with the CommandParameter property.
 * **EventArgsConverterParameter** (*object*): Optional parameter that will be passed to the EventArgsConverter.
 
+## Using your preferred IoC container
+
+Pillar allows you to override the built-in IoC container (which is a custom version of the IoC container present in ASP.NET Core), with the IoC container of your choice.
+
+All you need to do is implement a single interface, `IContainerAdapter`, and instantiate it in the app's bootstrapper (derived class of `PillarBootstrapper`):
+
+```C#
+// In this exemple, I will use Autofac as the IoC container of my application
+public class AutofacContainerAdapter : IContainerAdapter
+{
+    private readonly ContainerBuilder _containerBuilder = new ContainerBuilder();
+    private readonly Lazy<IContainer> _lazyContainer;
+
+    public AutofacContainerAdapter()
+    {
+        _lazyContainer = new Lazy<IContainer>(() => _containerBuilder.Build());
+    }
+
+    public object Resolve(Type serviceType)
+    {
+        return _lazyContainer.Value.Resolve(serviceType);
+    }
+
+    public void RegisterType(Type serviceType, Type implementationType)
+    {
+        _containerBuilder.RegisterType(implementationType).As(serviceType);
+    }
+
+    public void RegisterType(Type serviceType, Func<object> implementationFactory)
+    {
+        _containerBuilder.Register(ctx => implementationFactory()).As(serviceType);
+    }
+
+    public void RegisterSingleton(Type serviceType, Type implementationType)
+    {
+        _containerBuilder.RegisterType(implementationType).As(serviceType).SingleInstance();
+    }
+
+    public void RegisterSingleton(Type serviceType, object implementationInstance)
+    {
+        _containerBuilder.RegisterInstance(implementationInstance).As(serviceType).SingleInstance();
+    }
+
+    public void RegisterSingleton(Type serviceType, Func<object> implementationFactory)
+    {
+        _containerBuilder.Register(ctx => implementationFactory()).As(serviceType).SingleInstance();
+    }
+}
+
+// And then I instantiate it in my bootstrapper:
+protected override IContainerAdapter GetContainer()
+{
+    return new AutofacContainerAdapter();
+}
+```
+
 ## ItemsView with TemplateSelector by type
 
 The ItemsView is a  way for displaying a list of items. When used with the TemplateSelector, you can define a template for each different type of items contained in the items source. Quick example:
