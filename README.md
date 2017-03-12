@@ -1,7 +1,7 @@
 # Pillar
 
 [![Build Status](https://ci.appveyor.com/api/projects/status/2qrtolh41cn80ssi/branch/master?svg=true)](https://ci.appveyor.com/project/asimmon/pillar/branch/master)
-[![NuGet version](https://badge.fury.io/nu/Pillar.svg)](https://badge.fury.io/nu/Askaiser.Mobile.Pillar)
+[![NuGet version](https://badge.fury.io/nu/Askaiser.Mobile.Pillar.svg)](https://www.nuget.org/packages/Askaiser.Mobile.Pillar)
 
 Pillar is a standalone MVVM framework for [Xamarin.Forms](https://xamarin.com/forms). With this framework, you won't have to deal with page navigation or messed up code-behind anymore. Now, it's all about **view models**, and **navigation between view models**. It uses a embedded custom version of the [ASP.NET Core Dependency Injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection) for dependency injection. You can easily use your own IoC container by implementing an adapter class.
 
