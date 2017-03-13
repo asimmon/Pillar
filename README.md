@@ -23,7 +23,7 @@ Pillar is a standalone MVVM framework for [Xamarin.Forms](https://xamarin.com/fo
 
 Extend the `PillarBootstrapper` class to configure your view models and views. Then, in your Application class, instantiate it and call the `Run` method.
 
-Starting from Pillar 1.0.0, a sample class that extends `PillarBootstrapper` is added to your project after the package installation.
+Starting from Pillar 1.0.0, a sample class that extends `PillarBootstrapper` will be added to your project after the package installation.
 
 Here is an example:
 
