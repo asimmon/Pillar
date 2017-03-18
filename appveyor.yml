@@ -1,6 +1,23 @@
 version: 1.0.{build}
+image: Visual Studio 2017
+configuration: Release
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: oiaMccDaX+NHzizj3klPD1ot6vn6thzE9LZMMxrWe1G7BU1orWHoaxZdZpFCulbN
 before_build:
-- cmd: cd src & nuget restore
+- cmd: nuget restore .\src\Pillar.sln
 build:
-  project: src/Pillar.sln
+  project: .\src\Pillar.sln
   verbosity: minimal
+before_test:
+- cmd: >-
+    nuget install OpenCover -Version 4.6.519 -OutputDirectory .\src\packages
+
+    nuget install coveralls.net -Version 0.7.0 -OutputDirectory .\src\packages
+after_test:
+- cmd: >-
+    .\src\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:.\src\packages\xunit.runner.console.2.1.0\tools\xunit.console.exe -targetargs:".\tests\Pillar.Tests\bin\Release\Pillar.Tests.dll -noshadow -appveyor" -filter:"+[Pillar.Tests*]*" -output:coverage.xml
+
+
+    .\src\packages\coveralls.net.0.412\tools\csmacnz.Coveralls.exe --opencover -i coverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
+ 
