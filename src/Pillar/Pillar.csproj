@@ -8,6 +8,9 @@
 	<PropertyGroup>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	</PropertyGroup>
+	<PropertyGroup>
+		<DefaultItemExcludes>$(DefaultItemExcludes);**\*.csproj.DotSettings</DefaultItemExcludes>
+	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Xamarin.Forms" Version="2.3.4.231" />
 		<PackageReference Include="System.ComponentModel" Version="4.3.0" />

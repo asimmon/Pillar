@@ -8,6 +8,9 @@
 	<PropertyGroup>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	</PropertyGroup>
+	<PropertyGroup>
+		<DefaultItemExcludes>$(DefaultItemExcludes);**\*.csproj.DotSettings</DefaultItemExcludes>
+	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
 		<PackageReference Include="System.ComponentModel" Version="4.3.0" />
