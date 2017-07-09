@@ -1,16 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <AssemblyTitle>Pillar</AssemblyTitle>
-    </PropertyGroup>
+	<PropertyGroup>
+		<AssemblyTitle>Pillar</AssemblyTitle>
+	</PropertyGroup>
 	
 	<PropertyGroup>
-        <PackageId>Askaiser.Mobile.Pillar</PackageId>
-        <Title>Pillar</Title>
-        <PackageVersion>1.0.0</PackageVersion>
-        <Owners>Anthony Simmon</Owners>
-        <PackageProjectUrl>https://github.com/asimmon/Pillar</PackageProjectUrl>
-        <PackageIconUrl>https://anthonysimmon.com/wp-content/uploads/pillar_118x128.png</PackageIconUrl>
-        <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+		<TargetFramework>netstandard1.0</TargetFramework>
+		<PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<PackageId>Askaiser.Mobile.Pillar</PackageId>
+		<Title>Pillar</Title>
+		<PackageVersion>1.0.0</PackageVersion>
+		<Owners>Anthony Simmon</Owners>
+		<PackageProjectUrl>https://github.com/asimmon/Pillar</PackageProjectUrl>
+		<PackageIconUrl>https://anthonysimmon.com/wp-content/uploads/pillar_118x128.png</PackageIconUrl>
+		<PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
 	</PropertyGroup>
 	
 	<ItemGroup>
