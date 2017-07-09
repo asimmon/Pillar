@@ -4,5 +4,5 @@ install:
   - nuget restore ./src/Pillar.sln
   - nuget install xunit.runner.console -Version 2.2.0 -OutputDirectory ./src/packages
 script:
-  - xbuild /p:Configuration=Release ./src/Pillar.sln
+  - msbuild /p:Configuration=Release ./src/Pillar.sln
   - mono ./src/packages/xunit.runner.console.2.2.0/tools/xunit.console.exe ./tests/Pillar.Tests/bin/Release/net45/Pillar.Tests.dll
