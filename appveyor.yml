@@ -32,11 +32,11 @@ build:
   verbosity: minimal
 after_build:
 - ps: >-
-    rm -f ".\src\Pillar\bin\${env:CONFIGURATION}\*.nupkg"
+    Remove-Item ".\src\Pillar\bin\${env:CONFIGURATION}\*.nupkg" -Force
 
     dotnet pack --no-build --configuration $env:CONFIGURATION /p:Version=$versionFull .\src\Pillar\Pillar.csproj
 
-    mv ".\src\Pillar\bin\${env:CONFIGURATION}\*.nupkg" Pillar.nupkg
+    Move-Item ".\src\Pillar\bin\${env:CONFIGURATION}\*.nupkg" Pillar.nupkg
 test_script:
 - ps: >-
     nuget install OpenCover -Version 4.6.519 -OutputDirectory .\src\packages
