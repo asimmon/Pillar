@@ -1,11 +1,28 @@
-version: 1.0.{build}
+version: 1.0.1
 image: Visual Studio 2017
 configuration: Release
 environment:
   COVERALLS_REPO_TOKEN:
     secure: oiaMccDaX+NHzizj3klPD1ot6vn6thzE9LZMMxrWe1G7BU1orWHoaxZdZpFCulbN
 before_build:
-- ps: nuget restore .\src\Pillar.sln
+- ps: >-
+    $propsXmlPath = "${env:APPVEYOR_BUILD_FOLDER}\Directory.Build.props"
+
+    $propsXml = [xml](Get-Content $propsXmlPath)
+
+    $propertyGroup = $propsXml.Project.PropertyGroup | Where { $_.VersionPrefix}
+
+    $versionPrefix = $propertyGroup.VersionPrefix.ToString()
+
+    $versionSuffix = "alpha${env:APPVEYOR_BUILD_NUMBER}"
+
+    $propertyGroup.VersionSuffix = $versionSuffix
+
+    $xml.Save($propsXmlPath)
+
+    Update-AppveyorBuild -Version "$versionPrefix-$versionSuffix"
+
+    dotnet restore .\src\Pillar.sln
 build:
   project: .\src\Pillar.sln
   verbosity: minimal
@@ -13,15 +30,11 @@ test_script:
 - ps: >-
     nuget install OpenCover -Version 4.6.519 -OutputDirectory .\src\packages
 
-
     nuget install coveralls.net -Version 0.7.0 -OutputDirectory .\src\packages
-
 
     nuget install xunit.runner.console -Version 2.2.0 -OutputDirectory .\src\packages
 
-
     .\src\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:.\src\packages\xunit.runner.console.2.2.0\tools\xunit.console.exe -targetargs:".\tests\Pillar.Tests\bin\Release\net45\Pillar.Tests.dll -noshadow -appveyor" -filter:"+[Pillar*]* -[Pillar.Tests]*" -output:coverage.xml
-
 
     .\src\packages\coveralls.net.0.7.0\tools\csmacnz.Coveralls.exe --opencover -i coverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
  
