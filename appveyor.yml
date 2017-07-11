@@ -16,9 +16,11 @@ before_build:
 
     $versionPrefix = $propertyGroup.VersionPrefix.ToString()
 
-    $versionSuffix = "alpha${env:APPVEYOR_BUILD_NUMBER}"
+    $versionPrefix = "${versionPrefix}.${env:APPVEYOR_BUILD_NUMBER}"
 
-    $versionFull = "$versionPrefix-$versionSuffix"
+    $versionSuffix = ""
+
+    $versionFull = "$versionPrefix"
 
     $propertyGroup.VersionSuffix = $versionSuffix
 
