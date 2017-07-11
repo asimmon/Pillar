@@ -34,9 +34,15 @@ after_build:
 - ps: >-
     Remove-Item ".\src\Pillar\bin\${env:CONFIGURATION}\*.nupkg" -Force
 
+    Remove-Item ".\src\Pillar.Ioc\bin\${env:CONFIGURATION}\*.nupkg" -Force
+
     dotnet pack --no-build --configuration $env:CONFIGURATION /p:Version=$versionFull .\src\Pillar\Pillar.csproj
 
+    dotnet pack --no-build --configuration $env:CONFIGURATION /p:Version=$versionFull .\src\Pillar.Ioc\Pillar.Ioc.csproj
+
     Move-Item ".\src\Pillar\bin\${env:CONFIGURATION}\*.nupkg" ".\src\Pillar\bin\${env:CONFIGURATION}\Pillar.nupkg"
+
+    Move-Item ".\src\Pillar.Ioc\bin\${env:CONFIGURATION}\*.nupkg" ".\src\Pillar.Ioc\bin\${env:CONFIGURATION}\Pillar.Ioc.nupkg"
 test_script:
 - ps: >-
     nuget install OpenCover -Version 4.6.519 -OutputDirectory .\src\packages
@@ -50,6 +56,9 @@ test_script:
     .\src\packages\coveralls.net.0.7.0\tools\csmacnz.Coveralls.exe --opencover -i coverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
 artifacts:
 - path: .\src\Pillar\bin\$(configuration)\Pillar.nupkg
+- path: .\src\Pillar.Ioc\bin\$(configuration)\Pillar.nupkg
 deploy_script:
 - ps: >-
     nuget push ".\src\Pillar\bin\${env:CONFIGURATION}\Pillar.nupkg" $env:MYGET_TOKEN -Source https://www.myget.org/F/pillar/api/v2/package
+
+    nuget push ".\src\Pillar.Ioc\bin\${env:CONFIGURATION}\Pillar.Ioc.nupkg" $env:MYGET_TOKEN -Source https://www.myget.org/F/pillar/api/v2/package

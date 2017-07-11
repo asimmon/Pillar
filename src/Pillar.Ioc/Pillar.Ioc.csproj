@@ -8,6 +8,15 @@
 		<PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
 	</PropertyGroup>
 	
+	<PropertyGroup>
+		<PackageId>Askaiser.Mobile.Pillar.Ioc</PackageId>
+		<Title>Pillar.Ioc</Title>
+		<Owners>Anthony Simmon</Owners>
+		<PackageProjectUrl>https://github.com/asimmon/Pillar</PackageProjectUrl>
+		<PackageIconUrl>https://anthonysimmon.com/wp-content/uploads/pillar_118x128.png</PackageIconUrl>
+		<PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+	</PropertyGroup>
+	
 	<ItemGroup>
 		<PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
 		<PackageReference Include="System.ComponentModel" Version="4.3.0" />
