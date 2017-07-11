@@ -36,9 +36,9 @@ after_build:
 
     Remove-Item ".\src\Pillar.Ioc\bin\${env:CONFIGURATION}\*.nupkg" -Force
 
-    dotnet pack "/t:Restore;Pack" --no-build --configuration $env:CONFIGURATION /p:Version=$versionFull .\src\Pillar\Pillar.csproj
+    dotnet pack --no-build --configuration $env:CONFIGURATION /p:Version=$versionFull .\src\Pillar\Pillar.csproj
 
-    dotnet pack "/t:Restore;Pack" --no-build --configuration $env:CONFIGURATION /p:Version=$versionFull .\src\Pillar.Ioc\Pillar.Ioc.csproj
+    dotnet pack --no-build --configuration $env:CONFIGURATION /p:Version=$versionFull .\src\Pillar.Ioc\Pillar.Ioc.csproj
 
     Move-Item ".\src\Pillar\bin\${env:CONFIGURATION}\*.nupkg" ".\src\Pillar\bin\${env:CONFIGURATION}\Pillar.nupkg"
 
