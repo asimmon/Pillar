@@ -18,11 +18,11 @@ before_build:
 
     $propertyGroup.VersionSuffix = $versionSuffix
 
-    $xml.Save($propsXmlPath)
+    $propsXml.Save($propsXmlPath)
 
     Update-AppveyorBuild -Version "$versionPrefix-$versionSuffix"
 
-    nuget restore .\src\Pillar.sln
+    dotnet restore .\src\Pillar.sln
 build:
   project: .\src\Pillar.sln
   verbosity: minimal
