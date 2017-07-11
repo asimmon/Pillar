@@ -26,6 +26,9 @@ before_build:
 build:
   project: .\src\Pillar.sln
   verbosity: minimal
+after_build:
+- ps: >-
+    dotnet pack --no-build --configuration $env:CONFIGURATION .\src\Pillar\Pillar.csproj
 test_script:
 - ps: >-
     nuget install OpenCover -Version 4.6.519 -OutputDirectory .\src\packages
@@ -39,6 +42,3 @@ test_script:
     .\src\packages\coveralls.net.0.7.0\tools\csmacnz.Coveralls.exe --opencover -i coverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
 artifacts:
 - path: .\src\Pillar\bin\$(configuration)\*.nupkg
-deploy_script:
-- ps: >-
-    dotnet pack --no-build --configuration $env:CONFIGURATION .\src\Pillar\Pillar.csproj
