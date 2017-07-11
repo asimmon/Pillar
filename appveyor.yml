@@ -26,7 +26,7 @@ before_build:
 
     Update-AppveyorBuild -Version $versionFull
 
-    dotnet restore .\src\Pillar.sln
+    dotnet msbuild "/t:Restore" "/p:VersionSuffix=$versionSuffix" "/p:Configuration=${env:CONFIGURATION}" .\src\Pillar.sln
 build:
   project: .\src\Pillar.sln
   verbosity: minimal
