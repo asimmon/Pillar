@@ -16,13 +16,13 @@ before_build:
 
     $versionSuffix = "alpha${env:APPVEYOR_BUILD_NUMBER}"
 
-    $version = "$versionPrefix-$versionSuffix"
+    $versionFull = "$versionPrefix-$versionSuffix"
 
     $propertyGroup.VersionSuffix = $versionSuffix
 
     $propsXml.Save($propsXmlPath)
 
-    Update-AppveyorBuild -Version $version
+    Update-AppveyorBuild -Version $versionFull
 
     dotnet restore .\src\Pillar.sln
 build:
@@ -30,7 +30,7 @@ build:
   verbosity: minimal
 after_build:
 - ps: >-
-    dotnet pack --no-build --configuration $env:CONFIGURATION /p:Version=$version .\src\Pillar\Pillar.csproj
+    dotnet pack --no-build --configuration $env:CONFIGURATION /p:Version=$versionFull .\src\Pillar\Pillar.csproj
 test_script:
 - ps: >-
     nuget install OpenCover -Version 4.6.519 -OutputDirectory .\src\packages
