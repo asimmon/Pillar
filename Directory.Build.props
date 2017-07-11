@@ -1,6 +1,6 @@
 <Project>
     <PropertyGroup>
-        <VersionPrefix>1.0.0</VersionPrefix>
+        <VersionPrefix>1.0.1</VersionPrefix>
         <VersionSuffix></VersionSuffix>
         <Description>A lightweight PCL framework that helps you develop MVVM Xamarin.Forms applications easily.</Description>
         <Authors>Anthony Simmon (https://anthonysimmon.com)</Authors>
