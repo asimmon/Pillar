@@ -6,3 +6,5 @@ install:
 script:
   - msbuild /p:Configuration=Release ./src/Pillar.sln
   - mono ./src/packages/xunit.runner.console.2.2.0/tools/xunit.console.exe ./tests/Pillar.Tests/bin/Release/net45/Pillar.Tests.dll
+notifications:
+  email: false
