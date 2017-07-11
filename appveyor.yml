@@ -32,11 +32,11 @@ build:
   verbosity: minimal
 after_build:
 - ps: >-
-    rm .\src\Pillar\bin\$(configuration)\*.nupkg
+    rm ".\src\Pillar\bin\$(configuration)\*.nupkg"
 
     dotnet pack --no-build --configuration $env:CONFIGURATION /p:Version=$versionFull .\src\Pillar\Pillar.csproj
 
-    mv .\src\Pillar\bin\$(configuration)\*.nupkg Pillar.nupkg
+    mv ".\src\Pillar\bin\$(configuration)\*.nupkg" Pillar.nupkg
 test_script:
 - ps: >-
     nuget install OpenCover -Version 4.6.519 -OutputDirectory .\src\packages
@@ -52,4 +52,4 @@ artifacts:
 - path: .\src\Pillar\bin\$(configuration)\Pillar.nupkg
 deploy_script:
 - ps: >-
-    nuget push .\src\Pillar\bin\$(configuration)\Pillar.nupkg $env:MYGET_TOKEN -Source https://www.myget.org/F/pillar/api/v2/package
+    nuget push ".\src\Pillar\bin\$(configuration)\Pillar.nupkg" $env:MYGET_TOKEN -Source https://www.myget.org/F/pillar/api/v2/package
