@@ -4,16 +4,17 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
-		<TargetFramework>net45</TargetFramework>
-		<PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
+		<TargetFramework>netstandard1.5</TargetFramework>
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
 		<PackageReference Include="xunit" Version="2.2.0" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
 		<PackageReference Include="Moq" Version="4.7.63" />
-		<PackageReference Include="Xamarin.Forms" Version="2.3.4.231" />
+		<PackageReference Include="Xamarin.Forms" Version="2.4.0.282">
+			<ExcludeAssets>build</ExcludeAssets>
+		</PackageReference>
 	</ItemGroup>
 	
 	<ItemGroup>

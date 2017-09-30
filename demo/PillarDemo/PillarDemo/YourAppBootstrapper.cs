@@ -1,7 +1,7 @@
 using Xamarin.Forms;
 using Pillar;
 
-namespace $rootnamespace$
+namespace PillarDemo
 {
     public class YourAppBootstrapper : PillarBootstrapper
     {

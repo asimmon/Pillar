@@ -4,8 +4,7 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
-		<TargetFramework>netstandard1.0</TargetFramework>
-		<PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
+		<TargetFramework>netstandard1.5</TargetFramework>
 	</PropertyGroup>
 	
 	<PropertyGroup>

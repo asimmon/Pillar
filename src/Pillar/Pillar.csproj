@@ -4,8 +4,7 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
-		<TargetFramework>netstandard1.0</TargetFramework>
-		<PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
+		<TargetFramework>netstandard1.5</TargetFramework>
 	</PropertyGroup>
 	
 	<PropertyGroup>
@@ -19,7 +18,9 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Xamarin.Forms" Version="2.3.4.231" />
+		<PackageReference Include="Xamarin.Forms" Version="2.4.0.282">
+			<ExcludeAssets>build</ExcludeAssets>
+		</PackageReference>
 		<PackageReference Include="System.ComponentModel" Version="4.3.0" />
 	</ItemGroup>
 	
