@@ -26,6 +26,8 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <None Update="YourAppBootstrapper.cs.pp" Pack="true" />
+        <Content Include="YourAppBootstrapper.cs.pp">
+            <Pack>true</Pack>
+        </Content>
 	</ItemGroup>
 </Project>
