@@ -113,7 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Pillar.Ioc">
-      <HintPath>..\..\packages\Askaiser.Mobile.Pillar.Ioc.1.1.0-beta3\lib\netstandard1.0\Pillar.Ioc.dll</HintPath>
+      <HintPath>..\..\packages\Askaiser.Mobile.Pillar.Ioc.1.1.0\lib\netstandard1.0\Pillar.Ioc.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core">
       <HintPath>..\..\packages\Xamarin.Forms.2.4.0.280\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Core.dll</HintPath>
@@ -125,7 +125,7 @@
       <HintPath>..\..\packages\Xamarin.Forms.2.4.0.280\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="Pillar">
-      <HintPath>..\..\packages\Askaiser.Mobile.Pillar.1.1.0-beta3\lib\netstandard1.0\Pillar.dll</HintPath>
+      <HintPath>..\..\packages\Askaiser.Mobile.Pillar.1.1.0\lib\netstandard1.0\Pillar.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
