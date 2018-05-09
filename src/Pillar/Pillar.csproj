@@ -4,7 +4,7 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
-		<TargetFramework>netstandard1.5</TargetFramework>
+		<TargetFramework>netstandard2.0</TargetFramework>
 	</PropertyGroup>
 	
 	<PropertyGroup>
@@ -18,10 +18,7 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Xamarin.Forms" Version="2.4.0.282">
-			<ExcludeAssets>build</ExcludeAssets>
-		</PackageReference>
-		<PackageReference Include="System.ComponentModel" Version="4.3.0" />
+		<PackageReference Include="Xamarin.Forms" Version="2.4.0.280" />
 	</ItemGroup>
 	
 	<ItemGroup>

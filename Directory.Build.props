@@ -11,10 +11,4 @@
         <DebugType>full</DebugType>
         <DefaultItemExcludes>$(DefaultItemExcludes);**\*.csproj.DotSettings</DefaultItemExcludes>
     </PropertyGroup>
-    
-    <ItemGroup>
-        <None Remove="**\*.xaml" />
-        <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
-        <EmbeddedResource Include="**\*.xaml" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
-    </ItemGroup>
 </Project>
