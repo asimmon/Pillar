@@ -4,7 +4,7 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<TargetFrameworks>netstandard2.0;netstandard1.0</TargetFrameworks>
 	</PropertyGroup>
 	
 	<PropertyGroup>
