@@ -4,21 +4,62 @@ configuration: Release
 environment:
   COVERALLS_REPO_TOKEN:
     secure: oiaMccDaX+NHzizj3klPD1ot6vn6thzE9LZMMxrWe1G7BU1orWHoaxZdZpFCulbN
+  MYGET_TOKEN:
+    secure: HUyTVh8OGmRA3Owg50idjEEcgFSwVhY4U6c7zgNdB2Bgi1jIDn+MWLPe7bKhhCzB
 before_build:
-- ps: nuget restore .\src\Pillar.sln
+- ps: >-
+    $propsXmlPath = ".\Directory.Build.props"
+
+    $propsXml = [xml](Get-Content $propsXmlPath)
+
+    $propertyGroup = $propsXml.Project.PropertyGroup | Where { $_.VersionPrefix}
+
+    $versionPrefix = $propertyGroup.VersionPrefix.ToString()
+
+    $versionSuffix = "alpha${env:APPVEYOR_BUILD_NUMBER}"
+
+    $versionFull = "$versionPrefix-$versionSuffix"
+
+    $propertyGroup.VersionSuffix = $versionSuffix
+
+    $propsXml.Save($propsXmlPath)
+
+    Update-AppveyorBuild -Version $versionFull
+
+    dotnet msbuild "/t:Restore" "/p:VersionSuffix=$versionSuffix" "/p:Configuration=${env:CONFIGURATION}" .\src\Pillar.sln
 build:
   project: .\src\Pillar.sln
   verbosity: minimal
+after_build:
+- ps: >-
+    Remove-Item ".\src\Pillar\bin\${env:CONFIGURATION}\*.nupkg" -Force
+
+    Remove-Item ".\src\Pillar.Ioc\bin\${env:CONFIGURATION}\*.nupkg" -Force
+
+    dotnet pack --no-build --configuration $env:CONFIGURATION /p:Version=$versionFull .\src\Pillar\Pillar.csproj
+
+    dotnet pack --no-build --configuration $env:CONFIGURATION /p:Version=$versionFull .\src\Pillar.Ioc\Pillar.Ioc.csproj
+
+    Move-Item ".\src\Pillar\bin\${env:CONFIGURATION}\*.nupkg" ".\src\Pillar\bin\${env:CONFIGURATION}\Pillar.nupkg"
+
+    Move-Item ".\src\Pillar.Ioc\bin\${env:CONFIGURATION}\*.nupkg" ".\src\Pillar.Ioc\bin\${env:CONFIGURATION}\Pillar.Ioc.nupkg"
 test_script:
 - ps: >-
     nuget install OpenCover -Version 4.6.519 -OutputDirectory .\src\packages
 
-
     nuget install coveralls.net -Version 0.7.0 -OutputDirectory .\src\packages
 
+    nuget install xunit.runner.console -Version 2.2.0 -OutputDirectory .\src\packages
 
-    .\src\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:.\src\packages\xunit.runner.console.2.1.0\tools\xunit.console.exe -targetargs:".\tests\Pillar.Tests\bin\Release\Pillar.Tests.dll -noshadow -appveyor" -filter:"+[Pillar*]* -[Pillar.Tests]*" -output:coverage.xml
+    .\src\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:.\src\packages\xunit.runner.console.2.2.0\tools\xunit.console.exe -targetargs:".\tests\Pillar.Tests\bin\Release\net45\Pillar.Tests.dll -noshadow -appveyor" -filter:"+[Pillar*]* -[Pillar.Tests]*" -output:coverage.xml
 
+    #.\src\packages\coveralls.net.0.7.0\tools\csmacnz.Coveralls.exe --opencover -i coverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
+artifacts:
+- path: .\src\Pillar\bin\$(configuration)\Pillar.nupkg
+- path: .\src\Pillar.Ioc\bin\$(configuration)\Pillar.Ioc.nupkg
+- path: .\coverage.xml
+deploy_script:
+- ps: >-
+    nuget push ".\src\Pillar\bin\${env:CONFIGURATION}\Pillar.nupkg" $env:MYGET_TOKEN -Source https://www.myget.org/F/pillar/api/v2/package
 
-    .\src\packages\coveralls.net.0.7.0\tools\csmacnz.Coveralls.exe --opencover -i coverage.xml --repoToken $env:COVERALLS_REPO_TOKEN --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
- 
+    nuget push ".\src\Pillar.Ioc\bin\${env:CONFIGURATION}\Pillar.Ioc.nupkg" $env:MYGET_TOKEN -Source https://www.myget.org/F/pillar/api/v2/package

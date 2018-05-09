@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Reflection;
 using Xamarin.Forms;
@@ -131,7 +130,6 @@ namespace Pillar
         {
             if (type == null) return null;//This can happen when we recusively check base types (object.BaseType==null)
             examined.Add(type);
-            Contract.Assert(Templates != null, "Templates cannot be null");
 
             Cache = Cache ?? new Dictionary<Type, DataTemplate>();
             DataTemplate retTemplate = null;

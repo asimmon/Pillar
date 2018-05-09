@@ -14,9 +14,9 @@ namespace Pillar
     /// </summary>
     public class BindablePicker : Picker
     {
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IEnumerable), typeof(BindablePicker), default(IEnumerable), BindingMode.OneWay, null, ItemsSourcePropertyChanged);
+        public static readonly new BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IEnumerable), typeof(BindablePicker), default(IEnumerable), BindingMode.OneWay, null, ItemsSourcePropertyChanged);
 
-        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create("SelectedItem", typeof(object), typeof(BindablePicker), default(object), BindingMode.OneWay, null, SelectedItemPropertyChanged);
+        public static readonly new BindableProperty SelectedItemProperty = BindableProperty.Create("SelectedItem", typeof(object), typeof(BindablePicker), default(object), BindingMode.OneWay, null, SelectedItemPropertyChanged);
 
         private string _displayMemberPath;
 
@@ -31,7 +31,7 @@ namespace Pillar
         /// <summary>
         /// Gets or sets the items source.
         /// </summary>
-        public IEnumerable ItemsSource
+        public new IEnumerable ItemsSource
         {
             get { return (IEnumerable)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
@@ -40,7 +40,7 @@ namespace Pillar
         /// <summary>
         /// Gets or sets the selected item.
         /// </summary>
-        public object SelectedItem
+        public new object SelectedItem
         {
             get { return GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
