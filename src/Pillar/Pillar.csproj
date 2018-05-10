@@ -15,7 +15,6 @@
 		<PackageIconUrl>https://anthonysimmon.com/wp-content/uploads/pillar_118x128.png</PackageIconUrl>
 		<PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
 		<PackageTags>xamarin forms mvvm pcl android ios windowsphone</PackageTags>
-		<PackageReleaseNotes>Version 1.1.0 is now compatible with .NET Standard 1.0 and 2.0. Xamarin.Forms version have been upgraded to 2.4.</PackageReleaseNotes>
 	</PropertyGroup>
 	
 	<ItemGroup>
