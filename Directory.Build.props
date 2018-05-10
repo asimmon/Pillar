@@ -3,6 +3,7 @@
         <Description>A lightweight PCL framework that helps you develop MVVM Xamarin.Forms applications easily.</Description>
         <Authors>Anthony Simmon (https://anthonysimmon.com)</Authors>
         <Copyright>Copyright © Anthony Simmon 2015-2018</Copyright>
+        <PackageReleaseNotes>Version 1.1.0 is now compatible with .NET Standard 1.0 and 2.0. Xamarin.Forms version have been upgraded to 2.4.</PackageReleaseNotes>
     </PropertyGroup>
     
     <PropertyGroup>

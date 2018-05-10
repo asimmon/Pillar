@@ -4,7 +4,7 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
+		<TargetFrameworks>netstandard2.0;netstandard1.0</TargetFrameworks>
 	</PropertyGroup>
 	
 	<PropertyGroup>
@@ -17,7 +17,7 @@
 		<PackageTags>xamarin forms mvvm pcl android ios windowsphone</PackageTags>
 	</PropertyGroup>
 	
-	<ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.0' ">
 		<PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
 		<PackageReference Include="System.ComponentModel" Version="4.3.0" />
 	</ItemGroup>

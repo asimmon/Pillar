@@ -31,7 +31,7 @@ namespace PillarDemo.Models
 
         public override string ToString()
         {
-            return $"{Name} <{Email}>";
+            return Email == null ? Name : $"{Name} <{Email}>";
         }
     }
 }
